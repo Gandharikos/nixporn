@@ -1,0 +1,214 @@
+{
+  "nodes": {
+    "catppuccin-palette": {
+      "flake": false,
+      "locked": {
+        "lastModified": 1774131488,
+        "narHash": "sha256-hsy+GhuM4MSjnwGq1YJSLBFIbVm67SSdPRgObP00mxw=",
+        "owner": "catppuccin",
+        "repo": "palette",
+        "rev": "07d02aa110ef9eb7e7427afca5c73ba9cf7f8ebd",
+        "type": "github"
+      },
+      "original": {
+        "owner": "catppuccin",
+        "repo": "palette",
+        "type": "github"
+      }
+    },
+    "cyberdream": {
+      "flake": false,
+      "locked": {
+        "lastModified": 1777398070,
+        "narHash": "sha256-s31nTDVBAj7kKbcQEQ7BHEibJzk5573OKOMLCClkHZ8=",
+        "owner": "scottmckendry",
+        "repo": "cyberdream.nvim",
+        "rev": "d1866f5b606896ca530be00bafbd12a3e6bb6efd",
+        "type": "github"
+      },
+      "original": {
+        "owner": "scottmckendry",
+        "repo": "cyberdream.nvim",
+        "type": "github"
+      }
+    },
+    "decay": {
+      "flake": false,
+      "locked": {
+        "lastModified": 1720784061,
+        "narHash": "sha256-ydIef3z69S9Bdl42G7q8amx3RWl+7Z3d4j84H7cxGdU=",
+        "owner": "decaycs",
+        "repo": "decay.nvim",
+        "rev": "457014541ebcfb29bd660592a0b02f22c9e2d0e2",
+        "type": "github"
+      },
+      "original": {
+        "owner": "decaycs",
+        "repo": "decay.nvim",
+        "type": "github"
+      }
+    },
+    "dracula": {
+      "flake": false,
+      "locked": {
+        "lastModified": 1777595936,
+        "narHash": "sha256-btBnhpsRT6bsEjtEk6WGXRgpECPMsvVRFPstJJYVi58=",
+        "owner": "dracula",
+        "repo": "dracula-theme",
+        "rev": "5fa731c1fbd531270af1a9f89de5a135468d7a51",
+        "type": "github"
+      },
+      "original": {
+        "owner": "dracula",
+        "repo": "dracula-theme",
+        "type": "github"
+      }
+    },
+    "gruvbox": {
+      "flake": false,
+      "locked": {
+        "lastModified": 1745139741,
+        "narHash": "sha256-fmX4WuD25BaaJBZCcUyrtgq1a39tVpxLe3KE72dcQT4=",
+        "owner": "morhetz",
+        "repo": "gruvbox",
+        "rev": "697c00291db857ca0af00ec154e5bd514a79191f",
+        "type": "github"
+      },
+      "original": {
+        "owner": "morhetz",
+        "repo": "gruvbox",
+        "type": "github"
+      }
+    },
+    "kanagawa": {
+      "flake": false,
+      "locked": {
+        "lastModified": 1776667684,
+        "narHash": "sha256-vAq9ZiG3s4x/xFSKt9/o40pptj2y7S8DQqs1dJEdhVU=",
+        "owner": "rebelot",
+        "repo": "kanagawa.nvim",
+        "rev": "8ad3b4cdcc804b332c32db8f9743667e1bb82b99",
+        "type": "github"
+      },
+      "original": {
+        "owner": "rebelot",
+        "repo": "kanagawa.nvim",
+        "type": "github"
+      }
+    },
+    "nixpkgs": {
+      "locked": {
+        "lastModified": 1777954456,
+        "narHash": "sha256-hGdgeU2Nk87RAuZyYjyDjFL6LK7dAZN5RE9+hrDTkDU=",
+        "owner": "nixos",
+        "repo": "nixpkgs",
+        "rev": "549bd84d6279f9852cae6225e372cc67fb91a4c1",
+        "type": "github"
+      },
+      "original": {
+        "owner": "nixos",
+        "ref": "nixos-unstable",
+        "repo": "nixpkgs",
+        "type": "github"
+      }
+    },
+    "nordic": {
+      "flake": false,
+      "locked": {
+        "lastModified": 1777807431,
+        "narHash": "sha256-7Wod7nybP/3i3fMBnRdcNEeIWbbzowiyjTlqax8Fn4g=",
+        "owner": "AlexvZyl",
+        "repo": "nordic.nvim",
+        "rev": "9fb62116b891184049c50ca6ffb0d3bc100a1a6e",
+        "type": "github"
+      },
+      "original": {
+        "owner": "AlexvZyl",
+        "repo": "nordic.nvim",
+        "type": "github"
+      }
+    },
+    "root": {
+      "inputs": {
+        "catppuccin-palette": "catppuccin-palette",
+        "cyberdream": "cyberdream",
+        "decay": "decay",
+        "dracula": "dracula",
+        "gruvbox": "gruvbox",
+        "kanagawa": "kanagawa",
+        "nixpkgs": "nixpkgs",
+        "nordic": "nordic",
+        "rose-pine": "rose-pine",
+        "solarized-osaka": "solarized-osaka",
+        "tokyonight": "tokyonight",
+        "tokyonight-spotify": "tokyonight-spotify"
+      }
+    },
+    "rose-pine": {
+      "flake": false,
+      "locked": {
+        "lastModified": 1777504918,
+        "narHash": "sha256-Jf5jycFdPGugGjGH36owtD+27qptBDjADiam2KxQ/L4=",
+        "owner": "rose-pine",
+        "repo": "neovim",
+        "rev": "6a961effd67f6130d36df6d1c05c48c739796dd2",
+        "type": "github"
+      },
+      "original": {
+        "owner": "rose-pine",
+        "repo": "neovim",
+        "type": "github"
+      }
+    },
+    "solarized-osaka": {
+      "flake": false,
+      "locked": {
+        "lastModified": 1778214062,
+        "narHash": "sha256-haf2hbhE54NAeouBWXFdZPTHSV9IU78BfUL7W4kw0Q8=",
+        "owner": "craftzdog",
+        "repo": "solarized-osaka.nvim",
+        "rev": "f675d9a5c58f3b0d6158d665a623f81a62e7bdaf",
+        "type": "github"
+      },
+      "original": {
+        "owner": "craftzdog",
+        "repo": "solarized-osaka.nvim",
+        "type": "github"
+      }
+    },
+    "tokyonight": {
+      "flake": false,
+      "locked": {
+        "lastModified": 1774363414,
+        "narHash": "sha256-a9iRWue7DB7s/wNdxqqB51Jya5P9X6sDftqhdmKggU0=",
+        "owner": "folke",
+        "repo": "tokyonight.nvim",
+        "rev": "cdc07ac78467a233fd62c493de29a17e0cf2b2b6",
+        "type": "github"
+      },
+      "original": {
+        "owner": "folke",
+        "repo": "tokyonight.nvim",
+        "type": "github"
+      }
+    },
+    "tokyonight-spotify": {
+      "flake": false,
+      "locked": {
+        "lastModified": 1691913751,
+        "narHash": "sha256-cLj9v8qtHsdV9FfzV2Qf4pWO8AOBXu51U/lUMvdEXAk=",
+        "owner": "evening-hs",
+        "repo": "Spotify-Tokyo-Night-Theme",
+        "rev": "d88ca06eaeeb424d19e0d6f7f8e614e4bce962be",
+        "type": "github"
+      },
+      "original": {
+        "owner": "evening-hs",
+        "repo": "Spotify-Tokyo-Night-Theme",
+        "type": "github"
+      }
+    }
+  },
+  "root": "root",
+  "version": 7
+}
