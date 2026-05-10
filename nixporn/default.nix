@@ -1,9 +1,17 @@
-{ lib }:
+{ lib, inputs ? null }:
 let
   inherit (lib.attrsets) genAttrs mapAttrs;
   inherit (lib.modules) mkDefault mkIf mkMerge;
 
   helpers = import ../lib { inherit lib; };
+  mkColorschemeModule = import ./module.nix;
+  mkHomeColorschemeModule = import ../modules {
+    inputs =
+      if inputs == null then
+        throw "nixporn: mkHomeColorschemeModule requires flake inputs."
+      else
+        inputs;
+  };
   colorschemes = import ./colorschemes { inherit lib; };
   palettes = import ./palettes.nix { inherit lib; };
 
@@ -135,7 +143,7 @@ let
       defaultVariant = "dark";
     };
     tokyonight = {
-      variantOption = "style";
+      variantOption = "variant";
       variants = [
         "storm"
         "night"
@@ -155,6 +163,8 @@ let
       null
     else if cfg.colorscheme.variant != null then
       cfg.colorscheme.variant
+    else if colorschemeName == "tokyonight" && cfg.tokyonight.style != null then
+      cfg.tokyonight.style
     else
       meta.defaultVariant;
 
@@ -255,6 +265,8 @@ in
     getAccent
     getVariant
     mkColorschemeAssertions
+    mkColorschemeModule
+    mkHomeColorschemeModule
     mkLegacyColorschemeConfig
     mkNixpornOptions
     mkSelectedColorschemeConfig

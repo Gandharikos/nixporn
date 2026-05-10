@@ -51,16 +51,16 @@
     "dracula": {
       "flake": false,
       "locked": {
-        "lastModified": 1777595936,
-        "narHash": "sha256-btBnhpsRT6bsEjtEk6WGXRgpECPMsvVRFPstJJYVi58=",
-        "owner": "dracula",
-        "repo": "dracula-theme",
-        "rev": "5fa731c1fbd531270af1a9f89de5a135468d7a51",
+        "lastModified": 1762304881,
+        "narHash": "sha256-h0WQdK74FHJLva3RbyA8WZfX6rAo45wKPb9z4JbYAK8=",
+        "owner": "Mofiqul",
+        "repo": "dracula.nvim",
+        "rev": "ae752c13e95fb7c5f58da4b5123cb804ea7568ee",
         "type": "github"
       },
       "original": {
-        "owner": "dracula",
-        "repo": "dracula-theme",
+        "owner": "Mofiqul",
+        "repo": "dracula.nvim",
         "type": "github"
       }
     },
@@ -115,15 +115,15 @@
     "nordic": {
       "flake": false,
       "locked": {
-        "lastModified": 1777807431,
-        "narHash": "sha256-7Wod7nybP/3i3fMBnRdcNEeIWbbzowiyjTlqax8Fn4g=",
-        "owner": "AlexvZyl",
+        "lastModified": 1718571012,
+        "narHash": "sha256-ipmt0xD2zTfoh8fyYG4+09uVL2ef98FE9VwWpWJtQks=",
+        "owner": "andersevenrud",
         "repo": "nordic.nvim",
-        "rev": "9fb62116b891184049c50ca6ffb0d3bc100a1a6e",
+        "rev": "c88388b2a5f6e621df2718c316b856d4971bb89d",
         "type": "github"
       },
       "original": {
-        "owner": "AlexvZyl",
+        "owner": "andersevenrud",
         "repo": "nordic.nvim",
         "type": "github"
       }

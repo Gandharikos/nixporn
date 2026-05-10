@@ -1,6 +1,7 @@
 [
   "bat"
   "btop"
+  "cursor"
   "dank-material-shell"
   "delta"
   "discord"

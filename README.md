@@ -7,6 +7,7 @@ A reusable Nix colorscheme module collection with presets.
 - `nixosModules.colorscheme`
 - `homeModules.colorscheme`
 - `darwinModules.colorscheme`
+- `packages.${system}.<colorscheme>`
 
 The public interface is `nixporn.enable` plus `nixporn.colorscheme.*`. Enabling the
 module writes the resolved preset palette to `nixporn.colorscheme` and, in Home
@@ -33,18 +34,30 @@ consume; they are not applied by this flake.
 
 ## Adapters
 
-Home Manager adapters are exposed through a shared target set so each colorscheme has
+Home Manager adapters are exposed through a shared adapter set so each colorscheme has
 the same public surface. Tokyo Night uses upstream extras from
 `tokyonight.nvim` where they exist. Other colorschemes use palette-derived fallback
-adapters until an official or popular upstream port is wired in. Target
-directories dispatch to `modules/targets/<target>/<colorscheme>.nix` when present,
-otherwise they use `modules/targets/<target>/generic.nix`.
+adapters until an official or popular upstream port is wired in. Adapter
+directories dispatch to `modules/home-manager/<target>/<colorscheme>.nix` when present,
+otherwise they use `modules/home-manager/<target>/generic.nix`.
 
-Current targets are `bat`, `btop`, `dank-material-shell`, `delta`, `discord`,
+Current Home Manager adapters are `bat`, `btop`, `cursor`, `dank-material-shell`, `delta`, `discord`,
 `dunst`, `eza`, `fcitx5`, `fish`, `fzf`, `gemini-cli`, `ghostty`, `gowall`,
 `gtk`, `hyprland`, `kitty`, `lazygit`, `niri`, `noctalia-shell`, `opencode`,
 `qt`, `sioyek`, `spicetify`, `spotify-player`, `squirrel`, `starship`,
 `television`, `tmux`, `wezterm`, `xresources`, `yazi`, `zathura`, and `zellij`.
+
+## Packages
+
+`packages.${system}` contains reusable theme source packages, one per
+colorscheme. Each package stores its upstream source under
+`share/nixporn/<colorscheme>/source`; Tokyo Night also stores its Spotify theme
+source under `share/nixporn/tokyonight/spotify`.
+
+Cursor fallback packages are generated from Bibata for each colorscheme default
+variant as `<colorscheme>-xcursor` and `<colorscheme>-hyprcursor`. The Home
+Manager `cursor` adapter uses the selected palette to generate matching Bibata
+XCursor and Hyprcursor themes.
 
 ## Example
 
@@ -68,7 +81,7 @@ Current targets are `bat`, `btop`, `dank-material-shell`, `delta`, `discord`,
 ## Updating Sources
 
 Colorscheme source metadata and generated palettes live in `sources/<colorscheme>.json`.
-Regenerate them after updating flake inputs:
+Regenerate them after updating the colorscheme source inputs:
 
 ```sh
 nix flake update catppuccin-palette cyberdream decay dracula gruvbox kanagawa nordic rose-pine solarized-osaka tokyonight tokyonight-spotify

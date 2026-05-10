@@ -9,21 +9,6 @@
       flake = false;
     };
 
-    tokyonight = {
-      url = "github:folke/tokyonight.nvim";
-      flake = false;
-    };
-
-    tokyonight-spotify = {
-      url = "github:evening-hs/Spotify-Tokyo-Night-Theme";
-      flake = false;
-    };
-
-    dracula = {
-      url = "github:dracula/dracula-theme";
-      flake = false;
-    };
-
     cyberdream = {
       url = "github:scottmckendry/cyberdream.nvim";
       flake = false;
@@ -31,6 +16,11 @@
 
     decay = {
       url = "github:decaycs/decay.nvim";
+      flake = false;
+    };
+
+    dracula = {
+      url = "github:Mofiqul/dracula.nvim";
       flake = false;
     };
 
@@ -45,7 +35,7 @@
     };
 
     nordic = {
-      url = "github:AlexvZyl/nordic.nvim";
+      url = "github:andersevenrud/nordic.nvim";
       flake = false;
     };
 
@@ -56,6 +46,16 @@
 
     solarized-osaka = {
       url = "github:craftzdog/solarized-osaka.nvim";
+      flake = false;
+    };
+
+    tokyonight = {
+      url = "github:folke/tokyonight.nvim";
+      flake = false;
+    };
+
+    tokyonight-spotify = {
+      url = "github:evening-hs/Spotify-Tokyo-Night-Theme";
       flake = false;
     };
   };
@@ -69,22 +69,32 @@
     let
       lib = nixpkgs.lib.extend (
         final: _: {
-          nixporn = import ./nixporn { lib = final; };
+          nixporn = import ./nixporn {
+            inherit inputs;
+            lib = final;
+          };
         }
       );
-      mkColorschemeModule = import ./modules/colorscheme;
-      mkHomeColorschemeModule = import ./modules/home { inherit inputs; };
+      forAllSystems = lib.genAttrs lib.systems.flakeExposed;
     in
     {
       inherit lib;
 
+      packages = forAllSystems (
+        system:
+        import ./packages {
+          inherit inputs;
+          pkgs = nixpkgs.legacyPackages.${system};
+        }
+      );
+
       nixosModules.default = self.nixosModules.colorscheme;
-      nixosModules.colorscheme = mkColorschemeModule;
+      nixosModules.colorscheme = lib.nixporn.mkColorschemeModule;
 
       homeModules.default = self.homeModules.colorscheme;
-      homeModules.colorscheme = mkHomeColorschemeModule;
+      homeModules.colorscheme = lib.nixporn.mkHomeColorschemeModule;
 
       darwinModules.default = self.darwinModules.colorscheme;
-      darwinModules.colorscheme = mkColorschemeModule;
+      darwinModules.colorscheme = lib.nixporn.mkColorschemeModule;
     };
 }

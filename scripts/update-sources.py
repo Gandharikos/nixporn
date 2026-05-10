@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""Regenerate sources/<colorscheme>.json from flake inputs."""
+"""Regenerate sources/<colorscheme>.json from flake input sources."""
 
 from __future__ import annotations
 
@@ -14,7 +14,33 @@ from typing import Any
 ROOT = Path(__file__).resolve().parents[1]
 SOURCES = ROOT / "sources"
 
-COLORSCHEME_INPUTS = {
+SOURCE_EXPRESSIONS = {
+    "catppuccin": 'flake.inputs."catppuccin-palette"',
+    "cyberdream": "flake.inputs.cyberdream",
+    "decay": "flake.inputs.decay",
+    "dracula": "flake.inputs.dracula",
+    "gruvbox": "flake.inputs.gruvbox",
+    "kanagawa": "flake.inputs.kanagawa",
+    "nordic": "flake.inputs.nordic",
+    "rose-pine": 'flake.inputs."rose-pine"',
+    "solarized-osaka": 'flake.inputs."solarized-osaka"',
+    "tokyonight": "flake.inputs.tokyonight",
+}
+
+SOURCE_ORIGINS = {
+    "catppuccin": "flake input",
+    "cyberdream": "flake input",
+    "decay": "flake input",
+    "dracula": "flake input",
+    "gruvbox": "flake input",
+    "kanagawa": "flake input",
+    "nordic": "flake input",
+    "rose-pine": "flake input",
+    "solarized-osaka": "flake input",
+    "tokyonight": "flake input",
+}
+
+SOURCE_INPUTS = {
     "catppuccin": "catppuccin-palette",
     "cyberdream": "cyberdream",
     "decay": "decay",
@@ -25,6 +51,19 @@ COLORSCHEME_INPUTS = {
     "rose-pine": "rose-pine",
     "solarized-osaka": "solarized-osaka",
     "tokyonight": "tokyonight",
+}
+
+SOURCE_URLS = {
+    "catppuccin": "github:catppuccin/palette",
+    "cyberdream": "github:scottmckendry/cyberdream.nvim",
+    "decay": "github:decaycs/decay.nvim",
+    "dracula": "github:Mofiqul/dracula.nvim",
+    "gruvbox": "github:morhetz/gruvbox",
+    "kanagawa": "github:rebelot/kanagawa.nvim",
+    "nordic": "github:andersevenrud/nordic.nvim",
+    "rose-pine": "github:rose-pine/neovim",
+    "solarized-osaka": "github:craftzdog/solarized-osaka.nvim",
+    "tokyonight": "github:folke/tokyonight.nvim",
 }
 
 HEX_VALUE = r"(?:#[0-9A-Fa-f]{6}|NONE)"
@@ -53,24 +92,36 @@ def nixporn_json(attr: str) -> Any:
     return json.loads(run(["nix", "eval", "--impure", "--json", "--expr", expr]))
 
 
-def input_path(input_name: str) -> Path:
-    expr = f'(builtins.getFlake (toString ./.)).inputs."{input_name}".outPath'
-    return Path(run(["nix", "eval", "--impure", "--raw", "--expr", expr]))
+def source_expr(colorscheme: str) -> str:
+    return f"""
+      let
+        flake = builtins.getFlake (toString ./.);
+      in
+        {SOURCE_EXPRESSIONS[colorscheme]}
+    """
 
 
-def flake_url(original: dict[str, Any]) -> str | None:
-    if original.get("type") != "github":
-        return None
-    ref = f"/{original['ref']}" if "ref" in original else ""
-    return f"github:{original['owner']}/{original['repo']}{ref}"
+def source_path(colorscheme: str) -> Path:
+    path = run(
+        [
+            "nix",
+            "eval",
+            "--impure",
+            "--raw",
+            "--expr",
+            f"({source_expr(colorscheme)}).outPath",
+        ]
+    )
+    return Path(path)
 
 
-def source_info(input_name: str, metadata: dict[str, Any], paths: list[str]) -> dict[str, Any]:
-    node = metadata["locks"]["nodes"][input_name]
-    locked = node["locked"]
+def source_info(colorscheme: str, paths: list[str]) -> dict[str, Any]:
+    input_name = SOURCE_INPUTS[colorscheme]
+    metadata = json.loads(run(["nix", "flake", "metadata", "--json"]))
+    locked = metadata["locks"]["nodes"][input_name]["locked"]
     info = {
-        "input": input_name,
-        "url": flake_url(node.get("original", {})),
+        "source": SOURCE_ORIGINS[colorscheme],
+        "url": SOURCE_URLS[colorscheme],
         "rev": locked.get("rev"),
         "lastModified": locked.get("lastModified"),
         "narHash": locked.get("narHash"),
@@ -148,6 +199,21 @@ def read_lua_table(path: Path, pattern: str) -> dict[str, str]:
 
 def parse_catppuccin(root: Path) -> tuple[dict[str, dict[str, str]], list[str]]:
     rel = "palette.json"
+    if not (root / rel).exists():
+        files = {
+            "latte": "lua/catppuccin/palettes/latte.lua",
+            "frappe": "lua/catppuccin/palettes/frappe.lua",
+            "macchiato": "lua/catppuccin/palettes/macchiato.lua",
+            "mocha": "lua/catppuccin/palettes/mocha.lua",
+        }
+        return (
+            {
+                variant: parse_lua_assignments((root / path).read_text())
+                for variant, path in files.items()
+            },
+            list(files.values()),
+        )
+
     data = json.loads((root / rel).read_text())
     variants: dict[str, dict[str, str]] = {}
 
@@ -211,6 +277,10 @@ def parse_decay(root: Path) -> tuple[dict[str, dict[str, str]], list[str]]:
 
 
 def parse_dracula(root: Path) -> tuple[dict[str, dict[str, str]], list[str]]:
+    lua_rel = "lua/dracula/palette.lua"
+    if (root / lua_rel).exists():
+        return {"default": parse_lua_assignments((root / lua_rel).read_text())}, [lua_rel]
+
     rel = "README.md"
     text = (root / rel).read_text()
     section = text.split("### Dracula", 1)[1].split("###", 1)[0]
@@ -243,6 +313,10 @@ def parse_kanagawa(root: Path) -> tuple[dict[str, dict[str, str]], list[str]]:
 
 def parse_nordic(root: Path) -> tuple[dict[str, dict[str, str]], list[str]]:
     rel = "lua/nordic/colors/nordic.lua"
+    if not (root / rel).exists():
+        rel = "lua/nordic/palette.lua"
+        return {"default": parse_lua_assignments((root / rel).read_text())}, [rel]
+
     return {"default": read_lua_table(root / rel, r"local palette\s*=\s*{")}, [rel]
 
 
@@ -516,26 +590,26 @@ def with_aliases(colorscheme: str, variant: str, palette: dict[str, Any]) -> dic
         }
     elif colorscheme == "nordic":
         aliases = {
-            "bg": ["gray1"],
-            "bg_dark": ["gray2"],
-            "bg_highlight": ["gray3"],
-            "fg": ["white2"],
-            "fg_dark": ["white1"],
-            "comment": ["gray4"],
-            "black": ["gray1"],
-            "red": ["red_base"],
-            "orange": ["orange_base"],
-            "yellow": ["yellow_base"],
-            "green": ["green_base"],
-            "cyan": ["blue2"],
-            "blue": ["blue1"],
-            "magenta": ["magenta_base"],
-            "purple": ["magenta_base"],
-            "white": ["white2"],
-            "bright_black": ["gray4"],
-            "bright_blue": ["blue0"],
-            "bright_cyan": ["cyan_base"],
-            "bright_white": ["white3"],
+            "bg": ["gray1", "dark_black"],
+            "bg_dark": ["gray2", "dark_black_alt"],
+            "bg_highlight": ["gray3", "black"],
+            "fg": ["white2", "white"],
+            "fg_dark": ["white1", "dark_white"],
+            "comment": ["gray4", "gray"],
+            "black": ["gray1", "dark_black"],
+            "red": ["red_base", "red"],
+            "orange": ["orange_base", "orange"],
+            "yellow": ["yellow_base", "yellow"],
+            "green": ["green_base", "green"],
+            "cyan": ["blue2", "cyan"],
+            "blue": ["blue1", "blue"],
+            "magenta": ["magenta_base", "purple"],
+            "purple": ["magenta_base", "purple"],
+            "white": ["white2", "white"],
+            "bright_black": ["gray4", "gray"],
+            "bright_blue": ["blue0", "intense_blue"],
+            "bright_cyan": ["cyan_base", "bright_cyan"],
+            "bright_white": ["white3", "bright_white"],
         }
     else:
         aliases = {}
@@ -546,68 +620,58 @@ def with_aliases(colorscheme: str, variant: str, palette: dict[str, Any]) -> dic
     return aliased
 
 
-def normalize_palette(primary: dict[str, Any], fallback_palette: dict[str, Any]) -> dict[str, Any]:
-    bg = pick(primary, fallback_palette, ["bg", "background", "base"], "#000000")
-    bg_dark = pick(primary, fallback_palette, ["bg_dark", "contrast", "mantle", "bg_alt"], bg)
+def normalize_palette(
+    source_palette: dict[str, Any],
+    base_palette: dict[str, Any],
+    fallback_base: dict[str, Any],
+) -> dict[str, Any]:
+    bg = pick(base_palette, fallback_base, ["bg", "background", "base"], "#000000")
+    bg_dark = pick(base_palette, fallback_base, ["bg_dark", "contrast", "mantle", "bg_alt"], bg)
     bg_highlight = pick(
-        primary,
-        fallback_palette,
+        base_palette,
+        fallback_base,
         ["bg_highlight", "cursorline", "surface0", "overlay"],
         bg_dark,
     )
-    fg = pick(primary, fallback_palette, ["fg", "foreground", "text"], "#ffffff")
-    fg_dark = pick(primary, fallback_palette, ["fg_dark", "subtext1", "grey", "comments"], fg)
+    fg = pick(base_palette, fallback_base, ["fg", "foreground", "text"], "#ffffff")
+    fg_dark = pick(base_palette, fallback_base, ["fg_dark", "subtext1", "grey", "comments"], fg)
     comment = pick(
-        primary,
-        fallback_palette,
+        base_palette,
+        fallback_base,
         ["comment", "comments", "muted", "overlay0", "grey"],
         fg_dark,
     )
-    red = pick(primary, fallback_palette, ["red", "love"], "#ff0000")
-    orange = pick(primary, fallback_palette, ["orange", "peach"], red)
-    yellow = pick(primary, fallback_palette, ["yellow", "gold"], orange)
-    green = pick(primary, fallback_palette, ["green", "pine"], "#00ff00")
-    cyan = pick(primary, fallback_palette, ["cyan", "foam", "teal", "sky"], green)
-    blue = pick(primary, fallback_palette, ["blue", "sapphire"], cyan)
-    magenta = pick(primary, fallback_palette, ["magenta", "mauve", "iris", "purple", "pink"], blue)
-    purple = pick(primary, fallback_palette, ["purple", "mauve", "iris", "magenta"], magenta)
-    black = pick(primary, fallback_palette, ["black", "crust"], bg_dark)
-    white = pick(primary, fallback_palette, ["white", "text"], fg)
+    red = pick(base_palette, fallback_base, ["red", "love"], "#ff0000")
+    orange = pick(base_palette, fallback_base, ["orange", "peach"], red)
+    yellow = pick(base_palette, fallback_base, ["yellow", "gold"], orange)
+    green = pick(base_palette, fallback_base, ["green", "pine"], "#00ff00")
+    cyan = pick(base_palette, fallback_base, ["cyan", "foam", "teal", "sky"], green)
+    blue = pick(base_palette, fallback_base, ["blue", "sapphire"], cyan)
+    magenta = pick(base_palette, fallback_base, ["magenta", "mauve", "iris", "purple", "pink"], blue)
+    black = pick(base_palette, fallback_base, ["black", "crust"], bg_dark)
+    white = pick(base_palette, fallback_base, ["white", "text"], fg)
     bright_black = pick(
-        primary,
-        fallback_palette,
+        base_palette,
+        fallback_base,
         ["bright_black", "brightblack", "overlay1", "surface2"],
         comment,
     )
-    bright_red = pick(primary, fallback_palette, ["bright_red", "brightred"], red)
-    bright_green = pick(primary, fallback_palette, ["bright_green", "brightgreen"], green)
-    bright_yellow = pick(primary, fallback_palette, ["bright_yellow", "brightyellow"], yellow)
-    bright_blue = pick(primary, fallback_palette, ["bright_blue", "brightblue"], blue)
-    bright_magenta = pick(primary, fallback_palette, ["bright_magenta", "brightmagenta"], magenta)
-    bright_cyan = pick(primary, fallback_palette, ["bright_cyan", "brightcyan"], cyan)
-    bright_white = pick(primary, fallback_palette, ["bright_white", "brightwhite"], white)
+    bright_red = pick(base_palette, fallback_base, ["bright_red", "brightred"], red)
+    bright_green = pick(base_palette, fallback_base, ["bright_green", "brightgreen"], green)
+    bright_yellow = pick(base_palette, fallback_base, ["bright_yellow", "brightyellow"], yellow)
+    bright_blue = pick(base_palette, fallback_base, ["bright_blue", "brightblue"], blue)
+    bright_magenta = pick(base_palette, fallback_base, ["bright_magenta", "brightmagenta"], magenta)
+    bright_cyan = pick(base_palette, fallback_base, ["bright_cyan", "brightcyan"], cyan)
+    bright_white = pick(base_palette, fallback_base, ["bright_white", "brightwhite"], white)
 
-    derived = {
-        "base": bg,
+    base = {
         "bg": bg,
         "bg_dark": bg_dark,
-        "bg_dark1": bg_dark,
-        "bg_float": bg_dark,
         "bg_highlight": bg_highlight,
-        "bg_popup": bg_dark,
-        "bg_search": blue,
-        "bg_sidebar": bg_dark,
         "bg_statusline": bg_dark,
         "bg_visual": bg_highlight,
         "black": black,
         "blue": blue,
-        "blue0": blue,
-        "blue1": cyan,
-        "blue2": cyan,
-        "blue5": cyan,
-        "blue6": cyan,
-        "blue7": bg_highlight,
-        "border": black,
         "border_highlight": blue,
         "bright_black": bright_black,
         "bright_blue": bright_blue,
@@ -618,81 +682,41 @@ def normalize_palette(primary: dict[str, Any], fallback_palette: dict[str, Any])
         "bright_white": bright_white,
         "bright_yellow": bright_yellow,
         "comment": comment,
-        "crust": black,
-        "cursor": {
-            "baseColor": magenta,
-            "outlineColor": bg_highlight,
-            "watchBackgroundColor": orange,
-        },
         "cyan": cyan,
-        "dark3": comment,
-        "dark5": bright_black,
-        "error": red,
         "fg": fg,
         "fg_dark": fg_dark,
-        "fg_float": fg,
         "fg_gutter": comment,
-        "fg_sidebar": fg_dark,
-        "flamingo": pick(primary, fallback_palette, ["flamingo"], orange),
         "green": green,
-        "green1": green,
-        "green2": cyan,
-        "hint": cyan,
-        "info": blue,
-        "lavender": pick(primary, fallback_palette, ["lavender"], blue),
         "magenta": magenta,
-        "magenta2": magenta,
-        "mantle": bg_dark,
-        "maroon": pick(primary, fallback_palette, ["maroon"], red),
-        "mauve": pick(primary, fallback_palette, ["mauve"], magenta),
         "orange": orange,
-        "overlay0": comment,
-        "overlay1": comment,
-        "overlay2": bright_black,
-        "peach": pick(primary, fallback_palette, ["peach"], orange),
-        "pink": pick(primary, fallback_palette, ["pink"], magenta),
-        "purple": purple,
         "red": red,
-        "red1": red,
-        "rosewater": pick(primary, fallback_palette, ["rosewater"], orange),
-        "sapphire": pick(primary, fallback_palette, ["sapphire"], cyan),
-        "sky": pick(primary, fallback_palette, ["sky"], cyan),
-        "subtext0": fg_dark,
-        "subtext1": fg_dark,
-        "surface0": bg_highlight,
-        "surface1": bg_highlight,
-        "surface2": bright_black,
-        "teal": cyan,
-        "terminal_black": bright_black,
-        "text": fg,
-        "todo": blue,
-        "warning": yellow,
         "white": white,
         "yellow": yellow,
     }
 
-    normalized = dict(fallback_palette)
-    normalized.update(derived)
-    normalized.update(primary)
+    normalized = dict(source_palette)
+    normalized["base"] = base
     return normalized
 
 
-def build_source(colorscheme: str, metadata: dict[str, Any], colorscheme_meta: dict[str, Any]) -> dict[str, Any]:
-    input_name = COLORSCHEME_INPUTS[colorscheme]
+def build_source(colorscheme: str, colorscheme_meta: dict[str, Any]) -> dict[str, Any]:
     upstream: dict[str, dict[str, str]] = {}
     parsed_paths: list[str] = []
 
     if colorscheme in PARSERS:
-        upstream, parsed_paths = PARSERS[colorscheme](input_path(input_name))
+        upstream, parsed_paths = PARSERS[colorscheme](source_path(colorscheme))
 
     previous_normalized = load_previous_variants(colorscheme, "normalized")
     previous_upstream = load_previous_variants(colorscheme, "upstream")
     variants = {}
     for variant in variant_names(colorscheme, colorscheme_meta):
         raw = upstream.get(variant, previous_upstream.get(variant, {}))
+        previous_normalized_variant = previous_normalized.get(variant, {})
+        previous_base = previous_normalized_variant.get("base", previous_normalized_variant)
         normalized = normalize_palette(
+            raw,
             with_aliases(colorscheme, variant, raw),
-            previous_normalized.get(variant, {}),
+            previous_base,
         )
         entry: dict[str, Any] = {"normalized": normalized}
         if raw:
@@ -702,11 +726,11 @@ def build_source(colorscheme: str, metadata: dict[str, Any], colorscheme_meta: d
     return {
         "schema": 1,
         "colorscheme": colorscheme,
-        "source": source_info(input_name, metadata, parsed_paths),
+        "source": source_info(colorscheme, parsed_paths),
         "generated": {
             "tool": "scripts/update-sources.py",
-            "normalizedFrom": "parsed upstream palette with the previous source file as fallback",
-            "note": "upstream is parsed from official source files when available; normalized is the palette consumed by nixporn modules.",
+            "normalizedFrom": "parsed upstream palette plus a palette.base fallback set for generic adapters",
+            "note": "upstream is parsed from official source files when available; normalized keeps upstream keys at top level and stores common derived colors in base.",
         },
         "variants": variants,
     }
@@ -714,12 +738,11 @@ def build_source(colorscheme: str, metadata: dict[str, Any], colorscheme_meta: d
 
 def main() -> int:
     SOURCES.mkdir(exist_ok=True)
-    metadata = json.loads(run(["nix", "flake", "metadata", "--json"]))
     colorscheme_meta = nixporn_json("colorschemeMeta")
     colorschemes = nixporn_json("supportedColorschemes")
 
     for colorscheme in colorschemes:
-        source = build_source(colorscheme, metadata, colorscheme_meta)
+        source = build_source(colorscheme, colorscheme_meta)
         path = SOURCES / f"{colorscheme}.json"
         path.write_text(json.dumps(source, indent=2, sort_keys=True) + "\n")
         print(f"updated {path.relative_to(ROOT)}")

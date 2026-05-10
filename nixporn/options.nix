@@ -43,21 +43,6 @@ let
         default = null;
         description = "The resolved colorscheme slug.";
       };
-      displayName = mkOption {
-        type = nullOr str;
-        default = null;
-        description = "The human-readable colorscheme name.";
-      };
-      author = mkOption {
-        type = nullOr str;
-        default = null;
-        description = "The colorscheme author.";
-      };
-      description = mkOption {
-        type = nullOr str;
-        default = null;
-        description = "The colorscheme description.";
-      };
       palette = mkOption {
         type = nullOr attrs;
         default = null;

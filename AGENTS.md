@@ -4,27 +4,30 @@
 
 This repository is a reusable Nix flake for preset colorscheme modules.
 `flake.nix` exposes `nixosModules.colorscheme`, `homeModules.colorscheme`, and
-`darwinModules.colorscheme`.
+`darwinModules.colorscheme`. It also exposes `packages.${system}` with one
+package per colorscheme source.
 
 - `nixporn/default.nix` is the schema entry point for colorscheme metadata, palette
   resolution, and public options.
 - `nixporn/colorschemes/*.nix` defines colorscheme-specific module options.
+- `nixporn/module.nix` defines the base module options, palette resolution, and
+  selected colorscheme config.
 - `nixporn/palettes.nix` reads normalized palette data from
   `sources/<colorscheme>.json`; `nixporn/presets/*.nix` selects palettes per
   colorscheme.
 - `lib/default.nix` contains reusable helpers only, exposed as
   `lib.nixporn.lib`.
-- `modules/colorscheme/default.nix` provides the base NixOS/Darwin module.
-- `modules/home/default.nix` wires Home Manager support.
-- `modules/targets/default.nix` imports one directory per target.
-  `modules/targets/<target>/default.nix` dispatches to
-  `modules/targets/<target>/<colorscheme>.nix` when present, otherwise
-  `modules/targets/<target>/generic.nix`.
-- `modules/home/<colorscheme>/default.nix` contains colorscheme-level Home
-  Manager wiring.
+- `packages/*.nix` packages upstream colorscheme theme configuration sources.
+- `modules/default.nix` wires Home Manager support and imports the adapter
+  set for every supported colorscheme.
+- `modules/home-manager/default.nix` imports one directory per Home Manager adapter.
+  `modules/home-manager/<target>/default.nix` dispatches to
+  `modules/home-manager/<target>/<colorscheme>.nix` when present, otherwise
+  `modules/home-manager/<target>/generic.nix`.
 
-Wallpapers, cursors, avatars, and host-specific files belong in downstream
-configurations.
+Wallpapers, avatars, and host-specific files belong in downstream configurations.
+Cursor themes are handled by the Home Manager `cursor` adapter and Bibata fallback
+packages.
 
 ## Build, Test, and Development Commands
 
@@ -51,7 +54,7 @@ paths, machine-specific assets, or generated debugging files.
 ## Testing Guidelines
 
 There is no dedicated test suite yet. Treat Nix evaluation as the baseline:
-run `nix flake check` after every change. For new colorscheme or target behavior,
+run `nix flake check` after every change. For new colorscheme or Home Manager adapter behavior,
 evaluate at least one consuming Home Manager configuration with
 `nixporn.enable = true;` and a relevant `nixporn.colorscheme.name`.
 
