@@ -7,13 +7,12 @@
   },
   "schema": 1,
   "source": {
-    "lastModified": 1777398070,
     "narHash": "sha256-s31nTDVBAj7kKbcQEQ7BHEibJzk5573OKOMLCClkHZ8=",
     "paletteFiles": [
       "lua/cyberdream/colors.lua"
     ],
     "rev": "d1866f5b606896ca530be00bafbd12a3e6bb6efd",
-    "source": "flake input",
+    "source": "package source",
     "url": "github:scottmckendry/cyberdream.nvim"
   },
   "variants": {

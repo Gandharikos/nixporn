@@ -4,8 +4,8 @@
 
 This repository is a reusable Nix flake for preset colorscheme modules.
 `flake.nix` exposes `nixosModules.colorscheme`, `homeModules.colorscheme`, and
-`darwinModules.colorscheme`. It also exposes `packages.${system}` with one
-package per colorscheme source.
+`darwinModules.colorscheme`. It also exposes `packages.${system}` with themed
+Bibata cursor packages.
 
 - `nixporn/default.nix` is the schema entry point for colorscheme metadata, palette
   resolution, and public options.
@@ -17,7 +17,9 @@ package per colorscheme source.
   colorscheme.
 - `lib/default.nix` contains reusable helpers only, exposed as
   `lib.nixporn.lib`.
-- `packages/*.nix` packages upstream colorscheme theme configuration sources.
+- `nixporn/source-repos.nix` pins upstream colorscheme theme configuration
+  sources for Home Manager adapters and source regeneration.
+- `packages/*.nix` packages generated cursor themes.
 - `modules/default.nix` wires Home Manager support and imports the adapter
   set for every supported colorscheme.
 - `modules/home-manager/default.nix` imports one directory per Home Manager adapter.
@@ -34,7 +36,7 @@ packages.
 - `nix flake check` validates flake outputs and module evaluation.
 - `nix flake show` lists public outputs.
 - `python3 scripts/update-sources.py` regenerates `sources/<colorscheme>.json`
-  after colorscheme input updates.
+  after pinned colorscheme source updates.
 - `nix eval --impure --json --expr '(builtins.getFlake (toString ./.)).lib.nixporn.supportedColorschemes'`
   confirms the colorscheme list.
 

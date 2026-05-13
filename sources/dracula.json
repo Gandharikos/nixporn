@@ -7,13 +7,12 @@
   },
   "schema": 1,
   "source": {
-    "lastModified": 1762304881,
     "narHash": "sha256-h0WQdK74FHJLva3RbyA8WZfX6rAo45wKPb9z4JbYAK8=",
     "paletteFiles": [
       "lua/dracula/palette.lua"
     ],
     "rev": "ae752c13e95fb7c5f58da4b5123cb804ea7568ee",
-    "source": "flake input",
+    "source": "package source",
     "url": "github:Mofiqul/dracula.nvim"
   },
   "variants": {

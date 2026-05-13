@@ -7,13 +7,12 @@
   },
   "schema": 1,
   "source": {
-    "lastModified": 1745139741,
     "narHash": "sha256-fmX4WuD25BaaJBZCcUyrtgq1a39tVpxLe3KE72dcQT4=",
     "paletteFiles": [
       "colors/gruvbox.vim"
     ],
     "rev": "697c00291db857ca0af00ec154e5bd514a79191f",
-    "source": "flake input",
+    "source": "package source",
     "url": "github:morhetz/gruvbox"
   },
   "variants": {

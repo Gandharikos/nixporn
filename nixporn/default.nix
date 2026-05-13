@@ -1,17 +1,11 @@
-{ lib, inputs ? null }:
+{ lib }:
 let
   inherit (lib.attrsets) genAttrs mapAttrs;
   inherit (lib.modules) mkDefault mkIf mkMerge;
 
   helpers = import ../lib { inherit lib; };
   mkColorschemeModule = import ./module.nix;
-  mkHomeColorschemeModule = import ../modules {
-    inputs =
-      if inputs == null then
-        throw "nixporn: mkHomeColorschemeModule requires flake inputs."
-      else
-        inputs;
-  };
+  mkHomeColorschemeModule = import ../modules;
   colorschemes = import ./colorschemes { inherit lib; };
   palettes = import ./palettes.nix { inherit lib; };
 
@@ -187,7 +181,7 @@ let
       accent = getAccent cfg cfg.colorscheme.name;
     in
     {
-      enable = cfg.enable;
+      inherit (cfg) enable;
       inherit accent variant;
       flavor = variant;
       style = variant;

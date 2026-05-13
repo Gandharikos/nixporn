@@ -1,8 +1,8 @@
-{ inputs, pkgs }:
+{ pkgs }:
 let
   inherit (pkgs) lib;
   nixporn = import ../nixporn {
-    inherit inputs lib;
+    inherit lib;
   };
 
   defaultVariant =
@@ -84,51 +84,5 @@ let
     }))
     (builtins.foldl' (acc: value: acc // value) { })
   ];
-
-  packages = {
-    catppuccin = import ./catppuccin.nix {
-      inherit pkgs;
-      src = inputs.catppuccin-palette;
-    };
-    cyberdream = import ./cyberdream.nix {
-      inherit pkgs;
-      src = inputs.cyberdream;
-    };
-    decay = import ./decay.nix {
-      inherit pkgs;
-      src = inputs.decay;
-    };
-    dracula = import ./dracula.nix {
-      inherit pkgs;
-      src = inputs.dracula;
-    };
-    gruvbox = import ./gruvbox.nix {
-      inherit pkgs;
-      src = inputs.gruvbox;
-    };
-    kanagawa = import ./kanagawa.nix {
-      inherit pkgs;
-      src = inputs.kanagawa;
-    };
-    nordic = import ./nordic.nix {
-      inherit pkgs;
-      src = inputs.nordic;
-    };
-    "rose-pine" = import ./rose-pine.nix {
-      inherit pkgs;
-      src = inputs."rose-pine";
-    };
-    "solarized-osaka" = import ./solarized-osaka.nix {
-      inherit pkgs;
-      src = inputs."solarized-osaka";
-    };
-    tokyonight = import ./tokyonight.nix {
-      inherit pkgs;
-      src = inputs.tokyonight;
-      spotifySrc = inputs.tokyonight-spotify;
-    };
-  };
 in
-packages // cursorPackages // {
-  default = packages.catppuccin;
-}
+cursorPackages

@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""Regenerate sources/<colorscheme>.json from flake input sources."""
+"""Regenerate sources/<colorscheme>.json from packaged theme sources."""
 
 from __future__ import annotations
 
@@ -14,43 +14,17 @@ from typing import Any
 ROOT = Path(__file__).resolve().parents[1]
 SOURCES = ROOT / "sources"
 
-SOURCE_EXPRESSIONS = {
-    "catppuccin": 'flake.inputs."catppuccin-palette"',
-    "cyberdream": "flake.inputs.cyberdream",
-    "decay": "flake.inputs.decay",
-    "dracula": "flake.inputs.dracula",
-    "gruvbox": "flake.inputs.gruvbox",
-    "kanagawa": "flake.inputs.kanagawa",
-    "nordic": "flake.inputs.nordic",
-    "rose-pine": 'flake.inputs."rose-pine"',
-    "solarized-osaka": 'flake.inputs."solarized-osaka"',
-    "tokyonight": "flake.inputs.tokyonight",
-}
-
 SOURCE_ORIGINS = {
-    "catppuccin": "flake input",
-    "cyberdream": "flake input",
-    "decay": "flake input",
-    "dracula": "flake input",
-    "gruvbox": "flake input",
-    "kanagawa": "flake input",
-    "nordic": "flake input",
-    "rose-pine": "flake input",
-    "solarized-osaka": "flake input",
-    "tokyonight": "flake input",
-}
-
-SOURCE_INPUTS = {
-    "catppuccin": "catppuccin-palette",
-    "cyberdream": "cyberdream",
-    "decay": "decay",
-    "dracula": "dracula",
-    "gruvbox": "gruvbox",
-    "kanagawa": "kanagawa",
-    "nordic": "nordic",
-    "rose-pine": "rose-pine",
-    "solarized-osaka": "solarized-osaka",
-    "tokyonight": "tokyonight",
+    "catppuccin": "package source",
+    "cyberdream": "package source",
+    "decay": "package source",
+    "dracula": "package source",
+    "gruvbox": "package source",
+    "kanagawa": "package source",
+    "nordic": "package source",
+    "rose-pine": "package source",
+    "solarized-osaka": "package source",
+    "tokyonight": "package source",
 }
 
 SOURCE_URLS = {
@@ -96,8 +70,11 @@ def source_expr(colorscheme: str) -> str:
     return f"""
       let
         flake = builtins.getFlake (toString ./.);
+        system = builtins.currentSystem;
+        pkgs = flake.inputs.nixpkgs.legacyPackages.${{system}};
+        sources = import ./nixporn/source-repos.nix {{ inherit pkgs; }};
       in
-        {SOURCE_EXPRESSIONS[colorscheme]}
+        sources."{colorscheme}"
     """
 
 
@@ -116,15 +93,31 @@ def source_path(colorscheme: str) -> Path:
 
 
 def source_info(colorscheme: str, paths: list[str]) -> dict[str, Any]:
-    input_name = SOURCE_INPUTS[colorscheme]
-    metadata = json.loads(run(["nix", "flake", "metadata", "--json"]))
-    locked = metadata["locks"]["nodes"][input_name]["locked"]
+    source = json.loads(
+        run(
+            [
+                "nix",
+                "eval",
+                "--impure",
+                "--json",
+                "--expr",
+                f"""
+                  let
+                    src = {source_expr(colorscheme)};
+                  in
+                  {{
+                    rev = src.rev or null;
+                    narHash = src.outputHash or null;
+                  }}
+                """,
+            ]
+        )
+    )
     info = {
         "source": SOURCE_ORIGINS[colorscheme],
         "url": SOURCE_URLS[colorscheme],
-        "rev": locked.get("rev"),
-        "lastModified": locked.get("lastModified"),
-        "narHash": locked.get("narHash"),
+        "rev": source.get("rev"),
+        "narHash": source.get("narHash"),
     }
     if paths:
         info["paletteFiles"] = paths

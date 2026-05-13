@@ -3,98 +3,120 @@
 
   inputs = {
     nixpkgs.url = "github:nixos/nixpkgs/nixos-unstable";
-
-    catppuccin-palette = {
-      url = "github:catppuccin/palette";
-      flake = false;
-    };
-
-    cyberdream = {
-      url = "github:scottmckendry/cyberdream.nvim";
-      flake = false;
-    };
-
-    decay = {
-      url = "github:decaycs/decay.nvim";
-      flake = false;
-    };
-
-    dracula = {
-      url = "github:Mofiqul/dracula.nvim";
-      flake = false;
-    };
-
-    gruvbox = {
-      url = "github:morhetz/gruvbox";
-      flake = false;
-    };
-
-    kanagawa = {
-      url = "github:rebelot/kanagawa.nvim";
-      flake = false;
-    };
-
-    nordic = {
-      url = "github:andersevenrud/nordic.nvim";
-      flake = false;
-    };
-
-    rose-pine = {
-      url = "github:rose-pine/neovim";
-      flake = false;
-    };
-
-    solarized-osaka = {
-      url = "github:craftzdog/solarized-osaka.nvim";
-      flake = false;
-    };
-
-    tokyonight = {
-      url = "github:folke/tokyonight.nvim";
-      flake = false;
-    };
-
-    tokyonight-spotify = {
-      url = "github:evening-hs/Spotify-Tokyo-Night-Theme";
-      flake = false;
-    };
   };
 
   outputs =
-    inputs@{
-      self,
-      nixpkgs,
-      ...
-    }:
+    { self, nixpkgs }:
     let
-      lib = nixpkgs.lib.extend (
-        final: _: {
-          nixporn = import ./nixporn {
-            inherit inputs;
-            lib = final;
-          };
-        }
-      );
-      forAllSystems = lib.genAttrs lib.systems.flakeExposed;
+      inherit (nixpkgs) lib;
+
+      systems = lib.systems.flakeExposed;
+      devSystems = [
+        "x86_64-linux"
+        "aarch64-linux"
+        "x86_64-darwin"
+        "aarch64-darwin"
+      ];
+
+      forAllSystems = lib.genAttrs systems;
+      forAllDevSystems = lib.genAttrs devSystems;
+
+      nixporn = import ./nixporn { inherit lib; };
+
+      mkModule =
+        {
+          name ? "colorscheme",
+          type,
+          file,
+        }:
+        { ... }:
+        {
+          _file = "${self.outPath}/flake.nix#${type}Modules.${name}";
+
+          imports = [ file ];
+        };
     in
     {
-      inherit lib;
+      lib.nixporn = nixporn;
 
       packages = forAllSystems (
         system:
-        import ./packages {
-          inherit inputs;
+        (import ./default.nix {
+          inherit system;
           pkgs = nixpkgs.legacyPackages.${system};
+        }).packages
+      );
+
+      devShells = forAllDevSystems (
+        system:
+        let
+          pkgs = nixpkgs.legacyPackages.${system};
+        in
+        lib.genAttrs
+          [
+            "default"
+            "ci"
+          ]
+          (
+            name:
+            import ./shell.nix {
+              inherit pkgs;
+              minimal = name == "ci";
+            }
+          )
+      );
+
+      formatter = forAllDevSystems (
+        system:
+        let
+          pkgs = nixpkgs.legacyPackages.${system};
+        in
+        pkgs.treefmt.withConfig {
+          runtimeInputs = with pkgs; [
+            keep-sorted
+            nixfmt
+          ];
+
+          settings = {
+            on-unmatched = "info";
+            tree-root-file = "flake.nix";
+
+            formatter = {
+              keep-sorted = {
+                command = "keep-sorted";
+                includes = [ "*" ];
+              };
+              nixfmt = {
+                command = "nixfmt";
+                includes = [ "*.nix" ];
+              };
+            };
+          };
         }
       );
 
-      nixosModules.default = self.nixosModules.colorscheme;
-      nixosModules.colorscheme = lib.nixporn.mkColorschemeModule;
+      nixosModules = {
+        default = self.nixosModules.colorscheme;
+        colorscheme = mkModule {
+          type = "nixos";
+          file = ./nixporn/module.nix;
+        };
+      };
 
-      homeModules.default = self.homeModules.colorscheme;
-      homeModules.colorscheme = lib.nixporn.mkHomeColorschemeModule;
+      homeModules = {
+        default = self.homeModules.colorscheme;
+        colorscheme = mkModule {
+          type = "home";
+          file = ./modules;
+        };
+      };
 
-      darwinModules.default = self.darwinModules.colorscheme;
-      darwinModules.colorscheme = lib.nixporn.mkColorschemeModule;
+      darwinModules = {
+        default = self.darwinModules.colorscheme;
+        colorscheme = mkModule {
+          type = "darwin";
+          file = ./nixporn/module.nix;
+        };
+      };
     };
 }

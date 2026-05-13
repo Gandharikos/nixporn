@@ -7,13 +7,12 @@
   },
   "schema": 1,
   "source": {
-    "lastModified": 1777504918,
     "narHash": "sha256-Jf5jycFdPGugGjGH36owtD+27qptBDjADiam2KxQ/L4=",
     "paletteFiles": [
       "lua/rose-pine/palette.lua"
     ],
     "rev": "6a961effd67f6130d36df6d1c05c48c739796dd2",
-    "source": "flake input",
+    "source": "package source",
     "url": "github:rose-pine/neovim"
   },
   "variants": {

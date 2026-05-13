@@ -7,13 +7,12 @@
   },
   "schema": 1,
   "source": {
-    "lastModified": 1776667684,
     "narHash": "sha256-vAq9ZiG3s4x/xFSKt9/o40pptj2y7S8DQqs1dJEdhVU=",
     "paletteFiles": [
       "lua/kanagawa/colors.lua"
     ],
     "rev": "8ad3b4cdcc804b332c32db8f9743667e1bb82b99",
-    "source": "flake input",
+    "source": "package source",
     "url": "github:rebelot/kanagawa.nvim"
   },
   "variants": {

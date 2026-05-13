@@ -7,13 +7,12 @@
   },
   "schema": 1,
   "source": {
-    "lastModified": 1720784061,
     "narHash": "sha256-ydIef3z69S9Bdl42G7q8amx3RWl+7Z3d4j84H7cxGdU=",
     "paletteFiles": [
       "lua/decay/core.lua"
     ],
     "rev": "457014541ebcfb29bd660592a0b02f22c9e2d0e2",
-    "source": "flake input",
+    "source": "package source",
     "url": "github:decaycs/decay.nvim"
   },
   "variants": {

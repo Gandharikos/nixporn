@@ -7,7 +7,8 @@ A reusable Nix colorscheme module collection with presets.
 - `nixosModules.colorscheme`
 - `homeModules.colorscheme`
 - `darwinModules.colorscheme`
-- `packages.${system}.<colorscheme>`
+- `packages.${system}.<colorscheme>-xcursor`
+- `packages.${system}.<colorscheme>-hyprcursor`
 
 The public interface is `nixporn.enable` plus `nixporn.colorscheme.*`. Enabling the
 module writes the resolved preset palette to `nixporn.colorscheme` and, in Home
@@ -49,15 +50,10 @@ Current Home Manager adapters are `bat`, `btop`, `cursor`, `dank-material-shell`
 
 ## Packages
 
-`packages.${system}` contains reusable theme source packages, one per
-colorscheme. Each package stores its upstream source under
-`share/nixporn/<colorscheme>/source`; Tokyo Night also stores its Spotify theme
-source under `share/nixporn/tokyonight/spotify`.
-
-Cursor fallback packages are generated from Bibata for each colorscheme default
-variant as `<colorscheme>-xcursor` and `<colorscheme>-hyprcursor`. The Home
-Manager `cursor` adapter uses the selected palette to generate matching Bibata
-XCursor and Hyprcursor themes.
+`packages.${system}` contains cursor fallback packages generated from Bibata for
+each colorscheme default variant as `<colorscheme>-xcursor` and
+`<colorscheme>-hyprcursor`. The Home Manager `cursor` adapter uses the selected
+palette to generate matching Bibata XCursor and Hyprcursor themes.
 
 ## Example
 
@@ -81,13 +77,13 @@ XCursor and Hyprcursor themes.
 ## Updating Sources
 
 Colorscheme source metadata and generated palettes live in `sources/<colorscheme>.json`.
-Regenerate them after updating the colorscheme source inputs:
+Regenerate them after updating the pinned source definitions in
+`nixporn/source-repos.nix`:
 
 ```sh
-nix flake update catppuccin-palette cyberdream decay dracula gruvbox kanagawa nordic rose-pine solarized-osaka tokyonight tokyonight-spotify
 python3 scripts/update-sources.py
 nix flake check
 ```
 
 The scheduled GitHub workflow in `.github/workflows/update-sources.yml` runs
-the same update and opens a pull request when sources change.
+the same regeneration and opens a pull request when sources change.

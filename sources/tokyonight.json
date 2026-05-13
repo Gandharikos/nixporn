@@ -7,7 +7,6 @@
   },
   "schema": 1,
   "source": {
-    "lastModified": 1774363414,
     "narHash": "sha256-a9iRWue7DB7s/wNdxqqB51Jya5P9X6sDftqhdmKggU0=",
     "paletteFiles": [
       "extras/lua/tokyonight_day.lua",
@@ -16,7 +15,7 @@
       "extras/lua/tokyonight_storm.lua"
     ],
     "rev": "cdc07ac78467a233fd62c493de29a17e0cf2b2b6",
-    "source": "flake input",
+    "source": "package source",
     "url": "github:folke/tokyonight.nvim"
   },
   "variants": {

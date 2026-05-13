@@ -7,14 +7,13 @@
   },
   "schema": 1,
   "source": {
-    "lastModified": 1778214062,
     "narHash": "sha256-haf2hbhE54NAeouBWXFdZPTHSV9IU78BfUL7W4kw0Q8=",
     "paletteFiles": [
       "extras/lua/solarized_osaka_dark.lua",
       "extras/lua/solarized_osaka_light.lua"
     ],
     "rev": "f675d9a5c58f3b0d6158d665a623f81a62e7bdaf",
-    "source": "flake input",
+    "source": "package source",
     "url": "github:craftzdog/solarized-osaka.nvim"
   },
   "variants": {
