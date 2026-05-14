@@ -1,5 +1,1 @@
-{ colorschemeName }:
-import ../generic-adapter.nix {
-  inherit colorschemeName;
-  target = "polybar";
-}
+import ../generic/polybar.nix { targetPath = ./.; }

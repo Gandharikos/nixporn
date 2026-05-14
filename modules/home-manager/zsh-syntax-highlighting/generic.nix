@@ -1,5 +1,1 @@
-{ colorschemeName }:
-import ../generic-adapter.nix {
-  inherit colorschemeName;
-  target = "zsh-syntax-highlighting";
-}
+import ../generic/zsh-syntax-highlighting.nix { targetPath = ./.; }

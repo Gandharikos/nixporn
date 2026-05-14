@@ -1,21 +1,21 @@
 {
   config,
   lib,
-  nixpornSources,
+  pkgs,
   ...
 }:
 let
-  inherit (lib.modules) mkIf;
-  src = nixpornSources."solarized-osaka";
-  cfg = config.nixporn."solarized-osaka";
-  targetCfg = config.nixporn.targets."delta";
-  inherit (config.nixporn.colorscheme) slug;
-  file = "solarized_osaka_${cfg.variant}";
-  enable = cfg.enable && targetCfg.enable && (config.programs.delta.enable or false);
+  cfg = config.nixporn;
+  inherit (cfg.colorschemes) solarized-osaka;
+  inherit (solarized-osaka) slug;
+  source = pkgs.nixporn.solarized-osaka;
+  target = "delta";
+  enable = cfg.enable && cfg.colorscheme == "solarized-osaka" && cfg.${target}.enable;
 in
 {
-  config = mkIf enable {
-    programs.git.includes = [ { path = "${src}/extras/delta/${file}.gitconfig"; } ];
-    programs.delta.options.features = slug;
+  config = lib.mkIf enable {
+    programs.git = lib.mkIf config.programs.delta.enableGitIntegration {
+      includes = [ { path = "${source}/extras/delta/${slug}.gitconfig"; } ];
+    };
   };
 }

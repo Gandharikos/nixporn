@@ -1,22 +1,19 @@
 {
-  lib,
-  nixpornSources,
-  pkgs,
   config,
+  lib,
+  pkgs,
   ...
 }:
 let
-  inherit (lib.modules) mkIf;
-  src = nixpornSources.tokyonight;
-  cfg = config.nixporn.tokyonight;
-  targetCfg = config.nixporn.targets."eza";
-  enable = cfg.enable && targetCfg.enable && (config.programs.eza.enable or false);
-  inherit (config.nixporn.colorscheme) slug;
+  cfg = config.nixporn;
+  inherit (cfg.colorschemes) tokyonight;
+  inherit (tokyonight) slug;
+  source = pkgs.nixporn.tokyonight;
+  target = "eza";
+  enable = cfg.enable && cfg.colorscheme == "tokyonight" && cfg.${target}.enable;
 in
 {
-  config = mkIf enable {
-    home.sessionVariables.EZA_CONFIG_DIR = lib.mkDefault "${config.xdg.configHome}/eza";
-
-    xdg.configFile."eza/theme.yml".source = "${src}/extras/eza/${slug}.yml";
+  config = lib.mkIf enable {
+    xdg.configFile."eza/theme.yml".source = "${source}/extras/eza/${slug}.yml";
   };
 }

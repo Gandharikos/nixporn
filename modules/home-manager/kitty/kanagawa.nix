@@ -1,26 +1,28 @@
 {
   config,
   lib,
-  nixpornSources,
+  pkgs,
   ...
 }:
 let
-  inherit (lib.modules) mkIf;
-  src = nixpornSources.kanagawa;
-  cfg = config.nixporn.kanagawa;
-  targetCfg = config.nixporn.targets."kitty";
-  file =
-    if cfg.variant == "wave" then
-      "kanagawa.conf"
-    else if cfg.variant == "dragon" then
-      "kanagawa_dragon.conf"
-    else
-      "kanagawa_light.conf";
+  cfg = config.nixporn;
+  inherit (cfg.colorschemes) kanagawa;
+  inherit (kanagawa) variant;
+  source = pkgs.nixporn.kanagawa;
+  target = "kitty";
+  enable = cfg.enable && cfg.colorscheme == "kanagawa" && cfg.${target}.enable;
+  themeFile =
+    {
+      dragon = "kanagawa_dragon.conf";
+      lotus = "kanagawa_light.conf";
+      wave = "kanagawa.conf";
+    }
+    .${variant};
 in
 {
-  config = mkIf (cfg.enable && targetCfg.enable) {
-    programs.kitty.extraConfig = ''
-      include ${src}/extras/kitty/${file}
+  config = lib.mkIf enable {
+    programs.kitty.extraConfig = lib.mkBefore ''
+      include ${source}/extras/kitty/${themeFile}
     '';
   };
 }

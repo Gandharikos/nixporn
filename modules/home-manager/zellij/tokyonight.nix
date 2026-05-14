@@ -1,39 +1,20 @@
 {
   config,
   lib,
+  pkgs,
   ...
 }:
 let
-  inherit (lib.modules) mkIf;
-  inherit (config.nixporn.colorscheme) palette slug;
-  cfg = config.nixporn.tokyonight;
-  targetCfg = config.nixporn.targets."zellij";
-  enable = cfg.enable && targetCfg.enable && (config.programs.zellij.enable or false);
+  cfg = config.nixporn;
+  inherit (cfg.colorschemes) tokyonight;
+  inherit (tokyonight) slug;
+  source = pkgs.nixporn.tokyonight;
+  target = "zellij";
+  enable = cfg.enable && cfg.colorscheme == "tokyonight" && cfg.${target}.enable;
 in
 {
-  config = mkIf enable {
-    programs.zellij = {
-      settings = {
-        theme = slug;
-        theme_dir = "${config.xdg.configHome}/zellij/themes";
-      };
-      themes.${slug} = with palette.base; {
-        themes.${slug} = {
-          inherit
-            blue
-            cyan
-            fg
-            green
-            magenta
-            orange
-            red
-            white
-            yellow
-            ;
-          bg = bg_highlight;
-          black = bg;
-        };
-      };
-    };
+  config = lib.mkIf enable {
+    xdg.configFile."zellij/themes/${slug}.kdl".source = "${source}/extras/zellij/${slug}.kdl";
+    programs.zellij.settings.theme = slug;
   };
 }

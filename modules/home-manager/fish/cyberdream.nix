@@ -1,22 +1,22 @@
 {
   config,
   lib,
-  nixpornSources,
+  pkgs,
   ...
 }:
 let
-  inherit (lib.modules) mkIf;
-  src = nixpornSources.cyberdream;
-  cfg = config.nixporn.cyberdream;
-  targetCfg = config.nixporn.targets."fish";
-  inherit (config.nixporn.colorscheme) slug;
-  enable = cfg.enable && targetCfg.enable && (config.programs.fish.enable or false);
+  cfg = config.nixporn;
+  inherit (cfg.colorschemes) cyberdream;
+  inherit (cyberdream) slug;
+  source = pkgs.nixporn.cyberdream;
+  target = "fish";
+  enable = cfg.enable && cfg.colorscheme == "cyberdream" && cfg.${target}.enable;
 in
 {
-  config = mkIf enable {
-    xdg.configFile."fish/themes/${slug}.theme".source = "${src}/extras/fish/${slug}.theme";
-    programs.fish.interactiveShellInit = ''
-      fish_config theme choose ${slug}
+  config = lib.mkIf enable {
+    xdg.configFile."fish/themes/${slug}.theme".source = "${source}/extras/fish/${slug}.theme";
+    programs.fish.shellInit = ''
+      fish_config theme choose "${slug}"
     '';
   };
 }

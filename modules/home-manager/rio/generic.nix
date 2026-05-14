@@ -1,5 +1,3 @@
-{ colorschemeName }:
-import ../generic-adapter.nix {
-  inherit colorschemeName;
-  target = "rio";
+import ../generic/rio.nix {
+  targetPath = ./.;
 }

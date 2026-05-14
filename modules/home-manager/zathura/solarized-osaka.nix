@@ -1,18 +1,21 @@
 {
   config,
   lib,
-  nixpornSources,
+  pkgs,
   ...
 }:
 let
-  inherit (lib.modules) mkIf;
-  src = nixpornSources."solarized-osaka";
-  cfg = config.nixporn."solarized-osaka";
-  targetCfg = config.nixporn.targets."zathura";
-  file = "solarized_osaka_${cfg.variant}";
+  cfg = config.nixporn;
+  inherit (cfg.colorschemes) solarized-osaka;
+  inherit (solarized-osaka) slug;
+  source = pkgs.nixporn.solarized-osaka;
+  target = "zathura";
+  enable = cfg.enable && cfg.colorscheme == "solarized-osaka" && cfg.${target}.enable;
 in
 {
-  config = mkIf (cfg.enable && targetCfg.enable && config.programs.zathura.enable) {
-    programs.zathura.extraConfig = "include ${src}/extras/zathura/${file}.zathurarc";
+  config = lib.mkIf enable {
+    programs.zathura.extraConfig = ''
+      include ${source}/extras/zathura/${slug}.zathurarc
+    '';
   };
 }

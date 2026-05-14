@@ -4,30 +4,36 @@
   ...
 }:
 let
-  inherit (lib.modules) mkIf;
-  inherit (config.nixporn.colorscheme) palette;
-  cfg = config.nixporn.tokyonight;
-  targetCfg = config.nixporn.targets."fzf";
+  cfg = config.nixporn;
+  inherit (cfg.colorschemes) tokyonight;
+  inherit (tokyonight) palette;
+  target = "fzf";
+  enable = cfg.enable && cfg.colorscheme == "tokyonight" && cfg.${target}.enable;
 in
 {
-  config = mkIf (cfg.enable && targetCfg.enable) {
-    programs.fzf.colors = with palette; {
-      "bg+" = bg_visual;
-      "bg" = bg_dark;
-      "border" = border_highlight;
-      "fg" = fg;
-      "gutter" = bg_dark;
-      "header" = orange;
-      "hl+" = blue1;
-      "hl" = blue1;
-      "info" = dark3;
-      "marker" = magenta2;
-      "pointer" = magenta2;
-      "prompt" = blue1;
-      "query" = fg;
-      "scrollbar" = border_highlight;
-      "separator" = orange;
-      "spinner" = magenta2;
-    };
+  config = lib.mkIf enable {
+    programs.fzf.defaultOptions = [
+      "--highlight-line"
+      "--info=inline-right"
+      "--ansi"
+      "--layout=reverse"
+      "--border=none"
+      "--color=bg+:${palette.bg_visual}"
+      "--color=bg:${palette.bg_dark}"
+      "--color=border:${palette.border_highlight}"
+      "--color=fg:${palette.fg}"
+      "--color=gutter:${palette.bg_dark}"
+      "--color=header:${palette.orange}"
+      "--color=hl+:${palette.blue1}"
+      "--color=hl:${palette.blue1}"
+      "--color=info:${palette.dark3}"
+      "--color=marker:${palette.magenta2}"
+      "--color=pointer:${palette.magenta2}"
+      "--color=prompt:${palette.blue1}"
+      "--color=query:${palette.fg}:regular"
+      "--color=scrollbar:${palette.border_highlight}"
+      "--color=separator:${palette.orange}"
+      "--color=spinner:${palette.magenta2}"
+    ];
   };
 }

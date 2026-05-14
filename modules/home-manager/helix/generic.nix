@@ -1,5 +1,3 @@
-{ colorschemeName }:
-import ../generic-adapter.nix {
-  inherit colorschemeName;
-  target = "helix";
+import ../generic/helix.nix {
+  targetPath = ./.;
 }

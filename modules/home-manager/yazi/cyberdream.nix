@@ -1,18 +1,19 @@
 {
   config,
   lib,
-  nixpornSources,
+  pkgs,
   ...
 }:
 let
-  inherit (lib.modules) mkIf;
-  src = nixpornSources.cyberdream;
-  cfg = config.nixporn.cyberdream;
-  targetCfg = config.nixporn.targets."yazi";
-  inherit (config.nixporn.colorscheme) slug;
+  cfg = config.nixporn;
+  inherit (cfg.colorschemes) cyberdream;
+  inherit (cyberdream) slug;
+  source = pkgs.nixporn.cyberdream;
+  target = "yazi";
+  enable = cfg.enable && cfg.colorscheme == "cyberdream" && cfg.${target}.enable;
 in
 {
-  config = mkIf (cfg.enable && targetCfg.enable && config.programs.yazi.enable) {
-    xdg.configFile."yazi/theme.toml".source = "${src}/extras/yazi/${slug}.toml";
+  config = lib.mkIf enable {
+    xdg.configFile."yazi/theme.toml".source = "${source}/extras/yazi/${slug}.toml";
   };
 }

@@ -1,0 +1,194 @@
+{
+  "aerc": {
+    "lastModified": "2023-05-06",
+    "narHash": "sha256-BZjhgzKqP4V11rE9rSRERKlAluzKjjNsApxl2GsD/qQ=",
+    "rev": "ad0a1aedd7e227c1f3cf086d5364b06640323af7",
+    "url": "github:dracula/aerc"
+  },
+  "alacritty": {
+    "lastModified": "2025-04-24",
+    "narHash": "sha256-SzhZPvblz+U2vIHuLcjdA3pf7RfV2r0yrLZytkQ9s94=",
+    "rev": "c8a3a13404b78d520d04354e133b5075d9b785e1",
+    "url": "github:dracula/alacritty"
+  },
+  "cava": {
+    "lastModified": "2022-11-23",
+    "narHash": "sha256-YaDUU6TwG+xcffBibNBBW+GY8Zy0pzBESzsKJPZ3+DU=",
+    "rev": "7b802cdb520849fbb43ffe83631fca7cc454036b",
+    "url": "github:dracula/cava"
+  },
+  "dunst": {
+    "lastModified": "2024-04-23",
+    "narHash": "sha256-nWdGd1jGxUNdaTANvev15esnfY0eRyLoERMzVSn/GFU=",
+    "rev": "907f345d81dba9566eff59dd89afb321118da180",
+    "url": "github:dracula/dunst"
+  },
+  "fish": {
+    "lastModified": "2023-06-23",
+    "narHash": "sha256-Hyq4EfSmWmxwCYhp3O8agr7VWFAflcUe8BUKh50fNfY=",
+    "rev": "269cd7d76d5104fdc2721db7b8848f6224bdf554",
+    "url": "github:dracula/fish"
+  },
+  "foot": {
+    "lastModified": "2026-04-26",
+    "narHash": "sha256-O/IxSlQ1x2n8A5LhsAgd+Ivw8ToYAPNZ8JHDtT4XBlU=",
+    "rev": "570a4888e3316d00fc74596d924d6fbe5c327e36",
+    "url": "github:dracula/foot"
+  },
+  "freetube": {
+    "lastModified": "2023-03-22",
+    "narHash": "sha256-mRuF1K2L6ada8hmBFZOnly+LitYt7PU957NhUG7gQLQ=",
+    "rev": "6a7d3bf09030fc696f46d6cac84f47163896f5de",
+    "url": "github:dracula/freetube"
+  },
+  "fuzzel": {
+    "lastModified": "2023-03-21",
+    "narHash": "sha256-vq4/QnHIQvvPYVhPIjjotz+UqOTub7q8cpjfsU8hM70=",
+    "rev": "0a17de1c24b2bf7d2577424c8ee763a6867177ec",
+    "url": "github:dracula/fuzzel"
+  },
+  "fzf": {
+    "lastModified": "2022-03-13",
+    "narHash": "sha256-8NqgySpk7Wj0TGIBHt713EZGusCQTnNE5UbXF3ddeio=",
+    "rev": "f4c7758a813ca73b69e9c954c001586c33858c24",
+    "url": "github:dracula/fzf"
+  },
+  "gh-dash": {
+    "lastModified": "2023-08-25",
+    "narHash": "sha256-LMbc7XDA3CkiiwUT6s5cEHkZhAZbCF2w+pIymYokZWo=",
+    "rev": "f7943618876b5a44197693772ca65712a89827f8",
+    "url": "github:dracula/gh-dash"
+  },
+  "hyprland": {
+    "lastModified": "2026-03-19",
+    "narHash": "sha256-qw2l+gqN0eTWS5PUjOi15Oj0J/gaJiuF7z2WMsCxqD8=",
+    "rev": "359e0e4cb442883685485257e09ab1b6f627925e",
+    "url": "github:dracula/hyprland"
+  },
+  "kitty": {
+    "lastModified": "2022-05-19",
+    "narHash": "sha256-78PTH9wE6ktuxeIxrPp0ZgRI8ST+eZ3Ok2vW6BCIZkc=",
+    "rev": "87717a3f00e3dff0fc10c93f5ff535ea4092de70",
+    "url": "github:dracula/kitty"
+  },
+  "lsd": {
+    "lastModified": "2024-08-16",
+    "narHash": "sha256-tGKwbfJ6dX/HHKE0Iu4MBZ1Eofpit5IEVNnLxIoFLYI=",
+    "rev": "2b87711bdce8c89a882db720e4f47d95877f83a7",
+    "url": "github:dracula/lsd"
+  },
+  "mako": {
+    "lastModified": "2022-03-20",
+    "narHash": "sha256-qoQODX2435xfH9G6xOVFXitKy/75MaDU+tiQ/EsjRV4=",
+    "rev": "80caf30d59f8017e306519ca33609be75a86ebaf",
+    "url": "github:dracula/mako"
+  },
+  "micro": {
+    "lastModified": "2022-03-20",
+    "narHash": "sha256-kyVw+8kCPavd68y+IY7F//ZJV4jDXZtw6048BpdrOSY=",
+    "rev": "4234959e2bc597edea6fdb02bcc4e14e87d18ec1",
+    "url": "github:dracula/micro"
+  },
+  "newsboat": {
+    "lastModified": "2023-05-06",
+    "narHash": "sha256-+ngovzkK8sOHLMjbeyapamntPKz0hjslbZ0NLP7E1JQ=",
+    "rev": "1d4def41a4ddeca1923f76c84e24e92b12563368",
+    "url": "github:dracula/newsboat"
+  },
+  "polybar": {
+    "lastModified": "2023-08-31",
+    "narHash": "sha256-+gnafpZe5sDDVMG89ljW3IEgvlo3dfbj1FATqBRc++U=",
+    "rev": "f875430c0973f17e76ac1fac216eddf85b29fe7a",
+    "url": "github:dracula/polybar"
+  },
+  "qutebrowser": {
+    "lastModified": "2022-03-21",
+    "narHash": "sha256-BXTvYFZnzEDlNEOTaWm4m8MEelVrRsUkNdwYKxaxw/g=",
+    "rev": "791de19ce6a43f0fa52405eea57cba43b4c05a22",
+    "url": "github:dracula/qutebrowser"
+  },
+  "rio": {
+    "lastModified": "2026-03-21",
+    "narHash": "sha256-oqezHrHJnXy1P6FHu2IlzmWbpIqvePQ2JUyMU1pXkz4=",
+    "rev": "18ff2990203fedb5845e6cb83486e36eedfdd0cc",
+    "url": "github:dracula/rio-terminal"
+  },
+  "rofi": {
+    "lastModified": "2023-08-26",
+    "narHash": "sha256-Zx/+FLd5ocHg6+YkqOt67nWfeHR3+iitVm1uKnNXrzc=",
+    "rev": "459eee340059684bf429a5eb51f8e1cc4998eb74",
+    "url": "github:dracula/rofi"
+  },
+  "sioyek": {
+    "lastModified": "2022-11-23",
+    "narHash": "sha256-+HzxZA8Bb+cGogK+w4JES4ZFG+ueXEAuLu+0T18fvbc=",
+    "rev": "b832ab04d880fbe243c0fe9043612be61226426e",
+    "url": "github:dracula/sioyek"
+  },
+  "starship": {
+    "lastModified": "2025-06-11",
+    "narHash": "sha256-gFnRdz+OBsIWK78ERACwv/Y5RUwpbPX3gGnJdjJVJo4=",
+    "rev": "920e9f46ccc25beee15ed7fe0baddabdfeaaf92a",
+    "url": "github:dracula/starship"
+  },
+  "swaylock": {
+    "lastModified": "2024-02-05",
+    "narHash": "sha256-tM+CtrqEQNEn//PEbe8xI1Rbn48z2NVLYrV5mwdr/Lg=",
+    "rev": "b0d825a75fe4cb1e3266bf40e22480a31b81da1b",
+    "url": "github:dracula/swaylock"
+  },
+  "thunderbird": {
+    "lastModified": "2022-03-21",
+    "narHash": "sha256-dEFF+kZ/1cOLA8bW9SQD+1OXaPUITKTcVhuN1IGzvF8=",
+    "rev": "2d3d765e62711ea095a6870fa841642f74b7119d",
+    "url": "github:dracula/thunderbird"
+  },
+  "tmux": {
+    "lastModified": "2026-04-24",
+    "narHash": "sha256-GyGKbc73BeXpAUyUwa6aQRuxHoBAvJYaeAKJJBBkpPY=",
+    "rev": "a0830546479f4cc2e865099749a67914ae74a0f1",
+    "url": "github:dracula/tmux"
+  },
+  "vscode": {
+    "lastModified": "2026-03-01",
+    "narHash": "sha256-zyRl7mZa5lkd/EWHEnAvbCX/24/JE5bjXMuexhrQKbE=",
+    "rev": "f1c685e6d46dd5eef1b7d4ec8356976f29123814",
+    "url": "github:dracula/visual-studio-code"
+  },
+  "waybar": {
+    "lastModified": "2025-07-23",
+    "narHash": "sha256-rGJdiGCGaKw7WAKbX8yRzKuw1nso54Idlaxn0wfz/Ek=",
+    "rev": "359e71bdd3935df849801ca0d8533765e8779d8a",
+    "url": "github:dracula/waybar"
+  },
+  "wezterm": {
+    "lastModified": "2023-02-06",
+    "narHash": "sha256-sEoXqIAqedezT7cA0HhPsIfu1bWWxJS5+cd7nwK/Aps=",
+    "rev": "0db525a46b5242ee15fd4a52f887e172fbde8e51",
+    "url": "github:dracula/wezterm"
+  },
+  "xfce4-terminal": {
+    "lastModified": "2022-03-21",
+    "narHash": "sha256-Leh6auNo7cZVKJ0wUgJB0GoAotTKiWkW1jbsDkyF/qA=",
+    "rev": "8e037953cf9769c3ff6f261327a9e3145dfeb411",
+    "url": "github:dracula/xfce4-terminal"
+  },
+  "zathura": {
+    "lastModified": "2024-03-09",
+    "narHash": "sha256-1bEJYF1T1bk0meySXcww7POCjjzSQpyXdh5YwoZRhRA=",
+    "rev": "d21609b0548eaf45cccc275791dd3cc5c22baa5e",
+    "url": "github:dracula/zathura"
+  },
+  "zellij": {
+    "lastModified": "2022-12-26",
+    "narHash": "sha256-Sqj9EhDhr5Kv9x9GwfPUvNOQocGzbVScVSGnR0/yf7Q=",
+    "rev": "948a6dcae1d82b58ba725b464a96e6a1bc1c11cf",
+    "url": "github:dracula/zellij"
+  },
+  "zsh-syntax-highlighting": {
+    "lastModified": "2022-03-21",
+    "narHash": "sha256-JrSKx8qHGAF0DnSJiuKWvn6ItQHvWpJ5pKo4yNbrHno=",
+    "rev": "09c89b657ad8a27ddfe1d6f2162e99e5cce0d5b3",
+    "url": "github:dracula/zsh-syntax-highlighting"
+  }
+}

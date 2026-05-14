@@ -1,5 +1,1 @@
-{ colorschemeName }:
-import ../generic-adapter.nix {
-  inherit colorschemeName;
-  target = "skim";
-}
+import ../generic/skim.nix { targetPath = ./.; }

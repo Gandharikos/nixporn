@@ -1,23 +1,22 @@
 {
   config,
   lib,
-  nixpornSources,
+  pkgs,
   ...
 }:
 let
-  inherit (lib.modules) mkIf;
-  src = nixpornSources."solarized-osaka";
-  cfg = config.nixporn."solarized-osaka";
-  targetCfg = config.nixporn.targets."fish";
-  inherit (config.nixporn.colorscheme) slug;
-  file = "solarized_osaka_${cfg.variant}";
-  enable = cfg.enable && targetCfg.enable && (config.programs.fish.enable or false);
+  cfg = config.nixporn;
+  inherit (cfg.colorschemes) solarized-osaka;
+  inherit (solarized-osaka) slug;
+  source = pkgs.nixporn.solarized-osaka;
+  target = "fish";
+  enable = cfg.enable && cfg.colorscheme == "solarized-osaka" && cfg.${target}.enable;
 in
 {
-  config = mkIf enable {
-    xdg.configFile."fish/themes/${slug}.theme".source = "${src}/extras/fish_themes/${file}.theme";
-    programs.fish.interactiveShellInit = ''
-      fish_config theme choose ${slug}
+  config = lib.mkIf enable {
+    xdg.configFile."fish/themes/${slug}.theme".source = "${source}/extras/fish_themes/${slug}.theme";
+    programs.fish.shellInit = ''
+      fish_config theme choose "${slug}"
     '';
   };
 }

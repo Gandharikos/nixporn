@@ -1,22 +1,24 @@
 {
   config,
   lib,
-  nixpornSources,
+  pkgs,
   ...
 }:
 let
-  inherit (lib.modules) mkIf;
-  src = nixpornSources.cyberdream;
-  cfg = config.nixporn.cyberdream;
-  targetCfg = config.nixporn.targets."bat";
-  inherit (config.nixporn.colorscheme) slug;
+  cfg = config.nixporn;
+  inherit (cfg.colorschemes) cyberdream;
+  inherit (cyberdream) slug;
+  source = pkgs.nixporn.cyberdream;
+  target = "bat";
+  enable = cfg.enable && cfg.colorscheme == "cyberdream" && cfg.${target}.enable;
+  themeName = if cyberdream.variant == "light" then "Cyberdream Light" else "Cyberdream";
 in
 {
-  config = mkIf (cfg.enable && targetCfg.enable) {
+  config = lib.mkIf enable {
     programs.bat = {
-      config.theme = slug;
-      themes.${slug} = {
-        inherit src;
+      config.theme = themeName;
+      themes.${themeName} = {
+        src = source;
         file = "extras/textmate/${slug}.tmTheme";
       };
     };

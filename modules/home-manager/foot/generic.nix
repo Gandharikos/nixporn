@@ -1,5 +1,3 @@
-{ colorschemeName }:
-import ../generic-adapter.nix {
-  inherit colorschemeName;
-  target = "foot";
+import ../generic/foot.nix {
+  targetPath = ./.;
 }

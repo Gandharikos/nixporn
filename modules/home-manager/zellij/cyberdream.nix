@@ -1,26 +1,20 @@
 {
   config,
   lib,
-  nixpornSources,
+  pkgs,
   ...
 }:
 let
-  inherit (lib.modules) mkIf;
-  src = nixpornSources.cyberdream;
-  cfg = config.nixporn.cyberdream;
-  targetCfg = config.nixporn.targets."zellij";
-  inherit (config.nixporn.colorscheme) slug;
-  enable = cfg.enable && targetCfg.enable && (config.programs.zellij.enable or false);
-  theme = builtins.replaceStrings [ "    cyberdream {" ] [ "    ${slug} {" ] (
-    builtins.readFile "${src}/extras/zellij/${slug}.kdl"
-  );
+  cfg = config.nixporn;
+  inherit (cfg.colorschemes) cyberdream;
+  inherit (cyberdream) slug;
+  source = pkgs.nixporn.cyberdream;
+  target = "zellij";
+  enable = cfg.enable && cfg.colorscheme == "cyberdream" && cfg.${target}.enable;
 in
 {
-  config = mkIf enable {
-    programs.zellij.settings = {
-      theme = slug;
-      theme_dir = "${config.xdg.configHome}/zellij/themes";
-    };
-    xdg.configFile."zellij/themes/${slug}.kdl".text = theme;
+  config = lib.mkIf enable {
+    xdg.configFile."zellij/themes/${slug}.kdl".source = "${source}/extras/zellij/${slug}.kdl";
+    programs.zellij.settings.theme = slug;
   };
 }

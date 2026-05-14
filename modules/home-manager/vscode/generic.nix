@@ -1,5 +1,1 @@
-{ colorschemeName }:
-import ../generic-adapter.nix {
-  inherit colorschemeName;
-  target = "vscode";
-}
+import ../generic/vscode.nix { targetPath = ./.; }

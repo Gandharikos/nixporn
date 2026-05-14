@@ -1,5 +1,1 @@
-{ colorschemeName }:
-import ../generic-adapter.nix {
-  inherit colorschemeName;
-  target = "nushell";
-}
+import ../generic/nushell.nix { targetPath = ./.; }

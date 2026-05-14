@@ -1,23 +1,20 @@
 {
-  lib,
-  nixpornSources,
-  pkgs,
   config,
+  lib,
+  pkgs,
   ...
 }:
 let
-  inherit (lib.modules) mkIf;
-  src = nixpornSources.tokyonight;
-  cfg = config.nixporn.tokyonight;
-  targetCfg = config.nixporn.targets."opencode";
-  enable = cfg.enable && targetCfg.enable && (config.programs.opencode.enable or false);
-  inherit (config.nixporn.colorscheme) slug;
+  cfg = config.nixporn;
+  inherit (cfg.colorschemes) tokyonight;
+  inherit (tokyonight) slug;
+  source = pkgs.nixporn.tokyonight;
+  target = "opencode";
+  enable = cfg.enable && cfg.colorscheme == "tokyonight" && cfg.${target}.enable;
 in
 {
-  config = mkIf enable {
-    # OpenCode v1.2.15+ requires TUI settings in separate tui section
+  config = lib.mkIf enable {
+    xdg.configFile."opencode/themes/${slug}.json".source = "${source}/extras/opencode/${slug}.json";
     programs.opencode.tui.theme = slug;
-
-    xdg.configFile."opencode/themes/${slug}.json".source = "${src}/extras/opencode/${slug}.json";
   };
 }

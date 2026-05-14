@@ -1,5 +1,1 @@
-{ colorschemeName }:
-import ../generic-adapter.nix {
-  inherit colorschemeName;
-  target = "qutebrowser";
-}
+import ../generic/qutebrowser.nix { targetPath = ./.; }

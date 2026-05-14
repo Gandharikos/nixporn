@@ -1,20 +1,21 @@
 {
   config,
   lib,
-  nixpornSources,
+  pkgs,
   ...
 }:
 let
-  inherit (lib.modules) mkIf;
-  src = nixpornSources."solarized-osaka";
-  cfg = config.nixporn."solarized-osaka";
-  targetCfg = config.nixporn.targets."kitty";
-  file = "solarized_osaka_${cfg.variant}";
+  cfg = config.nixporn;
+  inherit (cfg.colorschemes) solarized-osaka;
+  inherit (solarized-osaka) slug;
+  source = pkgs.nixporn.solarized-osaka;
+  target = "kitty";
+  enable = cfg.enable && cfg.colorscheme == "solarized-osaka" && cfg.${target}.enable;
 in
 {
-  config = mkIf (cfg.enable && targetCfg.enable) {
-    programs.kitty.extraConfig = ''
-      include ${src}/extras/kitty/${file}.conf
+  config = lib.mkIf enable {
+    programs.kitty.extraConfig = lib.mkBefore ''
+      include ${source}/extras/kitty/${slug}.conf
     '';
   };
 }

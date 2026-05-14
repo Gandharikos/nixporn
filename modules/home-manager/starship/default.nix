@@ -1,13 +1,4 @@
-{ colorschemeName }:
-let
-  specific = ./. + "/${colorschemeName}.nix";
-in
+{ lib, ... }:
 {
-  imports =
-    if builtins.pathExists specific then
-      [ specific ]
-    else
-      [
-        (import ./generic.nix { inherit colorschemeName; })
-      ];
+  imports = lib.nixporn.scanPaths ./.;
 }

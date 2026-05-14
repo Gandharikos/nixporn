@@ -1,5 +1,1 @@
-{ colorschemeName }:
-import ../generic-adapter.nix {
-  inherit colorschemeName;
-  target = "vivid";
-}
+import ../generic/vivid.nix { targetPath = ./.; }

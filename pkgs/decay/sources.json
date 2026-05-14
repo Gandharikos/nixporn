@@ -1,0 +1,72 @@
+{
+  "bat": {
+    "narHash": "sha256-ZOz+fsauciWDY6lFvjmyAmqwvxmjAKTddcgijRfwpF4=",
+    "rev": "668a7b753d6c43a3adae2f959ef4fb4773cee534",
+    "url": "github:decaycs/decay-bat"
+  },
+  "cava": {
+    "narHash": "sha256-UEJetmtgsAO5VunpGeUY652IVQ9oNbXUFXoVeeDth7s=",
+    "rev": "72931be24a98b92eb3426a5af129e357a1cf9aaf",
+    "url": "github:decaycs/cava"
+  },
+  "discord": {
+    "narHash": "sha256-H3dy8qgvs3nA1SrOipYCQdxhd9trfEeHS3Wdc86BATg=",
+    "rev": "90ecdff789e3f64a47ff016ed2bb60ce51a81a27",
+    "url": "github:decaycs/decay-discord"
+  },
+  "dunst": {
+    "narHash": "sha256-BNC8k+rXkac45emaG9JwJBqNAgj2iYONod4AGkqfkVw=",
+    "rev": "068e9d01d2a9baa25bcaee756854d4e66150d791",
+    "url": "github:decaycs/dunst"
+  },
+  "firefox": {
+    "narHash": "sha256-+MdgAngS5RV6NqyQMPvdiedtBfWRRrCpPyl9boslw5s=",
+    "rev": "46838c911ab5e0ae2701c8b3c75dcdf2b931fcfb",
+    "url": "github:decaycs/decay-firefox"
+  },
+  "gtk": {
+    "narHash": "sha256-IWWbaNLVY6b0awyZwxWQT348TvawC3GekLDMs0FrnJk=",
+    "rev": "760c68056a43a1b41c485c7d388d9a1d411be158",
+    "url": "github:decaycs/decay-gtk"
+  },
+  "helix": {
+    "narHash": "sha256-iZuRsM/UqrGrRCk/9mMqc+uYy8Aa60vQGDBA5kaJPcE=",
+    "rev": "5f4e81222e3a5e3c02f8ccbd39e8cd77fe253516",
+    "url": "github:decaycs/decay-helix"
+  },
+  "icons": {
+    "narHash": "sha256-uXRVjA1Fh3SccyuzmbruCwNr7pW9+TvxUzJqnS47+gQ=",
+    "rev": "bb562de49b999aaa7823045286eda8962e9d6482",
+    "url": "github:decaycs/decay-icons"
+  },
+  "mako": {
+    "narHash": "sha256-Ps/4JgOxH3EvVRHAw1nA/eT7wUu3wASYFxNLDJ5/+Sg=",
+    "rev": "00d673aa6865c457d8518382a4ebe572d79628d0",
+    "url": "github:decaycs/decay-mako"
+  },
+  "nvim": {
+    "narHash": "sha256-ydIef3z69S9Bdl42G7q8amx3RWl+7Z3d4j84H7cxGdU=",
+    "rev": "457014541ebcfb29bd660592a0b02f22c9e2d0e2",
+    "url": "github:decaycs/decay.nvim"
+  },
+  "polybar": {
+    "narHash": "sha256-IkwVFEJwnWHlaqvwG3aizd4Bw44T0yEJ31NbvJ43qb4=",
+    "rev": "f2f06d92693c04300c42653e0efd043d56c7b256",
+    "url": "github:decaycs/polybar"
+  },
+  "rofi": {
+    "narHash": "sha256-8l7fEZIEp9t3hrgJx2n4JkDBEB7gUWxyjBXc9GKoKVg=",
+    "rev": "f8e1a8dcb5520f76808a5e85ad788c6654c434e3",
+    "url": "github:decaycs/rofi"
+  },
+  "terms": {
+    "narHash": "sha256-2xiE9F5380SUOLvmho3CscqfSCfNSdGgjAt9zVEkkpY=",
+    "rev": "ed0a674c16fda0551c280435e68ed502209e3066",
+    "url": "github:decaycs/decay-terms"
+  },
+  "vscode": {
+    "narHash": "sha256-BiuayTNr+KKKQ29wKxMABOAah2JUiUvG26oqhtldHVU=",
+    "rev": "0408ec2f5281d81b75352906dc71414a18b08eb5",
+    "url": "github:decaycs/vscode"
+  }
+}

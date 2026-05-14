@@ -1,22 +1,24 @@
 {
   config,
   lib,
-  nixpornSources,
+  pkgs,
   ...
 }:
 let
-  inherit (lib.modules) mkIf;
-  src = nixpornSources."solarized-osaka";
-  cfg = config.nixporn."solarized-osaka";
-  targetCfg = config.nixporn.targets."wezterm";
-  schemeName = if cfg.variant == "light" then "Solarized Osaka Light" else "Solarized Osaka";
-  enable = cfg.enable && targetCfg.enable && (config.programs.wezterm.enable or false);
+  cfg = config.nixporn;
+  inherit (cfg.colorschemes) solarized-osaka;
+  inherit (solarized-osaka) slug;
+  source = pkgs.nixporn.solarized-osaka;
+  target = "wezterm";
+  enable = cfg.enable && cfg.colorscheme == "solarized-osaka" && cfg.${target}.enable;
+  themeName =
+    if solarized-osaka.variant == "light" then "Solarized Osaka Light" else "Solarized Osaka";
 in
 {
-  config = mkIf enable {
+  config = lib.mkIf enable {
+    xdg.configFile."wezterm/colors/${slug}.toml".source = "${source}/extras/wezterm/${slug}.toml";
     programs.wezterm.extraConfig = ''
-      config.color_scheme_dirs = { "${src}/extras/wezterm" }
-      config.color_scheme = "${schemeName}"
+      config.color_scheme = "${themeName}"
     '';
   };
 }

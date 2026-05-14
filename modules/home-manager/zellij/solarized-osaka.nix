@@ -1,27 +1,20 @@
 {
   config,
   lib,
-  nixpornSources,
+  pkgs,
   ...
 }:
 let
-  inherit (lib.modules) mkIf;
-  src = nixpornSources."solarized-osaka";
-  cfg = config.nixporn."solarized-osaka";
-  targetCfg = config.nixporn.targets."zellij";
-  inherit (config.nixporn.colorscheme) slug;
-  file = "solarized_osaka_${cfg.variant}";
-  enable = cfg.enable && targetCfg.enable && (config.programs.zellij.enable or false);
-  theme = builtins.replaceStrings [ "\${_name}" ] [ slug ] (
-    builtins.readFile "${src}/extras/zellij/${file}.kdl"
-  );
+  cfg = config.nixporn;
+  inherit (cfg.colorschemes) solarized-osaka;
+  inherit (solarized-osaka) slug;
+  source = pkgs.nixporn.solarized-osaka;
+  target = "zellij";
+  enable = cfg.enable && cfg.colorscheme == "solarized-osaka" && cfg.${target}.enable;
 in
 {
-  config = mkIf enable {
-    programs.zellij.settings = {
-      theme = slug;
-      theme_dir = "${config.xdg.configHome}/zellij/themes";
-    };
-    xdg.configFile."zellij/themes/${slug}.kdl".text = theme;
+  config = lib.mkIf enable {
+    xdg.configFile."zellij/themes/${slug}.kdl".source = "${source}/extras/zellij/${slug}.kdl";
+    programs.zellij.settings.theme = slug;
   };
 }

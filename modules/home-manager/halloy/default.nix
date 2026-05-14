@@ -1,5 +1,4 @@
-{ colorschemeName }:
-import ../target-default.nix {
-  inherit colorschemeName;
-  targetDir = ./.;
+{ lib, ... }:
+{
+  imports = lib.nixporn.scanPaths ./.;
 }

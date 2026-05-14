@@ -1,19 +1,22 @@
 {
   config,
   lib,
-  nixpornSources,
+  pkgs,
   ...
 }:
 let
-  inherit (lib.modules) mkIf;
-  src = nixpornSources."solarized-osaka";
-  cfg = config.nixporn."solarized-osaka";
-  targetCfg = config.nixporn.targets."tmux";
-  file = "solarized_osaka_${cfg.variant}";
-  enable = cfg.enable && targetCfg.enable && (config.programs.tmux.enable or false);
+  cfg = config.nixporn;
+  inherit (cfg.colorschemes) solarized-osaka;
+  inherit (solarized-osaka) slug;
+  source = pkgs.nixporn.solarized-osaka;
+  target = "tmux";
+  enable = cfg.enable && cfg.colorscheme == "solarized-osaka" && cfg.${target}.enable;
 in
 {
-  config = mkIf enable {
-    programs.tmux.extraConfig = builtins.readFile "${src}/extras/tmux/${file}.tmux";
+  config = lib.mkIf enable {
+    programs.tmux.extraConfig = ''
+      source-file ${source}/extras/tmux/${slug}.tmux
+      ${cfg.${target}.extraConfig}
+    '';
   };
 }

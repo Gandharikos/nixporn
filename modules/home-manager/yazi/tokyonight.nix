@@ -1,36 +1,19 @@
 {
-  lib,
-  nixpornSources,
-  pkgs,
   config,
+  lib,
+  pkgs,
   ...
 }:
 let
-  inherit (lib.modules) mkIf;
-  src = nixpornSources.tokyonight;
-  cfg = config.nixporn.tokyonight;
-  targetCfg = config.nixporn.targets."yazi";
-  inherit (config.nixporn.colorscheme) slug;
+  cfg = config.nixporn;
+  inherit (cfg.colorschemes) tokyonight;
+  inherit (tokyonight) slug;
+  source = pkgs.nixporn.tokyonight;
+  target = "yazi";
+  enable = cfg.enable && cfg.colorscheme == "tokyonight" && cfg.${target}.enable;
 in
 {
-  config = mkIf (cfg.enable && targetCfg.enable) {
-    programs.yazi = {
-      # plugins = {
-      #   yatline = pkgs.yaziPlugins.yatline;
-      # };
-      # initLua = ''
-      #   local tokyo_night_theme = require("yatline-tokyo-night"):setup("${cfg.variant}") -- or moon/storm/day
-      #   require("yatline"):setup({
-      #     theme = tokyo_night_theme
-      #   })
-      # '';
-      theme = {
-        "$scheme" = "https://yazi-rs.github.io/schemas/theme.json";
-        flavor.use = slug;
-      };
-    };
-    xdg.configFile."yazi/flavors/${slug}.yazi/flavor.toml" = mkIf config.programs.yazi.enable {
-      source = "${src}/extras/yazi/${slug}.toml";
-    };
+  config = lib.mkIf enable {
+    xdg.configFile."yazi/theme.toml".source = "${source}/extras/yazi/${slug}.toml";
   };
 }

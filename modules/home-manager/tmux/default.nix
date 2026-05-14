@@ -1,13 +1,13 @@
-{ colorschemeName }:
-let
-  specific = ./. + "/${colorschemeName}.nix";
-in
+{ lib, ... }:
 {
-  imports =
-    if builtins.pathExists specific then
-      [ specific ]
-    else
-      [
-        (import ./generic.nix { inherit colorschemeName; })
-      ];
+  imports = lib.nixporn.scanPaths ./.;
+
+  options.nixporn.tmux.extraConfig = lib.mkOption {
+    type = lib.types.lines;
+    description = "Additional configuration for the catppuccin plugin.";
+    default = "";
+    example = ''
+      set -g @catppuccin_status_modules_right "application session user host date_time"
+    '';
+  };
 }

@@ -1,25 +1,22 @@
 {
-  lib,
-  nixpornSources,
-  pkgs,
   config,
+  lib,
+  pkgs,
   ...
 }:
 let
-  inherit (lib.modules) mkIf;
-  src = nixpornSources.tokyonight;
-  cfg = config.nixporn.tokyonight;
-  targetCfg = config.nixporn.targets."fish";
-  enable = cfg.enable && targetCfg.enable && (config.programs.fish.enable or false);
-  inherit (config.nixporn.colorscheme) slug;
+  cfg = config.nixporn;
+  inherit (cfg.colorschemes) tokyonight;
+  inherit (tokyonight) slug;
+  source = pkgs.nixporn.tokyonight;
+  target = "fish";
+  enable = cfg.enable && cfg.colorscheme == "tokyonight" && cfg.${target}.enable;
 in
 {
-  config = mkIf enable {
-    # Install modern fish theme format (fish 3.4.0+)
-    xdg.configFile."fish/themes/${slug}.theme".source = "${src}/extras/fish_themes/${slug}.theme";
-
-    programs.fish.interactiveShellInit = ''
-      fish_config theme choose ${slug}
+  config = lib.mkIf enable {
+    xdg.configFile."fish/themes/${slug}.theme".source = "${source}/extras/fish_themes/${slug}.theme";
+    programs.fish.shellInit = ''
+      fish_config theme choose "${slug}"
     '';
   };
 }

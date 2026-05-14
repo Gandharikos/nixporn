@@ -8,7 +8,11 @@
   outputs =
     { self, nixpkgs }:
     let
-      inherit (nixpkgs) lib;
+      lib = nixpkgs.lib.extend (
+        final: _: {
+          nixporn = import ./lib { lib = final; };
+        }
+      );
 
       systems = lib.systems.flakeExposed;
       devSystems = [
@@ -21,23 +25,31 @@
       forAllSystems = lib.genAttrs systems;
       forAllDevSystems = lib.genAttrs devSystems;
 
-      nixporn = import ./nixporn { inherit lib; };
-
       mkModule =
         {
           name ? "colorscheme",
           type,
           file,
         }:
-        { ... }:
+        { pkgs, ... }:
+        let
+          pkgs' = if pkgs ? nixporn then pkgs else pkgs.extend self.overlays.default;
+        in
         {
           _file = "${self.outPath}/flake.nix#${type}Modules.${name}";
 
-          imports = [ file ];
+          imports = [
+            (import file {
+              moduleLib = lib;
+              moduleType = type;
+            })
+          ];
+
+          _module.args.pkgs = pkgs';
         };
     in
     {
-      lib.nixporn = nixporn;
+      inherit lib;
 
       packages = forAllSystems (
         system:
@@ -46,6 +58,18 @@
           pkgs = nixpkgs.legacyPackages.${system};
         }).packages
       );
+
+      overlays = {
+        default = final: _: {
+          inherit
+            (import ./default.nix {
+              pkgs = final;
+              inherit (final) lib;
+            })
+            nixporn
+            ;
+        };
+      };
 
       devShells = forAllDevSystems (
         system:
@@ -99,7 +123,7 @@
         default = self.nixosModules.colorscheme;
         colorscheme = mkModule {
           type = "nixos";
-          file = ./nixporn/module.nix;
+          file = ./modules;
         };
       };
 
@@ -115,7 +139,7 @@
         default = self.darwinModules.colorscheme;
         colorscheme = mkModule {
           type = "darwin";
-          file = ./nixporn/module.nix;
+          file = ./modules;
         };
       };
     };

@@ -1,9 +1,5 @@
-{ colorschemeName }:
-let
-  targetNames = import ../../nixporn/target-names.nix;
-in
+{ lib, ... }:
 {
-  imports = builtins.map (
-    target: import (./. + "/${target}") { inherit colorschemeName; }
-  ) targetNames;
+  _class = "homeManager";
+  imports = lib.nixporn.scanPaths ./.;
 }

@@ -1,5 +1,3 @@
-{ colorschemeName }:
-import ../generic-adapter.nix {
-  inherit colorschemeName;
-  target = "xfce4-terminal";
+import ../generic/xfce4-terminal.nix {
+  targetPath = ./.;
 }

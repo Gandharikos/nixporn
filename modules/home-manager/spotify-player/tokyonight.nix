@@ -1,113 +1,23 @@
 {
   config,
   lib,
+  pkgs,
   ...
 }:
 let
-  inherit (lib.modules) mkIf;
-  inherit (config.nixporn.colorscheme) palette slug;
-  cfg = config.nixporn.tokyonight;
-  targetCfg = config.nixporn.targets."spotify-player";
+  cfg = config.nixporn;
+  inherit (cfg.colorschemes) tokyonight;
+  inherit (tokyonight) slug;
+  source = pkgs.nixporn.tokyonight;
+  target = "spotify-player";
+  enable = cfg.enable && cfg.colorscheme == "tokyonight" && cfg.${target}.enable;
+  inherit (lib.importTOML "${source}/extras/spotify_player/${slug}.toml") themes;
 in
 {
-  config = mkIf (cfg.enable && targetCfg.enable) {
+  config = lib.mkIf enable {
     programs.spotify-player = {
-      settings.theme = slug;
-      themes = [
-        {
-          name = slug;
-          palette = with palette.base; {
-            background = bg;
-            foreground = fg;
-            inherit
-              black
-              red
-              green
-              yellow
-              blue
-              magenta
-              cyan
-              white
-              bright_black
-              bright_red
-              bright_green
-              bright_yellow
-              bright_blue
-              bright_magenta
-              bright_cyan
-              bright_white
-              ;
-          };
-          component_style = {
-            block_title = {
-              fg = "BrightGreen";
-              modifiers = [
-                "Italic"
-                "Bold"
-              ];
-            };
-            like = {
-              fg = "Red";
-              modifiers = [ "Bold" ];
-            };
-            playback_track = {
-              fg = "BrightMagenta";
-              modifiers = [ "Italic" ];
-            };
-            playback_album = {
-              fg = "BrightRed";
-              modifiers = [ "Italic" ];
-            };
-            playback_artists = {
-              fg = "BrightCyan";
-              modifiers = [ ];
-            };
-            playback_metadata = {
-              fg = "BrightBlue";
-              modifiers = [ ];
-            };
-            playback_progress_bar = {
-              fg = "BrightGreen";
-              modifiers = [ "Italic" ];
-            };
-            current_playing = {
-              fg = "Red";
-              modifiers = [
-                "Bold"
-                "Italic"
-              ];
-            };
-            playlist_desc = {
-              fg = "White";
-              modifiers = [ "Italic" ];
-            };
-            page_desc = {
-              fg = "Magenta";
-              modifiers = [
-                "Bold"
-                "Italic"
-              ];
-            };
-            table_header = {
-              fg = "Blue";
-              modifiers = [ "Bold" ];
-            };
-            border = {
-              fg = "BrightYellow";
-            };
-            selection = {
-              fg = "Red";
-              modifiers = [
-                "Bold"
-                "Reversed"
-              ];
-            };
-            secondary_row = {
-              bg = "BrightBlack";
-            };
-          };
-        }
-      ];
+      settings.theme = (builtins.head themes).name;
+      inherit themes;
     };
   };
 }

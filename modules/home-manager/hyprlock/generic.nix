@@ -1,5 +1,1 @@
-{ colorschemeName }:
-import ../generic-adapter.nix {
-  inherit colorschemeName;
-  target = "hyprlock";
-}
+import ../generic/hyprlock.nix { targetPath = ./.; }

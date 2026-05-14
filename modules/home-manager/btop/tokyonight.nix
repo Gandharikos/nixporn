@@ -1,26 +1,21 @@
 {
-  lib,
-  nixpornSources,
-  pkgs,
   config,
+  lib,
+  pkgs,
   ...
 }:
 let
-  inherit (lib.modules) mkIf;
-  inherit (config.nixporn.general) transparent;
-  src = nixpornSources.tokyonight;
-  cfg = config.nixporn.tokyonight;
-  targetCfg = config.nixporn.targets."btop";
-  enable = cfg.enable && targetCfg.enable && (config.programs.btop.enable or false);
-  inherit (config.nixporn.colorscheme) slug;
+  cfg = config.nixporn;
+  inherit (cfg.colorschemes) tokyonight;
+  inherit (tokyonight) slug;
+  source = pkgs.nixporn.tokyonight;
+  target = "btop";
+  enable = cfg.enable && cfg.colorscheme == "tokyonight" && cfg.${target}.enable;
+  themeFile = "${slug}.theme";
 in
 {
-  config = mkIf enable {
-    programs.btop.settings = {
-      color_theme = slug;
-      theme_background = transparent; # make it transparent
-    };
-
-    xdg.configFile."btop/themes/${slug}.theme".source = "${src}/extras/btop/${slug}.theme";
+  config = lib.mkIf enable {
+    xdg.configFile."btop/themes/${themeFile}".source = "${source}/extras/btop/${themeFile}";
+    programs.btop.settings.color_theme = themeFile;
   };
 }

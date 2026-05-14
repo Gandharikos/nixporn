@@ -1,5 +1,3 @@
-{ colorschemeName }:
-import ../generic-adapter.nix {
-  inherit colorschemeName;
-  target = "rofi";
+import ../generic/rofi.nix {
+  targetPath = ./.;
 }

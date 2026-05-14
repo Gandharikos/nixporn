@@ -1,5 +1,1 @@
-{ colorschemeName }:
-import ../generic-adapter.nix {
-  inherit colorschemeName;
-  target = "firefox";
-}
+import ../generic/firefox.nix { targetPath = ./.; }

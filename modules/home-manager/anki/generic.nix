@@ -1,5 +1,1 @@
-{ colorschemeName }:
-import ../generic-adapter.nix {
-  inherit colorschemeName;
-  target = "anki";
-}
+import ../generic/anki.nix { targetPath = ./.; }

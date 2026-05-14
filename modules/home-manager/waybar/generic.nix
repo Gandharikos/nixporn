@@ -1,5 +1,3 @@
-{ colorschemeName }:
-import ../generic-adapter.nix {
-  inherit colorschemeName;
-  target = "waybar";
+import ../generic/waybar.nix {
+  targetPath = ./.;
 }

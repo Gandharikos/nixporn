@@ -1,8 +1,7 @@
 {
   "colorscheme": "nordic",
   "generated": {
-    "normalizedFrom": "parsed upstream palette plus a palette.base fallback set for generic adapters",
-    "note": "upstream is parsed from official source files when available; normalized keeps upstream keys at top level and stores common derived colors in base.",
+    "note": "palette is parsed from official source files when available.",
     "tool": "scripts/update-sources.py"
   },
   "schema": 1,
@@ -17,57 +16,7 @@
   },
   "variants": {
     "default": {
-      "normalized": {
-        "base": {
-          "bg": "#2e3440",
-          "bg_dark": "#2B303B",
-          "bg_highlight": "#3b4252",
-          "bg_statusline": "#2B303B",
-          "bg_visual": "#3b4252",
-          "black": "#2e3440",
-          "blue": "#81a1c1",
-          "border_highlight": "#81a1c1",
-          "bright_black": "#4c566a",
-          "bright_blue": "#5e81ac",
-          "bright_cyan": "#88c0d0",
-          "bright_green": "#a3be8c",
-          "bright_magenta": "#b48ead",
-          "bright_red": "#bf616a",
-          "bright_white": "#eceff4",
-          "bright_yellow": "#ebcb8b",
-          "comment": "#4c566a",
-          "cyan": "#8fbcbb",
-          "fg": "#e5e9f0",
-          "fg_dark": "#d8dee9",
-          "fg_gutter": "#4c566a",
-          "green": "#a3be8c",
-          "magenta": "#b48ead",
-          "orange": "#d08770",
-          "red": "#bf616a",
-          "white": "#e5e9f0",
-          "yellow": "#ebcb8b"
-        },
-        "black": "#3b4252",
-        "blue": "#81a1c1",
-        "bright_black": "#434c5e",
-        "bright_cyan": "#88c0d0",
-        "bright_white": "#eceff4",
-        "cyan": "#8fbcbb",
-        "dark_black": "#2e3440",
-        "dark_black_alt": "#2B303B",
-        "dark_white": "#d8dee9",
-        "darkish_black": "#3B414D",
-        "gray": "#4c566a",
-        "grayish": "#667084",
-        "green": "#a3be8c",
-        "intense_blue": "#5e81ac",
-        "orange": "#d08770",
-        "purple": "#b48ead",
-        "red": "#bf616a",
-        "white": "#e5e9f0",
-        "yellow": "#ebcb8b"
-      },
-      "upstream": {
+      "palette": {
         "black": "#3b4252",
         "blue": "#81a1c1",
         "bright_black": "#434c5e",

@@ -1,5 +1,1 @@
-{ colorschemeName }:
-import ../generic-adapter.nix {
-  inherit colorschemeName;
-  target = "mpv";
-}
+import ../generic/mpv.nix { targetPath = ./.; }

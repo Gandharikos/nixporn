@@ -1,18 +1,20 @@
 {
   config,
   lib,
-  nixpornSources,
+  pkgs,
   ...
 }:
 let
-  inherit (lib.modules) mkIf;
-  src = nixpornSources."solarized-osaka";
-  cfg = config.nixporn."solarized-osaka";
-  targetCfg = config.nixporn.targets."ghostty";
-  file = "solarized_osaka_${cfg.variant}";
+  cfg = config.nixporn;
+  inherit (cfg.colorschemes) solarized-osaka;
+  inherit (solarized-osaka) slug;
+  source = pkgs.nixporn.solarized-osaka;
+  target = "ghostty";
+  enable = cfg.enable && cfg.colorscheme == "solarized-osaka" && cfg.${target}.enable;
 in
 {
-  config = mkIf (cfg.enable && targetCfg.enable) {
-    programs.ghostty.settings.theme = "${src}/extras/ghostty/${file}";
+  config = lib.mkIf enable {
+    xdg.configFile."ghostty/themes/${slug}".source = "${source}/extras/ghostty/${slug}";
+    programs.ghostty.settings.theme = "light:${slug},dark:${slug}";
   };
 }

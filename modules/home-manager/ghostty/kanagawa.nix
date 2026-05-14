@@ -1,17 +1,20 @@
 {
   config,
   lib,
-  nixpornSources,
+  pkgs,
   ...
 }:
 let
-  inherit (lib.modules) mkIf;
-  src = nixpornSources.kanagawa;
-  cfg = config.nixporn.kanagawa;
-  targetCfg = config.nixporn.targets."ghostty";
+  cfg = config.nixporn;
+  inherit (cfg.colorschemes) kanagawa;
+  inherit (kanagawa) slug;
+  source = pkgs.nixporn.kanagawa;
+  target = "ghostty";
+  enable = cfg.enable && cfg.colorscheme == "kanagawa" && cfg.${target}.enable;
 in
 {
-  config = mkIf (cfg.enable && targetCfg.enable) {
-    programs.ghostty.settings.theme = "${src}/extras/ghostty/kanagawa-${cfg.variant}";
+  config = lib.mkIf enable {
+    xdg.configFile."ghostty/themes/${slug}".source = "${source}/extras/ghostty/${slug}";
+    programs.ghostty.settings.theme = "light:${slug},dark:${slug}";
   };
 }

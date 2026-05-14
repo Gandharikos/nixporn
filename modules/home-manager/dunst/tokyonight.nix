@@ -1,19 +1,20 @@
 {
   config,
   lib,
-  nixpornSources,
   pkgs,
   ...
 }:
 let
-  inherit (lib.modules) mkIf importTOML;
-  src = nixpornSources.tokyonight;
-  cfg = config.nixporn.tokyonight;
-  targetCfg = config.nixporn.targets."dunst";
-  inherit (config.nixporn.colorscheme) slug;
+  cfg = config.nixporn;
+  inherit (cfg.colorschemes) tokyonight;
+  inherit (tokyonight) slug;
+  source = pkgs.nixporn.tokyonight;
+  target = "dunst";
+  enable = cfg.enable && cfg.colorscheme == "tokyonight" && cfg.${target}.enable;
 in
 {
-  config = mkIf (cfg.enable && targetCfg.enable) {
-    services.dunst.settings = importTOML "${src}/extras/dunst/${slug}.dunstrc";
+  config = lib.mkIf enable {
+    xdg.configFile."dunst/dunstrc.d/${cfg.${target}.prefix}-tokyonight.conf".source =
+      "${source}/extras/dunst/${slug}.dunstrc";
   };
 }

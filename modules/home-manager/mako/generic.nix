@@ -1,5 +1,3 @@
-{ colorschemeName }:
-import ../generic-adapter.nix {
-  inherit colorschemeName;
-  target = "mako";
+import ../generic/mako.nix {
+  targetPath = ./.;
 }

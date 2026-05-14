@@ -1,5 +1,1 @@
-{ colorschemeName }:
-import ../generic-adapter.nix {
-  inherit colorschemeName;
-  target = "lsd";
-}
+import ../generic/lsd.nix { targetPath = ./.; }

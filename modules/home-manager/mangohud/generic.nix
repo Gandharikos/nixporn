@@ -1,5 +1,1 @@
-{ colorschemeName }:
-import ../generic-adapter.nix {
-  inherit colorschemeName;
-  target = "mangohud";
-}
+import ../generic/mangohud.nix { targetPath = ./.; }

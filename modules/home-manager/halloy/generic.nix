@@ -1,5 +1,1 @@
-{ colorschemeName }:
-import ../generic-adapter.nix {
-  inherit colorschemeName;
-  target = "halloy";
-}
+import ../generic/halloy.nix { targetPath = ./.; }

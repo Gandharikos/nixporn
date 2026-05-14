@@ -1,19 +1,22 @@
 {
   config,
   lib,
-  nixpornSources,
+  pkgs,
   ...
 }:
 let
-  inherit (lib.modules) mkIf;
-  src = nixpornSources.cyberdream;
-  cfg = config.nixporn.cyberdream;
-  targetCfg = config.nixporn.targets."tmux";
-  inherit (config.nixporn.colorscheme) slug;
-  enable = cfg.enable && targetCfg.enable && (config.programs.tmux.enable or false);
+  cfg = config.nixporn;
+  inherit (cfg.colorschemes) cyberdream;
+  inherit (cyberdream) slug;
+  source = pkgs.nixporn.cyberdream;
+  target = "tmux";
+  enable = cfg.enable && cfg.colorscheme == "cyberdream" && cfg.${target}.enable;
 in
 {
-  config = mkIf enable {
-    programs.tmux.extraConfig = builtins.readFile "${src}/extras/tmux/${slug}.conf";
+  config = lib.mkIf enable {
+    programs.tmux.extraConfig = ''
+      source-file ${source}/extras/tmux/${slug}.conf
+      ${cfg.${target}.extraConfig}
+    '';
   };
 }

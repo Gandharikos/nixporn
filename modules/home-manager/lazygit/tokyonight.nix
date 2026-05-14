@@ -1,34 +1,41 @@
 {
   config,
   lib,
+  pkgs,
   ...
 }:
 let
-  inherit (lib.modules) mkIf;
-  inherit (config.nixporn.colorscheme) palette;
-  cfg = config.nixporn.tokyonight;
-  targetCfg = config.nixporn.targets."lazygit";
+  cfg = config.nixporn;
+  inherit (cfg.colorschemes) tokyonight;
+  inherit (tokyonight) slug;
+  source = pkgs.nixporn.tokyonight;
+  target = "lazygit";
+  enable =
+    cfg.enable
+    && cfg.colorscheme == "tokyonight"
+    && cfg.${target}.enable
+    && config.programs.lazygit.enable;
+
+  enableXdgConfig = !pkgs.stdenv.hostPlatform.isDarwin || config.xdg.enable;
+
+  configDirectory =
+    if enableXdgConfig then
+      config.xdg.configHome
+    else
+      "${config.home.homeDirectory}/Library/Application Support";
+  configFile = "${configDirectory}/lazygit/config.yml";
 in
 {
-  config = mkIf (cfg.enable && targetCfg.enable) {
-    programs.lazygit.settings.gui.theme = with palette; {
-      activeBorderColor = [
-        orange
-        "bold"
-      ];
-      inactiveBorderColor = [ border_highlight ];
-      searchingActiveBorderColor = [
-        orange
-        "bold"
-      ];
-      optionsTextColor = [ blue ];
-      selectedLineBgColor = [ bg_visual ];
-      cherryPickedCommitFgColor = [ blue ];
-      cherryPickedCommitBgColor = [ magenta ];
-      markedBaseCommitFgColor = [ blue ];
-      markedBaseCommitBgColor = [ yellow ];
-      unstagedChangesColor = [ red1 ];
-      defaultFgColor = [ fg ];
-    };
+  config = lib.mkIf enable {
+    home.sessionVariables =
+      let
+        configFiles = [
+          "${source}/extras/lazygit/${slug}.yml"
+        ]
+        ++ lib.optional (config.programs.lazygit.settings != { }) configFile;
+      in
+      {
+        LG_CONFIG_FILE = lib.concatStringsSep "," configFiles;
+      };
   };
 }

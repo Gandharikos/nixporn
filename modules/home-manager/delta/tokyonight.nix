@@ -1,23 +1,21 @@
 {
-  lib,
-  nixpornSources,
-  pkgs,
   config,
+  lib,
+  pkgs,
   ...
 }:
 let
-  inherit (lib.modules) mkIf;
-  src = nixpornSources.tokyonight;
-  cfg = config.nixporn.tokyonight;
-  targetCfg = config.nixporn.targets."delta";
-  enable = cfg.enable && targetCfg.enable && (config.programs.delta.enable or false);
-  inherit (config.nixporn.colorscheme) slug;
+  cfg = config.nixporn;
+  inherit (cfg.colorschemes) tokyonight;
+  inherit (tokyonight) slug;
+  source = pkgs.nixporn.tokyonight;
+  target = "delta";
+  enable = cfg.enable && cfg.colorscheme == "tokyonight" && cfg.${target}.enable;
 in
 {
-  config = mkIf enable {
-    programs = {
-      git.includes = [ { path = "${src}/extras/delta/${slug}.gitconfig"; } ];
-      delta.options.features = slug;
+  config = lib.mkIf enable {
+    programs.git = lib.mkIf config.programs.delta.enableGitIntegration {
+      includes = [ { path = "${source}/extras/delta/${slug}.gitconfig"; } ];
     };
   };
 }

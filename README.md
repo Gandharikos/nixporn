@@ -1,59 +1,49 @@
 # nixporn
 
-A reusable Nix colorscheme module collection with presets.
+A minimal Nix colorscheme module.
 
-## Modules
+## Outputs
 
 - `nixosModules.colorscheme`
 - `homeModules.colorscheme`
 - `darwinModules.colorscheme`
-- `packages.${system}.<colorscheme>-xcursor`
-- `packages.${system}.<colorscheme>-hyprcursor`
-
-The public interface is `nixporn.enable` plus `nixporn.colorscheme.*`. Enabling the
-module writes the resolved preset palette to `nixporn.colorscheme` and, in Home
-Manager, applies colorscheme-specific adapters for supported programs.
-
-## Colorschemes
-
-Current colorschemes:
-
-- Catppuccin
-- Cyberdream
-- Decay
-- Dracula
-- Gruvbox
-- Kanagawa
-- Nordic
-- Rose Pine
-- Solarized Osaka
-- Tokyo Night
-
-These colorschemes are exposed as preset `config.nixporn.colorscheme` attributes.
-Wallpaper and avatar paths are exposed as options for downstream modules to
-consume; they are not applied by this flake.
-
-## Adapters
-
-Home Manager adapters are exposed through a shared adapter set so each colorscheme has
-the same public surface. Tokyo Night uses upstream extras from
-`tokyonight.nvim` where they exist. Other colorschemes use palette-derived fallback
-adapters until an official or popular upstream port is wired in. Adapter
-directories dispatch to `modules/home-manager/<target>/<colorscheme>.nix` when present,
-otherwise they use `modules/home-manager/<target>/generic.nix`.
-
-Current Home Manager adapters are `bat`, `btop`, `cursor`, `dank-material-shell`, `delta`, `discord`,
-`dunst`, `eza`, `fcitx5`, `fish`, `fzf`, `gemini-cli`, `ghostty`, `gowall`,
-`gtk`, `hyprland`, `kitty`, `lazygit`, `niri`, `noctalia-shell`, `opencode`,
-`qt`, `sioyek`, `spicetify`, `spotify-player`, `squirrel`, `starship`,
-`television`, `tmux`, `wezterm`, `xresources`, `yazi`, `zathura`, and `zellij`.
+- `overlays.default`
 
 ## Packages
 
-`packages.${system}` contains cursor fallback packages generated from Bibata for
-each colorscheme default variant as `<colorscheme>-xcursor` and
-`<colorscheme>-hyprcursor`. The Home Manager `cursor` adapter uses the selected
-palette to generate matching Bibata XCursor and Hyprcursor themes.
+Upstream target sources are exposed through `overlays.default` as
+`pkgs.nixporn.<colorscheme>.<target>`. Catppuccin sources are pinned in
+`pkgs/catppuccin/sources.json`.
+
+## Options
+
+- `nixporn.enable`
+- `nixporn.colorscheme`
+- `nixporn.wallpaper`
+- `nixporn.avatar`
+- `nixporn.palette`
+- `nixporn.<target>.enable`
+- `nixporn.colorschemes.<colorscheme>.source`
+- `nixporn.colorschemes.<colorscheme>.targets.<target>`
+- `nixporn.colorschemes.<colorscheme>.slug`
+- `nixporn.colorschemes.<colorscheme>.palette`
+
+`nixporn.colorscheme` is an enum generated from `sources/*.json` and defaults to
+`catppuccin`. When `nixporn.enable = true`, known target entries default to
+enabled. Target values can still be overridden per target.
+
+Target names are generated from directories in `modules/home-manager` and
+`modules/nixos`. Each target directory has a `default.nix` that imports the other
+`.nix` files in that target directory, so target-specific options can live there.
+Catppuccin target support is provided by `catppuccin.nix` in each target
+directory, but Catppuccin options stay under `nixporn.colorschemes.catppuccin`.
+
+Each `nixporn.colorschemes.<colorscheme>` has its own options. For example,
+Catppuccin has `flavor` and `accent`, Tokyo Night has `style`, and most other
+colorschemes have `variant`. Each colorscheme also has a configurable `source`
+option that defaults to metadata from `sources/<colorscheme>.json`.
+`targets` is generated from upstream target metadata when that colorscheme
+provides it.
 
 ## Example
 
@@ -63,27 +53,14 @@ palette to generate matching Bibata XCursor and Hyprcursor themes.
 
   nixporn = {
     enable = true;
-    colorscheme = {
-      name = "rose-pine";
-      variant = "moon";
-    };
+    colorscheme = "catppuccin";
 
-    wallpaper = ./wallpaper.png;
-    avatar = ./avatar.png;
+    kitty.enable = false;
+
+    colorschemes.catppuccin = {
+      flavor = "mocha";
+      accent = "mauve";
+    };
   };
 }
 ```
-
-## Updating Sources
-
-Colorscheme source metadata and generated palettes live in `sources/<colorscheme>.json`.
-Regenerate them after updating the pinned source definitions in
-`nixporn/source-repos.nix`:
-
-```sh
-python3 scripts/update-sources.py
-nix flake check
-```
-
-The scheduled GitHub workflow in `.github/workflows/update-sources.yml` runs
-the same regeneration and opens a pull request when sources change.

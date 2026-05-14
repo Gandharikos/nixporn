@@ -1,5 +1,3 @@
-{ colorschemeName }:
-import ../generic-adapter.nix {
-  inherit colorschemeName;
-  target = "fuzzel";
+import ../generic/fuzzel.nix {
+  targetPath = ./.;
 }

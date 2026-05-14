@@ -1,5 +1,3 @@
-{ colorschemeName }:
-import ../generic-adapter.nix {
-  inherit colorschemeName;
-  target = "swaylock";
+import ../generic/swaylock.nix {
+  targetPath = ./.;
 }

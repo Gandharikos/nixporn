@@ -1,0 +1,176 @@
+{
+  "alacritty": {
+    "lastModified": "2025-11-05",
+    "narHash": "sha256-eVQjH5TrMLP9FdxIovnH9ulxTr6uw82Dt8PGGvpF94k=",
+    "rev": "a6f7c8245e5bba639befe52e1e025f84ba8b3ee5",
+    "url": "github:rose-pine/alacritty"
+  },
+  "btop": {
+    "lastModified": "2025-11-05",
+    "narHash": "sha256-vtqqMEQbPOSRfQ28RIln5zZ4cZlyB3sMc2NaLUcITWo=",
+    "rev": "c27e5d48e44e8bd115a2838ecf8cf1f3ea39475e",
+    "url": "github:rose-pine/btop"
+  },
+  "cava": {
+    "lastModified": "2025-11-05",
+    "narHash": "sha256-i0Z5ZFygo+AjCo9NlwBhA41srwsDgAc7GPXPHCWngPc=",
+    "rev": "3cc2cf0c841df4056697389980a0890a01913f7d",
+    "url": "github:rose-pine/cava"
+  },
+  "fcitx5": {
+    "lastModified": "2025-11-05",
+    "narHash": "sha256-pNFDzsURMsNUJRz1jjyOb9uLjCtMbNuo3ARvv0rsvLg=",
+    "rev": "01c291bc4fa5095c7a7c2ab177a9efc2042c5026",
+    "url": "github:rose-pine/fcitx5"
+  },
+  "firefox": {
+    "lastModified": "2026-03-07",
+    "narHash": "sha256-5QOVoAWYI7qZGaf62Yv+8saJw/Iv8GMK2sJl2xd+JNo=",
+    "rev": "efc1896fb77b5e6984e15338659c1c7a23af2fa3",
+    "url": "github:rose-pine/firefox"
+  },
+  "fish": {
+    "lastModified": "2026-03-09",
+    "narHash": "sha256-3heI6nhItw5WfKGQT1FRQKfv+lONyn+DzwYjYqJjzLE=",
+    "rev": "127a990e5ad4688118c950123787fb0686afa4c8",
+    "url": "github:rose-pine/fish"
+  },
+  "foot": {
+    "lastModified": "2026-03-09",
+    "narHash": "sha256-rZm3d7dN4M2cHMx1SrrSWfCKn3JHUVQ+EsH5FvOww4I=",
+    "rev": "4c897ddad2fef9ebc6ec2e7ebc80ea71337edd07",
+    "url": "github:rose-pine/foot"
+  },
+  "fzf": {
+    "lastModified": "2025-11-05",
+    "narHash": "sha256-WKREw1qzjuURqrCS6LI5ySc924W8d2n0rlA6AV1K5OE=",
+    "rev": "9af300f871df52331c362ca58c73535f69b6fb03",
+    "url": "github:rose-pine/fzf"
+  },
+  "ghostty": {
+    "lastModified": "2025-11-19",
+    "narHash": "sha256-kNHbd3BhLp49nDk0Cr+9LNKJVwhguQ4uiheXDLGn3s8=",
+    "rev": "cd5c30210c8d90fa276e2632bbbf49b8abb18455",
+    "url": "github:rose-pine/ghostty"
+  },
+  "grub": {
+    "lastModified": "2025-11-05",
+    "narHash": "sha256-QIhqvB6EGHLtNeKapoul3RQ14dzzlLgFH2HUSXRMRFg=",
+    "rev": "4255654cd7cd7766a1747c5e01553efc528ba3d1",
+    "url": "github:rose-pine/grub"
+  },
+  "gtk": {
+    "lastModified": "2025-11-05",
+    "narHash": "sha256-58HfkFvflQhiJzfHcJCihSE9YbxbD6Koe0/aT+PVv4w=",
+    "rev": "3a11f84e11685aacaa749deea1e9f02872b99fdf",
+    "url": "github:rose-pine/gtk"
+  },
+  "helix": {
+    "lastModified": "2026-04-16",
+    "narHash": "sha256-70X448ewCKBG0yEMRSP2BMHNo+9CcyizioqkvMg/DAg=",
+    "rev": "2e8b94d54d48980ac9bbdfa6aae40b02227b71c3",
+    "url": "github:rose-pine/helix"
+  },
+  "hyprland": {
+    "lastModified": "2025-11-05",
+    "narHash": "sha256-3egB8oXxHFL6Mjj2wCVB7qU8jfcNPBGbKEwtBcMS/gA=",
+    "rev": "2787c67d62f128fa0b1ead4c9ffdab2fe79e410f",
+    "url": "github:rose-pine/hyprland"
+  },
+  "kitty": {
+    "lastModified": "2025-11-05",
+    "narHash": "sha256-GyRyflUVp1BHg6S0emZ6ViALx8L130npnfyZQmdxhfA=",
+    "rev": "efd4f01cb9887feaa7114ff21a887464295d0205",
+    "url": "github:rose-pine/kitty"
+  },
+  "kvantum": {
+    "lastModified": "2025-11-05",
+    "narHash": "sha256-/URQh491kXdXkgRWn16Pv8k1SbshwjFWoDTgXAmddPY=",
+    "rev": "816e3383d73f44c32423d6b43ce1dc66a528cefd",
+    "url": "github:rose-pine/kvantum"
+  },
+  "lazygit": {
+    "lastModified": "2025-11-05",
+    "narHash": "sha256-Vo5FDhx+Hkb6a3NAssJyNrs2cGiTZPYjhiWX/LEsxyI=",
+    "rev": "acc968a6090bd190ab0c49fa36847cb931a39a52",
+    "url": "github:rose-pine/lazygit"
+  },
+  "limine": {
+    "lastModified": "2026-02-22",
+    "narHash": "sha256-6M8CBX8si59is5dEFhYifcskQf6tgxemIqbnZ31MFP0=",
+    "rev": "2976e371f5104ab0a9f5cff60929911e4bb84c18",
+    "url": "github:rose-pine/limine"
+  },
+  "mako": {
+    "lastModified": "2025-11-05",
+    "narHash": "sha256-4DAVlzODCKv6pqQcDph0jLuJGJKSzew4u+3sn9sM1Mw=",
+    "rev": "12f7814de6a485ecc373933cc04bb2b13b23e491",
+    "url": "github:rose-pine/mako"
+  },
+  "obs": {
+    "lastModified": "2025-11-05",
+    "narHash": "sha256-kUxh3b+y+cc4LOSTg0kRK32xCXXqX4YnJCM4Vd1ZHe0=",
+    "rev": "cb77f6257f38e160c3452ed72f575eb282a1593b",
+    "url": "github:rose-pine/obs"
+  },
+  "polybar": {
+    "narHash": "sha256-NFcFi2XKSClcVmNWAzmTVsRwv/bppYN0QhNPhCcvQmY=",
+    "rev": "732052d47aa9c4c80a122e11f9719ad636421cf4",
+    "url": "github:rose-pine/polybar"
+  },
+  "rio": {
+    "narHash": "sha256-QTcziWewnPbaPlJ6CsLm4YMUSKisP0LeF46vs5fD26I=",
+    "rev": "ab3c488b66ed4b46fc77ab5f4a1ab84a0ec20be3",
+    "url": "github:rose-pine/rio-terminal"
+  },
+  "rofi": {
+    "narHash": "sha256-skGYxur4OGeQxJdMXN/UlophX47oSFeHaEadie7VB08=",
+    "rev": "43262caa3130d225a8b616fe594fd5867caa500b",
+    "url": "github:rose-pine/rofi"
+  },
+  "starship": {
+    "narHash": "sha256-r7q7nyGPXCMwVzVqrOXcskAnPFT07jDY91sB3C8b1Ow=",
+    "rev": "0edc3c781f219565453bbb8e8e7af56ebc2a0d8a",
+    "url": "github:rose-pine/starship"
+  },
+  "swaync": {
+    "narHash": "sha256-HvEglMgtjG5qi/aJ+EEFxPgWPqXLir7laqz5btLuPto=",
+    "rev": "d506efe27ebbc0246572b54b18d9ddeaf1131372",
+    "url": "github:rose-pine/swaync"
+  },
+  "tmux": {
+    "narHash": "sha256-HDmCCRhTCPfu7gL9VPHVGCiG5IcnkpQ4EaXN4IsQ0YE=",
+    "rev": "b6138c51573425ccdc33c91464597323baec3b7e",
+    "url": "github:rose-pine/tmux"
+  },
+  "tty": {
+    "narHash": "sha256-iQ2jf7VvGm4zJDZJYNARZTwtGj2gusMM26GnlKz7CPA=",
+    "rev": "f9d1c1d7aa81277a3208a7a58030315814550e73",
+    "url": "github:rose-pine/linux-tty"
+  },
+  "vscode": {
+    "narHash": "sha256-SO2WfrguCgflqFEhPLi4LdnOM/4oyEXeEFzjAPSXDsI=",
+    "rev": "6b51224aa5936d3fc18e270ab35cde0a71fecf29",
+    "url": "github:rose-pine/vscode"
+  },
+  "waybar": {
+    "narHash": "sha256-Qc7J74yHu366bkQjYmHIvZVx1wLN3N6zWFZPNFxr0m0=",
+    "rev": "d337e99fac6e6d46170f9ad91ef0d70cf6a872d7",
+    "url": "github:rose-pine/waybar"
+  },
+  "yazi": {
+    "narHash": "sha256-9e3dXViWl1rK9BPrGAFfs9ZL/tsG6Njz6ksuU6AIrFY=",
+    "rev": "c89d745573d4fcfe0550fe6646f9f9ab1c0e51db",
+    "url": "github:rose-pine/yazi"
+  },
+  "zed-editor": {
+    "narHash": "sha256-NK4XWp3dHMqPTb7itTje0Joh3ZCmrafrTOvBv6oOJSQ=",
+    "rev": "577707af80007feaa606f3f63287d6aab4ae72fe",
+    "url": "github:rose-pine/zed"
+  },
+  "zellij": {
+    "narHash": "sha256-eilCRSweo0wk4z6snBWFC67NMVvytfDfJqGWVXg6QRc=",
+    "rev": "f4b7c27f9515d964a78e07da8332530a45f060d5",
+    "url": "github:rose-pine/zellij"
+  }
+}
