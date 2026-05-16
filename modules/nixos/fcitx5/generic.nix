@@ -1,10 +1,13 @@
-{ targetPath }:
-{ config, lib, ... }:
+{
+  config,
+  lib,
+  ...
+}:
 let
   cfg = config.nixporn;
   target = "fcitx5";
   colorscheme = cfg.colorscheme;
-  hasSpecific = builtins.pathExists (targetPath + "/${colorscheme}.nix");
+  hasSpecific = builtins.pathExists (./. + "/${colorscheme}.nix");
   fcitx5Enabled =
     (
       config.i18n.inputMethod ? enable

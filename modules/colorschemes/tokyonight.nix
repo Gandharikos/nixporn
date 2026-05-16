@@ -35,10 +35,18 @@ in
 {
   lightVariants = [ "day" ];
 
-  targets = lib.mapAttrs (_: directory: {
-    url = "github:folke/tokyonight.nvim";
-    path = "extras/${directory}";
-  }) targetDirectories;
+  targets =
+    lib.mapAttrs (_: directory: {
+      url = "github:folke/tokyonight.nvim";
+      path = "extras/${directory}";
+    }) targetDirectories
+    // {
+      spicetify = {
+        url = "github:evening-hs/Spotify-Tokyo-Night-Theme";
+        rev = "d88ca06eaeeb424d19e0d6f7f8e614e4bce962be";
+        hash = "sha256-cLj9v8qtHsdV9FfzV2Qf4pWO8AOBXu51U/lUMvdEXAk=";
+      };
+    };
 
   options.style = lib.mkOption {
     type = lib.types.enum variantNames;

@@ -27,7 +27,6 @@ let
     "atuin"
     "broot"
     "cursors"
-    "element"
     "eza"
     "fcitx5"
     "firefox"
@@ -45,7 +44,6 @@ let
     "mako"
     "mpv"
     "qt5ct"
-    "sddm"
     "television"
     "thunderbird"
     "vesktop"
@@ -59,14 +57,22 @@ in
 {
   lightVariants = [ "latte" ];
 
-  targets = lib.mapAttrs (
-    port: metadata:
-    metadata
+  targets =
+    lib.mapAttrs (
+      port: metadata:
+      metadata
+      // {
+        accentSupport = builtins.elem port accentSupportTargets;
+        url = "github:catppuccin/${port}";
+      }
+    ) (builtins.fromJSON (builtins.readFile ../../pkgs/catppuccin/sources.json))
     // {
-      accentSupport = builtins.elem port accentSupportTargets;
-      url = "github:catppuccin/${port}";
-    }
-  ) (builtins.fromJSON (builtins.readFile ../../pkgs/catppuccin/sources.json));
+      spicetify = {
+        url = "github:catppuccin/spicetify";
+        rev = "1ec645c4cf7f42f9792b9eeb1bb7930f94593277";
+        hash = "sha256-VK9JpXYFuLMkIuMftFkkMy6Y5+ttuxDUYoIiAPlx6YY=";
+      };
+    };
 
   options = {
     flavor = mkOption {

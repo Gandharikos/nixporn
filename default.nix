@@ -74,6 +74,10 @@ let
     source = catppuccinSources.cursors;
   };
 
+  bibataXcursor = pkgs.callPackage ./pkgs/bibata-xcursor.nix { };
+
+  bibataHyprcursor = pkgs.callPackage ./pkgs/bibata-hyprcursor/package.nix { };
+
   catppuccinFcitx5 = pkgs.callPackage ./pkgs/catppuccin/fcitx5/package.nix {
     source = catppuccinSources.fcitx5;
   };
@@ -107,6 +111,11 @@ let
     );
 
   nixporn = {
+    bibata = {
+      hyprcursor = bibataHyprcursor;
+      xcursor = bibataXcursor;
+    };
+
     catppuccin = catppuccinSources // {
       cursors = catppuccinCursors;
       fcitx5 = catppuccinFcitx5;

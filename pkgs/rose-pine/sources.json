@@ -53,12 +53,6 @@
     "rev": "cd5c30210c8d90fa276e2632bbbf49b8abb18455",
     "url": "github:rose-pine/ghostty"
   },
-  "grub": {
-    "lastModified": "2025-11-05",
-    "narHash": "sha256-QIhqvB6EGHLtNeKapoul3RQ14dzzlLgFH2HUSXRMRFg=",
-    "rev": "4255654cd7cd7766a1747c5e01553efc528ba3d1",
-    "url": "github:rose-pine/grub"
-  },
   "gtk": {
     "lastModified": "2025-11-05",
     "narHash": "sha256-58HfkFvflQhiJzfHcJCihSE9YbxbD6Koe0/aT+PVv4w=",
@@ -94,12 +88,6 @@
     "narHash": "sha256-Vo5FDhx+Hkb6a3NAssJyNrs2cGiTZPYjhiWX/LEsxyI=",
     "rev": "acc968a6090bd190ab0c49fa36847cb931a39a52",
     "url": "github:rose-pine/lazygit"
-  },
-  "limine": {
-    "lastModified": "2026-02-22",
-    "narHash": "sha256-6M8CBX8si59is5dEFhYifcskQf6tgxemIqbnZ31MFP0=",
-    "rev": "2976e371f5104ab0a9f5cff60929911e4bb84c18",
-    "url": "github:rose-pine/limine"
   },
   "mako": {
     "lastModified": "2025-11-05",

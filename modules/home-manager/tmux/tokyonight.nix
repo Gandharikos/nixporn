@@ -16,6 +16,7 @@ in
   config = lib.mkIf enable {
     programs.tmux.extraConfig = lib.mkBefore ''
       source-file ${source}/extras/tmux/${slug}.tmux
+      set -g status-position ${cfg.${target}.statusPosition}
       ${cfg.${target}.extraConfig}
     '';
   };

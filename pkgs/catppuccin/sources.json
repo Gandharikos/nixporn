@@ -54,11 +54,6 @@
     "lastModified": "2024-12-24",
     "rev": "5955cf0213d14a3494ec63580a81818b6f7caa66"
   },
-  "element": {
-    "hash": "sha256-Admv5TIEqN+b5o0m6+7M0Y56eK23KBaie7n01CNaFV0=",
-    "lastModified": "2026-04-13",
-    "rev": "f8236600302ef016c7366b96414a09e086996b71"
-  },
   "eza": {
     "hash": "sha256-Q+C07IReQQBO5xYuFiFbS1wjmO4gdt/wIJWHNwIizSc=",
     "lastModified": "2025-09-03",
@@ -119,11 +114,6 @@
     "lastModified": "2025-05-02",
     "rev": "00c97fa3823d272d9d041d5d872ae6335555a776"
   },
-  "grub": {
-    "hash": "sha256-jgM22pvCQvb0bjQQXoiqGMgScR9AgCK3OfDF5Ud+/mk=",
-    "lastModified": "2025-07-11",
-    "rev": "0a37ab19f654e77129b409fed371891c01ffd0b9"
-  },
   "halloy": {
     "hash": "sha256-+c9C9QHTHzt1bl0wDzknfUpoMtyUaeKZcbpfXA+BaVM=",
     "lastModified": "2025-03-30",
@@ -173,11 +163,6 @@
     "hash": "sha256-dwCRILNi2Qo8X0Y9ESnx2IjU1kSi4iOfcz5CoM2vSHY=",
     "lastModified": "2026-04-01",
     "rev": "798ad2e75a11766e9ba50e76e59aea6a81eb4866"
-  },
-  "limine": {
-    "hash": "sha256-ccD/6soFIJT4hUCFbbEhfOda10McAW+KtEDkVy5MXrk=",
-    "lastModified": "2026-05-05",
-    "rev": "01c564b7903280d12950acd19237774d07ad163c"
   },
   "lsd": {
     "hash": "sha256-lf6VawCgK9VlKO+PAzPD/WqPjxoqw2j000b5ZlEXj/Y=",
@@ -229,11 +214,6 @@
     "lastModified": "2026-03-21",
     "rev": "07d02aa110ef9eb7e7427afca5c73ba9cf7f8ebd"
   },
-  "plymouth": {
-    "hash": "sha256-2hGe8VOj1EhpwX51q8AcTfuVBByEHskBj89FX5YZqXc=",
-    "lastModified": "2026-04-28",
-    "rev": "198eba2071d80e4a23b8f51a5859e8f4acf8de6c"
-  },
   "polybar": {
     "hash": "sha256-jMQ+gH1djp2euERZpVW9muHQFI7xYnEQoNpucRj7Gow=",
     "lastModified": "2024-07-20",
@@ -258,11 +238,6 @@
     "hash": "sha256-81eeFjwM/haPjIEWkZPp1JSDwhWbWDAuKtWiCg7P9Q0=",
     "lastModified": "2025-07-19",
     "rev": "71fb15577ccb091df2f4fc1f65710edbc61b5a53"
-  },
-  "sddm": {
-    "hash": "sha256-6sEBe8g0MPFwjo+JfjJxBw+/QoXL2J+wtdHlBtE2THk=",
-    "lastModified": "2025-09-08",
-    "rev": "28699090372cce33c12a923cf8fc297a9cae2cd4"
   },
   "sioyek": {
     "hash": "sha256-LBSSdyFvgJW8BxRHMp+cdR7F8Kmwxwz8epLQ8T9jBKc=",

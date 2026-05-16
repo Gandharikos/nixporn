@@ -12,6 +12,7 @@ in
   config = lib.mkIf enable (
     lib.mkDefault {
       programs.tmux.extraConfig = ''
+        set -g status-position ${cfg.${target}.statusPosition}
         set -g status-style "fg=${ansi.fg},bg=${ansi.bg}"
         set -g message-style "fg=${ansi.fg},bg=${ansi.black}"
         set -g pane-border-style "fg=${ansi.black}"
