@@ -14,6 +14,11 @@ let
 in
 {
   config = lib.mkIf enable {
-    xdg.configFile."yazi/theme.toml".source = "${source}/extras/yazi/${slug}.toml";
+    programs.yazi.theme = {
+      "$scheme" = lib.mkDefault "https://yazi-rs.github.io/schemas/theme.json";
+      flavor.use = lib.mkDefault slug;
+    };
+    xdg.configFile."yazi/flavors/${slug}.yazi/flavor.toml".source =
+      "${source}/extras/yazi/${slug}.toml";
   };
 }
