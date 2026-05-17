@@ -12,7 +12,7 @@ in
 {
   config = lib.mkIf enable {
     programs.fzf.colors = {
-      inherit (ansi) bg fg;
+      inherit (ansi) fg;
       "bg+" = ansi.black;
       "fg+" = ansi.bright_white;
       header = ansi.yellow;
@@ -23,6 +23,9 @@ in
       pointer = ansi.magenta;
       prompt = ansi.green;
       spinner = ansi.yellow;
+    }
+    // lib.optionalAttrs (!cfg.transparent) {
+      inherit (ansi) bg;
     };
   };
 }

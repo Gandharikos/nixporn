@@ -14,7 +14,6 @@ in
   config = lib.mkIf enable {
     programs.fzf.colors = {
       "bg+" = palette.selection;
-      inherit (palette) bg;
       spinner = palette.purple;
       hl = palette.pink;
       inherit (palette) fg;
@@ -25,6 +24,9 @@ in
       "fg+" = palette.fg;
       prompt = palette.purple;
       "hl+" = palette.pink;
+    }
+    // lib.optionalAttrs (!cfg.transparent) {
+      inherit (palette) bg;
     };
   };
 }

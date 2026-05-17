@@ -13,12 +13,10 @@ in
 {
   config = lib.mkIf enable {
     programs.fzf.colors = {
-      bg = palette.base;
       "bg+" = palette.overlay;
       border = palette.highlight_med;
       fg = palette.subtle;
       "fg+" = palette.text;
-      gutter = palette.base;
       header = palette.pine;
       hl = palette.rose;
       "hl+" = palette.rose;
@@ -27,6 +25,10 @@ in
       pointer = palette.iris;
       prompt = palette.subtle;
       spinner = palette.gold;
+    }
+    // lib.optionalAttrs (!cfg.transparent) {
+      bg = palette.base;
+      gutter = palette.base;
     };
   };
 }

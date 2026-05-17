@@ -23,10 +23,8 @@ in
 
       colors = {
         "bg+" = palette.bg_highlight;
-        inherit (palette) bg;
         border = palette.base02;
         fg = palette.base0;
-        gutter = palette.bg;
         header = palette.orange;
         "hl+" = palette.orange;
         hl = palette.orange;
@@ -38,6 +36,10 @@ in
         scrollbar = palette.base02;
         separator = palette.base02;
         spinner = palette.orange;
+      }
+      // lib.optionalAttrs (!cfg.transparent) {
+        inherit (palette) bg;
+        gutter = palette.bg;
       };
     };
   };
