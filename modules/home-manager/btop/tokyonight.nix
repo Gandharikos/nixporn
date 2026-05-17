@@ -18,7 +18,7 @@ in
     xdg.configFile."btop/themes/${themeFile}".source = "${source}/extras/btop/${themeFile}";
     programs.btop.settings = {
       color_theme = slug;
-      theme_background = true;
+      theme_background = !cfg.transparent;
     };
   };
 }

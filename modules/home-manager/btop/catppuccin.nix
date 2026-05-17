@@ -17,6 +17,9 @@ in
 {
   config = lib.mkIf enable {
     xdg.configFile."btop/themes/${themeFile}".source = "${sources.btop}/${themeFile}";
-    programs.btop.settings.color_theme = themeName;
+    programs.btop.settings = {
+      color_theme = themeName;
+      theme_background = !cfg.transparent;
+    };
   };
 }

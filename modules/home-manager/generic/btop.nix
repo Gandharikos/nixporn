@@ -52,6 +52,9 @@ in
       theme[upload_mid]="${ansi.yellow}"
       theme[upload_end]="${ansi.red}"
     '';
-    programs.btop.settings.color_theme = themeName;
+    programs.btop.settings = {
+      color_theme = themeName;
+      theme_background = !cfg.transparent;
+    };
   };
 }
