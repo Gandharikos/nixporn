@@ -10,7 +10,8 @@ let
   inherit (catppuccin) flavor;
   sources = pkgs.nixporn.catppuccin;
   target = "xfce4-terminal";
-  enable = cfg.enable && cfg.colorscheme == "catppuccin" && cfg.${target}.enable;
+  programEnabled = config.programs."xfce4-terminal".enable or false;
+  enable = cfg.enable && cfg.colorscheme == "catppuccin" && cfg.${target}.enable && programEnabled;
   themeFile = "${sources.xfce4-terminal}/catppuccin-${flavor}.theme";
   importINI =
     path:

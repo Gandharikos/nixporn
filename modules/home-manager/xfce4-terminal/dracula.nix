@@ -8,7 +8,8 @@ let
   cfg = config.nixporn;
   sources = pkgs.nixporn.dracula;
   target = "xfce4-terminal";
-  enable = cfg.enable && cfg.colorscheme == "dracula" && cfg.${target}.enable;
+  programEnabled = config.programs."xfce4-terminal".enable or false;
+  enable = cfg.enable && cfg.colorscheme == "dracula" && cfg.${target}.enable && programEnabled;
   importINI =
     path:
     lib.importJSON (

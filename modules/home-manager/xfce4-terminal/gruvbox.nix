@@ -9,7 +9,8 @@ let
   inherit (cfg.colorschemes.gruvbox) variant;
   sources = pkgs.nixporn.gruvbox;
   target = "xfce4-terminal";
-  enable = cfg.enable && cfg.colorscheme == "gruvbox" && cfg.${target}.enable;
+  programEnabled = config.programs."xfce4-terminal".enable or false;
+  enable = cfg.enable && cfg.colorscheme == "gruvbox" && cfg.${target}.enable && programEnabled;
   themeFile = "gruvbox-${variant}.theme";
   importINI =
     path:

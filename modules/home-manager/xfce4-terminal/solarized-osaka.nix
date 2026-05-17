@@ -10,7 +10,8 @@ let
   inherit (solarized-osaka) slug;
   source = pkgs.nixporn.solarized-osaka;
   target = "xfce4-terminal";
-  enable = cfg.enable && cfg.colorscheme == "solarized-osaka" && cfg.${target}.enable;
+  programEnabled = config.programs."xfce4-terminal".enable or false;
+  enable = cfg.enable && cfg.colorscheme == "solarized-osaka" && cfg.${target}.enable && programEnabled;
   themeFile = "${source}/extras/xfceterm/${slug}.theme";
   importINI =
     path:

@@ -10,7 +10,8 @@ let
   inherit (tokyonight) slug;
   source = pkgs.nixporn.tokyonight;
   target = "xfce4-terminal";
-  enable = cfg.enable && cfg.colorscheme == "tokyonight" && cfg.${target}.enable;
+  programEnabled = config.programs."xfce4-terminal".enable or false;
+  enable = cfg.enable && cfg.colorscheme == "tokyonight" && cfg.${target}.enable && programEnabled;
   themeFile = "${source}/extras/xfceterm/${slug}.theme";
   importINI =
     path:

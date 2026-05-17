@@ -5,7 +5,8 @@ let
   target = "xfce4-terminal";
   colorscheme = cfg.colorscheme;
   hasSpecific = builtins.pathExists (targetPath + "/${colorscheme}.nix");
-  enable = cfg.enable && cfg.${target}.enable && !hasSpecific;
+  programEnabled = config.programs."xfce4-terminal".enable or false;
+  enable = cfg.enable && cfg.${target}.enable && programEnabled && !hasSpecific;
   inherit (cfg.palette) ansi;
 in
 {
