@@ -12,10 +12,11 @@ let
   target = "btop";
   enable = cfg.enable && cfg.colorscheme == "catppuccin" && cfg.${target}.enable;
   themeFile = "catppuccin_${flavor}.theme";
+  themeName = "catppuccin_${flavor}";
 in
 {
   config = lib.mkIf enable {
     xdg.configFile."btop/themes/${themeFile}".source = "${sources.btop}/${themeFile}";
-    programs.btop.settings.color_theme = themeFile;
+    programs.btop.settings.color_theme = themeName;
   };
 }

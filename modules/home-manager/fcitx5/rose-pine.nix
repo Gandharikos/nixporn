@@ -10,22 +10,16 @@ let
   inherit (rose-pine) slug;
   sources = pkgs.nixporn.rose-pine;
   target = "fcitx5";
-  fcitx5Enabled =
-    (
-      config.i18n.inputMethod ? enable
-      && config.i18n.inputMethod.enable
-      && config.i18n.inputMethod.type == "fcitx5"
-    )
-    || (config.i18n.inputMethod ? enabled && config.i18n.inputMethod.enabled == "fcitx5");
-  enable = cfg.enable && cfg.colorscheme == "rose-pine" && cfg.${target}.enable && fcitx5Enabled;
+  enable = cfg.enable && cfg.colorscheme == "rose-pine" && cfg.${target}.enable;
+  classicUiFile = (pkgs.formats.iniWithGlobalSection { }).generate "fcitx5-classicui.conf" {
+    globalSection.Theme = slug;
+  };
 in
 {
   config = lib.mkIf enable {
-    i18n.inputMethod.fcitx5 = {
-      addons = [ sources.fcitx5 ];
-      settings.addons = lib.mkIf cfg.${target}.apply {
-        classicui.globalSection.Theme = slug;
-      };
+    xdg.configFile = lib.mkIf cfg.${target}.apply {
+      "fcitx5/conf/classicui.conf".source = classicUiFile;
     };
+    xdg.dataFile."fcitx5/themes/${slug}".source = "${sources.fcitx5}/share/fcitx5/themes/${slug}";
   };
 }
