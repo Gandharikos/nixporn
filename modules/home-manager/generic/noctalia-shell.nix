@@ -2,6 +2,7 @@
 { config, lib, ... }:
 let
   cfg = config.nixporn;
+  inherit (cfg) avatar wallpaper;
   target = "noctalia-shell";
   colorscheme = cfg.colorscheme;
   colorschemeCfg = cfg.colorschemes.${colorscheme};
@@ -40,6 +41,15 @@ in
           darkMode = colorschemeCfg.polarity == "dark";
           predefinedScheme = "";
           useWallpaperColors = false;
+        };
+
+        settings.general = lib.optionalAttrs (avatar != null) {
+          avatarImage = toString avatar;
+        };
+
+        settings.wallpaper = lib.optionalAttrs (wallpaper != null) {
+          enabled = true;
+          directory = builtins.dirOf (toString wallpaper);
         };
       };
     }

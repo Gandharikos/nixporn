@@ -2,7 +2,6 @@
 {
   config,
   lib,
-  pkgs,
   ...
 }:
 let
@@ -12,12 +11,7 @@ let
   colorschemeCfg = cfg.colorschemes.${colorscheme};
   targetCfg = cfg.${target};
   hasSpecific = builtins.pathExists (targetPath + "/${colorscheme}.nix");
-  enable =
-    cfg.enable
-    && targetCfg.enable
-    && !hasSpecific
-    && pkgs.stdenv.hostPlatform.isDarwin
-    && (config.programs.rime.enable or false);
+  enable = cfg.enable && targetCfg.enable && !hasSpecific && (config.programs.rime.enable or false);
   inherit (cfg.palette) ansi;
 
   toRimeColor =

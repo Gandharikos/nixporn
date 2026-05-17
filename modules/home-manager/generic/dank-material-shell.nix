@@ -7,6 +7,7 @@
 }:
 let
   cfg = config.nixporn;
+  inherit (cfg) avatar wallpaper;
   target = "dank-material-shell";
   colorscheme = cfg.colorscheme;
   colorschemeCfg = cfg.colorschemes.${colorscheme};
@@ -51,6 +52,16 @@ in
             light = theme;
           }
         );
+      };
+
+      programs.dank-material-shell.session = lib.optionalAttrs (wallpaper != null) {
+        wallpaperPath = toString wallpaper;
+        wallpaperPathLight = toString wallpaper;
+        wallpaperPathDark = toString wallpaper;
+      };
+
+      home.file = lib.optionalAttrs (avatar != null) {
+        ".face".source = avatar;
       };
     }
   );

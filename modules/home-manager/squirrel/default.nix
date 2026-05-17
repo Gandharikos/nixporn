@@ -1,6 +1,5 @@
 {
   lib,
-  pkgs,
   ...
 }:
 {
@@ -20,7 +19,4 @@
     };
   };
 
-  config = lib.mkIf (!pkgs.stdenv.hostPlatform.isDarwin) {
-    nixporn.squirrel.enable = lib.mkDefault false;
-  };
 }

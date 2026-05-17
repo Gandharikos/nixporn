@@ -11,7 +11,7 @@ in
 {
   config = lib.mkIf enable (
     lib.mkDefault {
-      programs.xfconf.settings.xfce4-terminal = {
+      xfconf.settings.xfce4-terminal = {
         color-background = ansi.bg;
         color-foreground = ansi.fg;
         color-cursor = ansi.fg;
