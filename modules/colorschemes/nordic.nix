@@ -22,8 +22,6 @@
       bright_white
       cyan
       green
-      orange
-      purple
       red
       white
       yellow
