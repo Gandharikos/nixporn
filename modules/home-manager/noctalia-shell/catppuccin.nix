@@ -1,11 +1,7 @@
 { config, lib, ... }:
 let
   cfg = config.nixporn;
-  inherit (cfg)
-    avatar
-    palette
-    wallpaper
-    ;
+  inherit (cfg) palette;
   inherit (cfg.colorschemes) catppuccin;
   target = "noctalia-shell";
   enable =
@@ -41,15 +37,6 @@ in
         darkMode = catppuccin.flavor != "latte";
         predefinedScheme = "";
         useWallpaperColors = false;
-      };
-
-      settings.general = lib.optionalAttrs (avatar != null) {
-        avatarImage = toString avatar;
-      };
-
-      settings.wallpaper = lib.optionalAttrs (wallpaper != null) {
-        enabled = true;
-        directory = builtins.dirOf (toString wallpaper);
       };
     };
   };
