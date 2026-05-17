@@ -10,14 +10,9 @@ let
   inherit (catppuccin) accent flavor;
   sources = pkgs.nixporn.catppuccin;
   target = "lazygit";
-  enable =
-    cfg.enable
-    && cfg.colorscheme == "catppuccin"
-    && cfg.${target}.enable
-    && config.programs.lazygit.enable;
+  enable = cfg.enable && cfg.colorscheme == "catppuccin" && cfg.${target}.enable;
 
   enableXdgConfig = !pkgs.stdenv.hostPlatform.isDarwin || config.xdg.enable;
-
   configDirectory =
     if enableXdgConfig then
       config.xdg.configHome

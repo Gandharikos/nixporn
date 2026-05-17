@@ -10,14 +10,9 @@ let
   inherit (cyberdream) slug;
   source = pkgs.nixporn.cyberdream;
   target = "lazygit";
-  enable =
-    cfg.enable
-    && cfg.colorscheme == "cyberdream"
-    && cfg.${target}.enable
-    && config.programs.lazygit.enable;
+  enable = cfg.enable && cfg.colorscheme == "cyberdream" && cfg.${target}.enable;
 
   enableXdgConfig = !pkgs.stdenv.hostPlatform.isDarwin || config.xdg.enable;
-
   configDirectory =
     if enableXdgConfig then
       config.xdg.configHome

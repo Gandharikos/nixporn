@@ -10,14 +10,9 @@ let
   inherit (tokyonight) slug;
   source = pkgs.nixporn.tokyonight;
   target = "lazygit";
-  enable =
-    cfg.enable
-    && cfg.colorscheme == "tokyonight"
-    && cfg.${target}.enable
-    && config.programs.lazygit.enable;
+  enable = cfg.enable && cfg.colorscheme == "tokyonight" && cfg.${target}.enable;
 
   enableXdgConfig = !pkgs.stdenv.hostPlatform.isDarwin || config.xdg.enable;
-
   configDirectory =
     if enableXdgConfig then
       config.xdg.configHome

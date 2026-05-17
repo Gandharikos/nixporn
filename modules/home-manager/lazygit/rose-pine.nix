@@ -10,14 +10,9 @@ let
   inherit (rose-pine) slug;
   sources = pkgs.nixporn.rose-pine;
   target = "lazygit";
-  enable =
-    cfg.enable
-    && cfg.colorscheme == "rose-pine"
-    && cfg.${target}.enable
-    && config.programs.lazygit.enable;
+  enable = cfg.enable && cfg.colorscheme == "rose-pine" && cfg.${target}.enable;
 
   enableXdgConfig = !pkgs.stdenv.hostPlatform.isDarwin || config.xdg.enable;
-
   configDirectory =
     if enableXdgConfig then
       config.xdg.configHome

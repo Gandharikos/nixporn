@@ -10,14 +10,9 @@ let
   inherit (solarized-osaka) slug;
   source = pkgs.nixporn.solarized-osaka;
   target = "lazygit";
-  enable =
-    cfg.enable
-    && cfg.colorscheme == "solarized-osaka"
-    && cfg.${target}.enable
-    && config.programs.lazygit.enable;
+  enable = cfg.enable && cfg.colorscheme == "solarized-osaka" && cfg.${target}.enable;
 
   enableXdgConfig = !pkgs.stdenv.hostPlatform.isDarwin || config.xdg.enable;
-
   configDirectory =
     if enableXdgConfig then
       config.xdg.configHome
