@@ -18,7 +18,7 @@ let
     || (config.i18n.inputMethod ? enabled && config.i18n.inputMethod.enabled == "fcitx5");
   enable = cfg.enable && cfg.${target}.enable && !hasSpecific && fcitx5Enabled;
   inherit (cfg.palette) ansi;
-  themeName = "nixporn-${colorscheme}";
+  themeName = cfg.colorschemes.${colorscheme}.slug;
   alpha = color: "${color}00";
 
   iniFormat = pkgs.formats.ini { };
@@ -110,22 +110,20 @@ let
   '';
 in
 {
-  config = lib.mkIf enable (
-    lib.mkDefault {
-      i18n.inputMethod.fcitx5 = {
-        addons = [ themePackage ];
-        settings.addons = lib.mkIf cfg.${target}.apply {
-          classicui.globalSection = {
-            Theme = themeName;
-            DarkTheme = themeName;
-            Font = "Sans 13";
-            MenuFont = "Sans 10";
-            TrayFont = "Sans 10";
-            UseDarkTheme = cfg.colorschemes.${colorscheme}.polarity == "dark";
-            UseAccentColor = false;
-          };
+  config = lib.mkIf enable {
+    i18n.inputMethod.fcitx5 = {
+      addons = [ themePackage ];
+      settings.addons = lib.mkIf cfg.${target}.apply {
+        classicui.globalSection = {
+          Theme = themeName;
+          DarkTheme = themeName;
+          Font = "Sans 13";
+          MenuFont = "Sans 10";
+          TrayFont = "Sans 10";
+          UseDarkTheme = cfg.colorschemes.${colorscheme}.polarity == "dark";
+          UseAccentColor = false;
         };
       };
-    }
-  );
+    };
+  };
 }

@@ -32,16 +32,14 @@ let
   };
 in
 {
-  config = lib.mkIf enable (
-    lib.mkDefault {
-      environment.systemPackages = [
-        cursorPackage
-        hyprcursorPackage
-      ];
-      environment.variables = {
-        XCURSOR_THEME = cursorName;
-        HYPRCURSOR_THEME = hyprcursorName;
-      };
-    }
-  );
+  config = lib.mkIf enable {
+    environment.systemPackages = [
+      cursorPackage
+      hyprcursorPackage
+    ];
+    environment.variables = {
+      XCURSOR_THEME = cursorName;
+      HYPRCURSOR_THEME = hyprcursorName;
+    };
+  };
 }
