@@ -21,7 +21,7 @@ let
 in
 {
   config = lib.mkIf enable {
-    programs.xfconf.settings.xfce4-terminal =
+    xfconf.settings.xfce4-terminal =
       lib.mapAttrs' (name: value: lib.nameValuePair "color-${lib.toLower name}" value)
         (
           builtins.removeAttrs (importINI "${sources.contrib}/xfce4-terminal/${themeFile}").Scheme [ "Name" ]

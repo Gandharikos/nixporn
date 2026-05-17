@@ -19,7 +19,7 @@ let
 in
 {
   config = lib.mkIf enable {
-    programs.xfconf.settings.xfce4-terminal = lib.mapAttrs' (
+    xfconf.settings.xfce4-terminal = lib.mapAttrs' (
       name: value: lib.nameValuePair "color-${lib.toLower name}" value
     ) (builtins.removeAttrs (importINI "${sources.xfce4-terminal}/Dracula.theme").Scheme [ "Name" ]);
   };
