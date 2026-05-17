@@ -12,13 +12,14 @@ pkgs.mkShellNoCC {
     with pkgs;
     [
       nixVersions.nix_2_28
+      deadnix
+      keep-sorted
       nixfmt
       python3
+      treefmt
     ]
     ++ lib.optionals (!minimal) [
       actionlint
-      deadnix
-      keep-sorted
       nil
       nixd
       shellcheck

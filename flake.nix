@@ -42,6 +42,42 @@
             })
           ];
         };
+
+      mkFormatter =
+        system:
+        let
+          pkgs = nixpkgs.legacyPackages.${system};
+        in
+        pkgs.treefmt.withConfig {
+          runtimeInputs = with pkgs; [
+            deadnix
+            keep-sorted
+            nixfmt
+          ];
+
+          settings = {
+            on-unmatched = "info";
+            tree-root-file = "flake.nix";
+
+            formatter = {
+              deadnix = {
+                command = "deadnix";
+                options = [ "--edit" ];
+                includes = [ "*.nix" ];
+                priority = 1;
+              };
+              keep-sorted = {
+                command = "keep-sorted";
+                includes = [ "*" ];
+              };
+              nixfmt = {
+                command = "nixfmt";
+                includes = [ "*.nix" ];
+              };
+            };
+          };
+        };
+
     in
     {
       inherit lib;
@@ -85,34 +121,7 @@
           )
       );
 
-      formatter = forAllDevSystems (
-        system:
-        let
-          pkgs = nixpkgs.legacyPackages.${system};
-        in
-        pkgs.treefmt.withConfig {
-          runtimeInputs = with pkgs; [
-            keep-sorted
-            nixfmt
-          ];
-
-          settings = {
-            on-unmatched = "info";
-            tree-root-file = "flake.nix";
-
-            formatter = {
-              keep-sorted = {
-                command = "keep-sorted";
-                includes = [ "*" ];
-              };
-              nixfmt = {
-                command = "nixfmt";
-                includes = [ "*.nix" ];
-              };
-            };
-          };
-        }
-      );
+      formatter = forAllDevSystems mkFormatter;
 
       nixosModules = {
         default = self.nixosModules.colorscheme;
