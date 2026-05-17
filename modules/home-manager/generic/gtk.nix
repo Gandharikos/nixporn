@@ -36,21 +36,19 @@ let
   '';
 in
 {
-  config = lib.mkIf enable (
-    lib.mkDefault {
-      gtk = {
-        enable = true;
-        theme = {
-          package = pkgs.adw-gtk3;
-          name = "adw-gtk3";
-        };
-        gtk3.extraCss = css;
-        gtk4.extraCss = css;
+  config = lib.mkIf enable {
+    gtk = {
+      enable = true;
+      theme = {
+        package = pkgs.adw-gtk3;
+        name = "adw-gtk3";
       };
-      xdg.configFile = {
-        "gtk-3.0/gtk.css".text = css;
-        "gtk-4.0/gtk.css".text = css;
-      };
-    }
-  );
+      gtk3.extraCss = css;
+      gtk4.extraCss = css;
+    };
+    xdg.configFile = {
+      "gtk-3.0/gtk.css".text = css;
+      "gtk-4.0/gtk.css".text = css;
+    };
+  };
 }

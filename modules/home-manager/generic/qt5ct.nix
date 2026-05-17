@@ -102,14 +102,12 @@ let
   '';
 in
 {
-  config = lib.mkIf enable (
-    lib.mkDefault {
-      qt = lib.genAttrs [ "qt5ctSettings" "qt6ctSettings" ] (_: {
-        Appearance = {
-          custom_palette = true;
-          color_scheme_path = colorScheme;
-        };
-      });
-    }
-  );
+  config = lib.mkIf enable {
+    qt = lib.genAttrs [ "qt5ctSettings" "qt6ctSettings" ] (_: {
+      Appearance = {
+        custom_palette = true;
+        color_scheme_path = colorScheme;
+      };
+    });
+  };
 }

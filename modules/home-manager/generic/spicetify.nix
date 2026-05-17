@@ -43,15 +43,13 @@ let
   };
 in
 {
-  config = lib.mkIf enable (
-    lib.mkDefault {
-      programs.spicetify = {
-        theme = {
-          name = themeName;
-          src = theme;
-        };
-        colorScheme = "nixporn";
+  config = lib.mkIf enable {
+    programs.spicetify = {
+      theme = {
+        name = themeName;
+        src = theme;
       };
-    }
-  );
+      colorScheme = "nixporn";
+    };
+  };
 }

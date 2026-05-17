@@ -9,58 +9,56 @@ let
   inherit (cfg.palette) ansi;
 in
 {
-  config = lib.mkIf enable (
-    lib.mkDefault {
-      programs.wlogout.style = lib.concatStrings [
-        ''
-          * {
-            background-image: none;
-            box-shadow: none;
-          }
+  config = lib.mkIf enable {
+    programs.wlogout.style = lib.concatStrings [
+      ''
+        * {
+          background-image: none;
+          box-shadow: none;
+        }
 
-          window {
-            background-color: alpha(${ansi.bg}, 0.90);
-          }
+        window {
+          background-color: alpha(${ansi.bg}, 0.90);
+        }
 
-          button {
-            border-radius: 0;
-            border: 1px solid ${ansi.blue};
-            color: ${ansi.fg};
-            background-color: ${ansi.black};
-            background-repeat: no-repeat;
-            background-position: center;
-            background-size: 25%;
-            text-decoration-color: ${ansi.fg};
-          }
+        button {
+          border-radius: 0;
+          border: 1px solid ${ansi.blue};
+          color: ${ansi.fg};
+          background-color: ${ansi.black};
+          background-repeat: no-repeat;
+          background-position: center;
+          background-size: 25%;
+          text-decoration-color: ${ansi.fg};
+        }
 
-          button:focus,
-          button:active,
-          button:hover {
-            background-color: ${ansi.bright_black};
-            color: ${ansi.bright_white};
-            outline-style: none;
-          }
+        button:focus,
+        button:active,
+        button:hover {
+          background-color: ${ansi.bright_black};
+          color: ${ansi.bright_white};
+          outline-style: none;
+        }
 
-          #lock {
-            border-color: ${ansi.blue};
-          }
+        #lock {
+          border-color: ${ansi.blue};
+        }
 
-          #logout,
-          #suspend,
-          #hibernate {
-            border-color: ${ansi.yellow};
-          }
+        #logout,
+        #suspend,
+        #hibernate {
+          border-color: ${ansi.yellow};
+        }
 
-          #reboot {
-            border-color: ${ansi.magenta};
-          }
+        #reboot {
+          border-color: ${ansi.magenta};
+        }
 
-          #shutdown {
-            border-color: ${ansi.red};
-          }
-        ''
-        cfg.${target}.extraStyle
-      ];
-    }
-  );
+        #shutdown {
+          border-color: ${ansi.red};
+        }
+      ''
+      cfg.${target}.extraStyle
+    ];
+  };
 }

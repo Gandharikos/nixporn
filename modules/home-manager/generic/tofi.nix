@@ -9,15 +9,13 @@ let
   inherit (cfg.palette) ansi;
 in
 {
-  config = lib.mkIf enable (
-    lib.mkDefault {
-      programs.tofi.settings = {
-        background-color = ansi.bg;
-        text-color = ansi.fg;
-        selection-color = ansi.blue;
-        prompt-color = ansi.cyan;
-        border-color = ansi.blue;
-      };
-    }
-  );
+  config = lib.mkIf enable {
+    programs.tofi.settings = {
+      background-color = ansi.bg;
+      text-color = ansi.fg;
+      selection-color = ansi.blue;
+      prompt-color = ansi.cyan;
+      border-color = ansi.blue;
+    };
+  };
 }

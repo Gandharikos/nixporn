@@ -44,15 +44,13 @@ let
       "Cyan";
 in
 {
-  config = lib.mkIf enable (
-    lib.mkDefault {
-      programs.freetube.settings = {
-        inherit
-          baseTheme
-          mainColor
-          secColor
-          ;
-      };
-    }
-  );
+  config = lib.mkIf enable {
+    programs.freetube.settings = {
+      inherit
+        baseTheme
+        mainColor
+        secColor
+        ;
+    };
+  };
 }

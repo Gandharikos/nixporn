@@ -60,24 +60,22 @@ let
   '';
 in
 {
-  config = lib.mkIf enable (
-    lib.mkDefault {
-      programs.thunderbird = {
-        settings = {
-          "browser.display.background_color" = ansi.bg;
-          "browser.display.foreground_color" = ansi.fg;
-          "browser.anchor_color" = ansi.blue;
-          "browser.visited_color" = ansi.magenta;
-          "mail.theme.content-theme" = if polarity == "light" then 1 else 0;
-          "mail.theme.toolbar-theme" = if polarity == "light" then 1 else 0;
-          "toolkit.legacyUserProfileCustomizations.stylesheets" = true;
-        };
-
-        profiles.default = {
-          userChrome = lib.mkBefore css;
-          userContent = lib.mkBefore css;
-        };
+  config = lib.mkIf enable {
+    programs.thunderbird = {
+      settings = {
+        "browser.display.background_color" = ansi.bg;
+        "browser.display.foreground_color" = ansi.fg;
+        "browser.anchor_color" = ansi.blue;
+        "browser.visited_color" = ansi.magenta;
+        "mail.theme.content-theme" = if polarity == "light" then 1 else 0;
+        "mail.theme.toolbar-theme" = if polarity == "light" then 1 else 0;
+        "toolkit.legacyUserProfileCustomizations.stylesheets" = true;
       };
-    }
-  );
+
+      profiles.default = {
+        userChrome = lib.mkBefore css;
+        userContent = lib.mkBefore css;
+      };
+    };
+  };
 }

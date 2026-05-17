@@ -7,7 +7,7 @@ let
   hasSpecific = builtins.pathExists (targetPath + "/${colorscheme}.nix");
   enable = cfg.enable && cfg.${target}.enable && !hasSpecific;
   inherit (cfg.palette) ansi;
-  themeName = "nixporn-${colorscheme}";
+  themeName = cfg.colorschemes.${colorscheme}.slug;
   theme = {
     text_unselected = {
       base = ansi.fg;
@@ -76,12 +76,10 @@ let
   };
 in
 {
-  config = lib.mkIf enable (
-    lib.mkDefault {
-      programs.zellij = {
-        settings.theme = themeName;
-        themes.${themeName}.themes.default = theme;
-      };
-    }
-  );
+  config = lib.mkIf enable {
+    programs.zellij = {
+      settings.theme = themeName;
+      themes.${themeName}.themes.default = theme;
+    };
+  };
 }

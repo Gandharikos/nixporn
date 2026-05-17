@@ -12,7 +12,7 @@ let
   hasSpecific = builtins.pathExists (targetPath + "/${colorscheme}.nix");
   enable = cfg.enable && cfg.${target}.enable && !hasSpecific;
   inherit (cfg.palette) ansi;
-  themeName = "nixporn-${colorscheme}";
+  themeName = cfg.colorschemes.${colorscheme}.slug;
   theme = pkgs.writeText "${themeName}.rasi" ''
     * {
       background: ${ansi.bg};
@@ -42,9 +42,7 @@ let
   '';
 in
 {
-  config = lib.mkIf enable (
-    lib.mkDefault {
-      programs.rofi.theme = theme;
-    }
-  );
+  config = lib.mkIf enable {
+    programs.rofi.theme = theme;
+  };
 }

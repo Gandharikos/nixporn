@@ -12,7 +12,7 @@ let
   hasSpecific = builtins.pathExists (targetPath + "/${colorscheme}.nix");
   enable = cfg.enable && cfg.${target}.enable && !hasSpecific;
   inherit (cfg.palette) ansi;
-  themeName = "nixporn-${colorscheme}";
+  themeName = cfg.colorschemes.${colorscheme}.slug;
   theme = pkgs.writeText "${themeName}.toml" ''
     "ui.background" = { bg = "bg" }
     "ui.text" = "fg"
@@ -62,13 +62,11 @@ let
   '';
 in
 {
-  config = lib.mkIf enable (
-    lib.mkDefault {
-      xdg.configFile."helix/themes/${themeName}.toml".source = theme;
-      programs.helix.settings = {
-        theme = themeName;
-        editor.color-modes = lib.mkDefault true;
-      };
-    }
-  );
+  config = lib.mkIf enable {
+    xdg.configFile."helix/themes/${themeName}.toml".source = theme;
+    programs.helix.settings = {
+      theme = themeName;
+      editor.color-modes = lib.mkDefault true;
+    };
+  };
 }

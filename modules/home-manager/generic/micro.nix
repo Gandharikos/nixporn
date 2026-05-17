@@ -8,9 +8,7 @@ let
   enable = cfg.enable && cfg.${target}.enable && !hasSpecific;
 in
 {
-  config = lib.mkIf enable (
-    lib.mkDefault {
-      programs.micro.settings.colorscheme = "simple";
-    }
-  );
+  config = lib.mkIf enable {
+    programs.micro.settings.colorscheme = "simple";
+  };
 }

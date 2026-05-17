@@ -9,25 +9,23 @@ let
   inherit (cfg.palette) ansi;
 in
 {
-  config = lib.mkIf enable (
-    lib.mkDefault {
-      programs.lazygit.settings.gui.theme = {
-        activeBorderColor = [
-          ansi.blue
-          "bold"
-        ];
-        inactiveBorderColor = [ ansi.bright_black ];
-        searchingActiveBorderColor = [
-          ansi.yellow
-          "bold"
-        ];
-        optionsTextColor = [ ansi.cyan ];
-        selectedLineBgColor = [ ansi.black ];
-        cherryPickedCommitBgColor = [ ansi.black ];
-        cherryPickedCommitFgColor = [ ansi.bright_black ];
-        unstagedChangesColor = [ ansi.red ];
-        defaultFgColor = [ ansi.fg ];
-      };
-    }
-  );
+  config = lib.mkIf enable {
+    programs.lazygit.settings.gui.theme = {
+      activeBorderColor = [
+        ansi.blue
+        "bold"
+      ];
+      inactiveBorderColor = [ ansi.bright_black ];
+      searchingActiveBorderColor = [
+        ansi.yellow
+        "bold"
+      ];
+      optionsTextColor = [ ansi.cyan ];
+      selectedLineBgColor = [ ansi.black ];
+      cherryPickedCommitBgColor = [ ansi.black ];
+      cherryPickedCommitFgColor = [ ansi.bright_black ];
+      unstagedChangesColor = [ ansi.red ];
+      defaultFgColor = [ ansi.fg ];
+    };
+  };
 }

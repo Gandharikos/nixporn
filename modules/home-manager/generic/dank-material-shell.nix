@@ -42,27 +42,25 @@ let
   };
 in
 {
-  config = lib.mkIf enable (
-    lib.mkDefault {
-      programs.dank-material-shell.settings = {
-        currentThemeName = "custom";
-        customThemeFile = pkgs.writeText "dank-material-shell-${themeName}-theme.json" (
-          builtins.toJSON {
-            dark = theme;
-            light = theme;
-          }
-        );
-      };
+  config = lib.mkIf enable {
+    programs.dank-material-shell.settings = {
+      currentThemeName = "custom";
+      customThemeFile = pkgs.writeText "dank-material-shell-${themeName}-theme.json" (
+        builtins.toJSON {
+          dark = theme;
+          light = theme;
+        }
+      );
+    };
 
-      programs.dank-material-shell.session = lib.optionalAttrs (wallpaper != null) {
-        wallpaperPath = toString wallpaper;
-        wallpaperPathLight = toString wallpaper;
-        wallpaperPathDark = toString wallpaper;
-      };
+    programs.dank-material-shell.session = lib.optionalAttrs (wallpaper != null) {
+      wallpaperPath = toString wallpaper;
+      wallpaperPathLight = toString wallpaper;
+      wallpaperPathDark = toString wallpaper;
+    };
 
-      home.file = lib.optionalAttrs (avatar != null) {
-        ".face".source = avatar;
-      };
-    }
-  );
+    home.file = lib.optionalAttrs (avatar != null) {
+      ".face".source = avatar;
+    };
+  };
 }

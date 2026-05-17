@@ -12,26 +12,24 @@ let
   rgba = color: alpha: "rgba(${hex color}${alpha})";
 in
 {
-  config = lib.mkIf enable (
-    lib.mkDefault {
-      wayland.windowManager.hyprland.settings = {
-        decoration.shadow.color = rgba ansi.bg "99";
-        general = {
-          "col.active_border" = rgb ansi.blue;
-          "col.inactive_border" = rgb ansi.bright_black;
-        };
-        group = {
-          "col.border_active" = rgb ansi.blue;
-          "col.border_inactive" = rgb ansi.bright_black;
-          "col.border_locked_active" = rgb ansi.cyan;
-          groupbar = {
-            text_color = rgb ansi.fg;
-            "col.active" = rgb ansi.blue;
-            "col.inactive" = rgb ansi.black;
-          };
-        };
-        misc.background_color = rgb ansi.bg;
+  config = lib.mkIf enable {
+    wayland.windowManager.hyprland.settings = {
+      decoration.shadow.color = rgba ansi.bg "99";
+      general = {
+        "col.active_border" = rgb ansi.blue;
+        "col.inactive_border" = rgb ansi.bright_black;
       };
-    }
-  );
+      group = {
+        "col.border_active" = rgb ansi.blue;
+        "col.border_inactive" = rgb ansi.bright_black;
+        "col.border_locked_active" = rgb ansi.cyan;
+        groupbar = {
+          text_color = rgb ansi.fg;
+          "col.active" = rgb ansi.blue;
+          "col.inactive" = rgb ansi.black;
+        };
+      };
+      misc.background_color = rgb ansi.bg;
+    };
+  };
 }

@@ -12,7 +12,7 @@ let
   hasSpecific = builtins.pathExists (targetPath + "/${colorscheme}.nix");
   enable = cfg.enable && cfg.${target}.enable && !hasSpecific;
   inherit (cfg.palette) ansi;
-  themeName = "nixporn-${colorscheme}";
+  themeName = cfg.colorschemes.${colorscheme}.slug;
   theme = pkgs.writeText "${themeName}-ghostty" ''
     background = ${ansi.bg}
     foreground = ${ansi.fg}
@@ -35,10 +35,8 @@ let
   '';
 in
 {
-  config = lib.mkIf enable (
-    lib.mkDefault {
-      xdg.configFile."ghostty/themes/${themeName}".source = theme;
-      programs.ghostty.settings.theme = "light:${themeName},dark:${themeName}";
-    }
-  );
+  config = lib.mkIf enable {
+    xdg.configFile."ghostty/themes/${themeName}".source = theme;
+    programs.ghostty.settings.theme = "light:${themeName},dark:${themeName}";
+  };
 }

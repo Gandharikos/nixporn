@@ -12,7 +12,7 @@ let
   hasSpecific = builtins.pathExists (targetPath + "/${colorscheme}.nix");
   enable = cfg.enable && cfg.${target}.enable && !hasSpecific;
   inherit (cfg.palette) ansi;
-  themeName = "nixporn-${colorscheme}";
+  themeName = cfg.colorschemes.${colorscheme}.slug;
 
   kvconfig = pkgs.writeText "${themeName}.kvconfig" (
     lib.generators.toINI { } {
@@ -125,17 +125,15 @@ let
   '';
 in
 {
-  config = lib.mkIf enable (
-    lib.mkDefault {
-      xdg.configFile = {
-        "Kvantum/${themeName}".source = "${theme}/share/Kvantum/${themeName}";
-        "Kvantum/kvantum.kvconfig" = lib.mkIf cfg.${target}.apply {
-          text = ''
-            [General]
-            theme=${themeName}
-          '';
-        };
+  config = lib.mkIf enable {
+    xdg.configFile = {
+      "Kvantum/${themeName}".source = "${theme}/share/Kvantum/${themeName}";
+      "Kvantum/kvantum.kvconfig" = lib.mkIf cfg.${target}.apply {
+        text = ''
+          [General]
+          theme=${themeName}
+        '';
       };
-    }
-  );
+    };
+  };
 }

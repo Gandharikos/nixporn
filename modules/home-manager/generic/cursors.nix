@@ -33,15 +33,13 @@ let
   };
 in
 {
-  config = lib.mkIf enable (
-    lib.mkDefault {
-      home.pointerCursor = {
-        name = cursorName;
-        package = cursorPackage;
-      };
+  config = lib.mkIf enable {
+    home.pointerCursor = {
+      name = lib.mkDefault cursorName;
+      package = lib.mkDefault cursorPackage;
+    };
 
-      home.packages = [ hyprcursorPackage ];
-      home.sessionVariables.HYPRCURSOR_THEME = hyprcursorName;
-    }
-  );
+    home.packages = [ hyprcursorPackage ];
+    home.sessionVariables.HYPRCURSOR_THEME = lib.mkDefault hyprcursorName;
+  };
 }

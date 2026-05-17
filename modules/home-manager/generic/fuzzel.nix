@@ -11,17 +11,15 @@ let
   rgba = color: "${hex color}ff";
 in
 {
-  config = lib.mkIf enable (
-    lib.mkDefault {
-      programs.fuzzel.settings.colors = {
-        background = rgba ansi.bg;
-        text = rgba ansi.fg;
-        match = rgba ansi.blue;
-        selection = rgba ansi.black;
-        selection-text = rgba ansi.bright_white;
-        selection-match = rgba ansi.cyan;
-        border = rgba ansi.blue;
-      };
-    }
-  );
+  config = lib.mkIf enable {
+    programs.fuzzel.settings.colors = {
+      background = rgba ansi.bg;
+      text = rgba ansi.fg;
+      match = rgba ansi.blue;
+      selection = rgba ansi.black;
+      selection-text = rgba ansi.bright_white;
+      selection-match = rgba ansi.cyan;
+      border = rgba ansi.blue;
+    };
+  };
 }

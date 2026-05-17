@@ -11,18 +11,16 @@ let
   rgb = color: "rgb(${hex color})";
 in
 {
-  config = lib.mkIf enable (
-    lib.mkDefault {
-      programs.hyprlock.settings = {
-        background.color = rgb ansi.bg;
-        input-field = {
-          outer_color = rgb ansi.bright_black;
-          inner_color = rgb ansi.bg;
-          font_color = rgb ansi.fg;
-          fail_color = rgb ansi.red;
-          check_color = rgb ansi.yellow;
-        };
+  config = lib.mkIf enable {
+    programs.hyprlock.settings = {
+      background.color = rgb ansi.bg;
+      input-field = {
+        outer_color = rgb ansi.bright_black;
+        inner_color = rgb ansi.bg;
+        font_color = rgb ansi.fg;
+        fail_color = rgb ansi.red;
+        check_color = rgb ansi.yellow;
       };
-    }
-  );
+    };
+  };
 }

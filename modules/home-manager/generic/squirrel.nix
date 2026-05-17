@@ -32,28 +32,26 @@ let
   };
 in
 {
-  config = lib.mkIf enable (
-    lib.mkDefault {
-      home.file."${targetCfg.dir}/squirrel.custom.yaml".text = ''
-        patch:
-          style/color_scheme: ${colorschemeCfg.slug}
-          style/color_scheme_dark: ${colorschemeCfg.slug}
-          style/font_point: ${toString targetCfg.fontPoint}
-          preset_color_schemes/${colorschemeCfg.slug}:
-            name: "${colorschemeCfg.slug}"
-            author: "nixporn"
-            text_color: ${style.text_color}
-            back_color: ${style.back_color}
-            border_color: ${style.border_color}
-            label_color: ${style.label_color}
-            candidate_text_color: ${style.candidate_text_color}
-            comment_text_color: ${style.comment_text_color}
-            hilited_text_color: ${style.hilited_text_color}
-            hilited_back_color: ${style.hilited_back_color}
-            hilited_candidate_text_color: ${style.hilited_candidate_text_color}
-            hilited_candidate_back_color: ${style.hilited_candidate_back_color}
-            hilited_comment_text_color: ${style.hilited_comment_text_color}
-      '';
-    }
-  );
+  config = lib.mkIf enable {
+    home.file."${targetCfg.dir}/squirrel.custom.yaml".text = ''
+      patch:
+        style/color_scheme: ${colorschemeCfg.slug}
+        style/color_scheme_dark: ${colorschemeCfg.slug}
+        style/font_point: ${toString targetCfg.fontPoint}
+        preset_color_schemes/${colorschemeCfg.slug}:
+          name: "${colorschemeCfg.slug}"
+          author: "nixporn"
+          text_color: ${style.text_color}
+          back_color: ${style.back_color}
+          border_color: ${style.border_color}
+          label_color: ${style.label_color}
+          candidate_text_color: ${style.candidate_text_color}
+          comment_text_color: ${style.comment_text_color}
+          hilited_text_color: ${style.hilited_text_color}
+          hilited_back_color: ${style.hilited_back_color}
+          hilited_candidate_text_color: ${style.hilited_candidate_text_color}
+          hilited_candidate_back_color: ${style.hilited_candidate_back_color}
+          hilited_comment_text_color: ${style.hilited_comment_text_color}
+    '';
+  };
 }

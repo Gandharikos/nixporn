@@ -10,13 +10,11 @@ let
   hex = lib.removePrefix "#";
 in
 {
-  config = lib.mkIf enable (
-    lib.mkDefault {
-      programs.imv.settings.options = {
-        background = hex ansi.bg;
-        overlay_text_color = hex ansi.fg;
-        overlay_background_color = hex ansi.black;
-      };
-    }
-  );
+  config = lib.mkIf enable {
+    programs.imv.settings.options = {
+      background = hex ansi.bg;
+      overlay_text_color = hex ansi.fg;
+      overlay_background_color = hex ansi.black;
+    };
+  };
 }

@@ -12,7 +12,7 @@ let
   hasSpecific = builtins.pathExists (targetPath + "/${colorscheme}.nix");
   enable = cfg.enable && cfg.${target}.enable && !hasSpecific;
   inherit (cfg.palette) ansi;
-  themeName = "nixporn-${colorscheme}";
+  themeName = cfg.colorschemes.${colorscheme}.slug;
   themeFile = "${themeName}.tmTheme";
   theme = pkgs.writeTextDir themeFile ''
     <?xml version="1.0" encoding="UTF-8"?>
@@ -116,15 +116,13 @@ let
   '';
 in
 {
-  config = lib.mkIf enable (
-    lib.mkDefault {
-      programs.bat = {
-        config.theme = themeName;
-        themes.${themeName} = {
-          src = theme;
-          file = themeFile;
-        };
+  config = lib.mkIf enable {
+    programs.bat = {
+      config.theme = themeName;
+      themes.${themeName} = {
+        src = theme;
+        file = themeFile;
       };
-    }
-  );
+    };
+  };
 }

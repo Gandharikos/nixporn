@@ -9,14 +9,12 @@ let
   inherit (cfg.palette) ansi;
 in
 {
-  config = lib.mkIf enable (
-    lib.mkDefault {
-      services.mako.settings = {
-        background-color = ansi.bg;
-        text-color = ansi.fg;
-        border-color = ansi.blue;
-        progress-color = "over ${ansi.cyan}";
-      };
-    }
-  );
+  config = lib.mkIf enable {
+    services.mako.settings = {
+      background-color = ansi.bg;
+      text-color = ansi.fg;
+      border-color = ansi.blue;
+      progress-color = "over ${ansi.cyan}";
+    };
+  };
 }

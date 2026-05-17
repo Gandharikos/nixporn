@@ -12,7 +12,7 @@ let
   hasSpecific = builtins.pathExists (targetPath + "/${colorscheme}.nix");
   enable = cfg.enable && cfg.${target}.enable && !hasSpecific;
   inherit (cfg.palette) ansi;
-  themeName = "nixporn-${colorscheme}";
+  themeName = cfg.colorschemes.${colorscheme}.slug;
 
   chroma = {
     text.color = ansi.fg;
@@ -29,14 +29,14 @@ let
     operator.color = ansi.cyan;
     punctuation.color = ansi.bright_black;
     name.color = ansi.blue;
-    name_builtin.color = ansi.orange;
+    name_builtin.color = ansi.yellow;
     name_tag.color = ansi.magenta;
     name_attribute.color = ansi.yellow;
     name_class.color = ansi.yellow;
     name_constant.color = ansi.yellow;
     name_decorator.color = ansi.magenta;
     name_function.color = ansi.blue;
-    literal_number.color = ansi.orange;
+    literal_number.color = ansi.yellow;
     literal_string.color = ansi.green;
     literal_string_escape.color = ansi.magenta;
     generic_deleted.color = ansi.red;
@@ -80,7 +80,7 @@ let
     };
     h2 = {
       prefix = "## ";
-      color = ansi.orange;
+      color = ansi.yellow;
       bold = true;
     };
     h3 = {
@@ -155,9 +155,7 @@ let
   themeFile = pkgs.writeText "${themeName}.json" (builtins.toJSON theme);
 in
 {
-  config = lib.mkIf enable (
-    lib.mkDefault {
-      home.sessionVariables.GLAMOUR_STYLE = themeFile;
-    }
-  );
+  config = lib.mkIf enable {
+    home.sessionVariables.GLAMOUR_STYLE = themeFile;
+  };
 }
