@@ -31,10 +31,7 @@
           type,
           file,
         }:
-        { pkgs, ... }:
-        let
-          pkgs' = if pkgs ? nixporn then pkgs else pkgs.extend self.overlays.default;
-        in
+        { ... }:
         {
           _file = "${self.outPath}/flake.nix#${type}Modules.${name}";
 
@@ -44,8 +41,6 @@
               moduleType = type;
             })
           ];
-
-          _module.args.pkgs = pkgs';
         };
     in
     {
@@ -121,6 +116,7 @@
 
       nixosModules = {
         default = self.nixosModules.colorscheme;
+        nixporn = self.nixosModules.colorscheme;
         colorscheme = mkModule {
           type = "nixos";
           file = ./modules;
@@ -129,14 +125,22 @@
 
       homeModules = {
         default = self.homeModules.colorscheme;
+        nixporn = self.homeModules.colorscheme;
         colorscheme = mkModule {
           type = "home";
           file = ./modules;
         };
       };
 
+      homeManagerModules = {
+        default = self.homeModules.colorscheme;
+        nixporn = self.homeModules.colorscheme;
+        colorscheme = self.homeModules.colorscheme;
+      };
+
       darwinModules = {
         default = self.darwinModules.colorscheme;
+        nixporn = self.darwinModules.colorscheme;
         colorscheme = mkModule {
           type = "darwin";
           file = ./modules;

@@ -42,13 +42,13 @@ let
     wallpaper = mkOption {
       type = types.nullOr resourcePathType;
       default = null;
-      description = "The active wallpaper path.";
+      description = "The wallpaper path.";
     };
 
     avatar = mkOption {
       type = types.nullOr resourcePathType;
       default = null;
-      description = "The active avatar path.";
+      description = "The avatar path.";
     };
 
     palette = mkOption {

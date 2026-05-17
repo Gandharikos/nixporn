@@ -23,7 +23,6 @@ Upstream target sources are exposed through `overlays.default` as
 - `nixporn.avatar`
 - `nixporn.palette`
 - `nixporn.<target>.enable`
-- `nixporn.colorschemes.<colorscheme>.source`
 - `nixporn.colorschemes.<colorscheme>.targets.<target>`
 - `nixporn.colorschemes.<colorscheme>.slug`
 - `nixporn.colorschemes.<colorscheme>.palette`
@@ -40,10 +39,11 @@ directory, but Catppuccin options stay under `nixporn.colorschemes.catppuccin`.
 
 Each `nixporn.colorschemes.<colorscheme>` has its own options. For example,
 Catppuccin has `flavor` and `accent`, Tokyo Night has `style`, and most other
-colorschemes have `variant`. Each colorscheme also has a configurable `source`
-option that defaults to metadata from `sources/<colorscheme>.json`.
-`targets` is generated from upstream target metadata when that colorscheme
-provides it.
+colorschemes have `variant`. `targets` is generated from upstream target
+metadata when that colorscheme provides it.
+
+`nixporn.avatar` and `nixporn.wallpaper` are top-level resources. They are not
+colorscheme-specific options.
 
 ## Example
 
