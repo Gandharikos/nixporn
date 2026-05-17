@@ -11,13 +11,22 @@ let
   source = pkgs.nixporn.tokyonight;
   target = "gemini-cli";
   enable = cfg.enable && cfg.colorscheme == "tokyonight" && cfg.${target}.enable;
-  theme = lib.importJSON "${source}/extras/gemini_cli/${slug}.json";
+  rawTheme = lib.importJSON "${source}/extras/gemini_cli/${slug}.json";
+  theme =
+    rawTheme
+    // {
+      name = slug;
+      type = "custom";
+    }
+    // lib.optionalAttrs (rawTheme ? text && builtins.isAttrs rawTheme.text) {
+      text = builtins.removeAttrs rawTheme.text [ "response" ];
+    };
 in
 {
   config = lib.mkIf enable {
-    programs.gemini-cli.settings = {
-      theme = theme.name;
-      customThemes.${theme.name} = theme;
+    programs.gemini-cli.settings.ui = {
+      theme = slug;
+      customThemes.${slug} = theme;
     };
   };
 }
