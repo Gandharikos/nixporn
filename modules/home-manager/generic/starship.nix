@@ -3,7 +3,7 @@
 let
   cfg = config.nixporn;
   target = "starship";
-  colorscheme = cfg.colorscheme;
+  inherit (cfg) colorscheme;
   hasSpecific = builtins.pathExists (targetPath + "/${colorscheme}.nix");
   enable = cfg.enable && cfg.${target}.enable && !hasSpecific;
   inherit (cfg.palette) ansi;
@@ -13,14 +13,16 @@ in
     programs.starship.settings = {
       palette = "nixporn";
       palettes.nixporn = {
-        black = ansi.black;
-        red = ansi.red;
-        green = ansi.green;
-        yellow = ansi.yellow;
-        blue = ansi.blue;
+        inherit (ansi)
+          black
+          red
+          green
+          yellow
+          blue
+          cyan
+          white
+          ;
         purple = ansi.magenta;
-        cyan = ansi.cyan;
-        white = ansi.white;
         bright-black = ansi.bright_black;
         bright-red = ansi.bright_red;
         bright-green = ansi.bright_green;

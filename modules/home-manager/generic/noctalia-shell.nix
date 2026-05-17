@@ -4,7 +4,7 @@ let
   cfg = config.nixporn;
   inherit (cfg) avatar wallpaper;
   target = "noctalia-shell";
-  colorscheme = cfg.colorscheme;
+  inherit (cfg) colorscheme;
   colorschemeCfg = cfg.colorschemes.${colorscheme};
   hasSpecific = builtins.pathExists (targetPath + "/${colorscheme}.nix");
   enable =

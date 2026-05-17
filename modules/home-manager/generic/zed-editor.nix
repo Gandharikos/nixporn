@@ -3,7 +3,7 @@
 let
   cfg = config.nixporn;
   target = "zed-editor";
-  colorscheme = cfg.colorscheme;
+  inherit (cfg) colorscheme;
   colorschemeCfg = cfg.colorschemes.${colorscheme};
   hasSpecific = builtins.pathExists (targetPath + "/${colorscheme}.nix");
   enable = cfg.enable && cfg.${target}.enable && !hasSpecific && config.programs.zed-editor.enable;

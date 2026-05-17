@@ -14,10 +14,10 @@ in
   config = lib.mkIf enable {
     programs.fzf.colors = {
       "bg+" = palette.selection;
-      bg = palette.bg;
+      inherit (palette) bg;
       spinner = palette.purple;
       hl = palette.pink;
-      fg = palette.fg;
+      inherit (palette) fg;
       header = palette.pink;
       info = palette.comment;
       pointer = palette.purple;

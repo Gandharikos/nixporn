@@ -8,7 +8,7 @@
 let
   cfg = config.nixporn;
   target = "qt5ct";
-  colorscheme = cfg.colorscheme;
+  inherit (cfg) colorscheme;
   hasSpecific = builtins.pathExists (targetPath + "/${colorscheme}.nix");
   enable = cfg.enable && cfg.${target}.enable && !hasSpecific;
   colorschemeCfg = cfg.colorschemes.${colorscheme};

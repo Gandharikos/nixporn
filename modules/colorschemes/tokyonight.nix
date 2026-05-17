@@ -59,10 +59,12 @@ in
   slugFor = _: variant: "tokyonight_${variant}";
 
   ansiFor = _: palette: {
-    bg = palette.bg;
-    fg = palette.fg;
+    inherit (palette)
+      bg
+      fg
+      black
+      ;
 
-    black = palette.black;
     red = palette.terminal_red;
     green = palette.terminal_green;
     yellow = palette.terminal_yellow;

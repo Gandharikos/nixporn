@@ -7,7 +7,7 @@
 let
   cfg = config.nixporn;
   target = "squirrel";
-  colorscheme = cfg.colorscheme;
+  inherit (cfg) colorscheme;
   colorschemeCfg = cfg.colorschemes.${colorscheme};
   targetCfg = cfg.${target};
   hasSpecific = builtins.pathExists (targetPath + "/${colorscheme}.nix");

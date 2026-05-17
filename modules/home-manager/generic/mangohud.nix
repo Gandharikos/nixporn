@@ -3,7 +3,7 @@
 let
   cfg = config.nixporn;
   target = "mangohud";
-  colorscheme = cfg.colorscheme;
+  inherit (cfg) colorscheme;
   hasSpecific = builtins.pathExists (targetPath + "/${colorscheme}.nix");
   enable = cfg.enable && cfg.${target}.enable && !hasSpecific;
   inherit (cfg.palette) ansi;

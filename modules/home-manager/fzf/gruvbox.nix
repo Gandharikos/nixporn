@@ -12,9 +12,8 @@ in
 {
   config = lib.mkIf enable {
     programs.fzf.colors = {
-      bg = ansi.bg;
+      inherit (ansi) bg fg;
       "bg+" = ansi.black;
-      fg = ansi.fg;
       "fg+" = ansi.bright_white;
       header = ansi.yellow;
       hl = ansi.red;

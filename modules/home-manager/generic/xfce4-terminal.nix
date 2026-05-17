@@ -3,7 +3,7 @@
 let
   cfg = config.nixporn;
   target = "xfce4-terminal";
-  colorscheme = cfg.colorscheme;
+  inherit (cfg) colorscheme;
   hasSpecific = builtins.pathExists (targetPath + "/${colorscheme}.nix");
   programEnabled = config.programs."xfce4-terminal".enable or false;
   enable = cfg.enable && cfg.${target}.enable && programEnabled && !hasSpecific;

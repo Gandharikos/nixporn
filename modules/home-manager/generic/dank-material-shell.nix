@@ -9,7 +9,7 @@ let
   cfg = config.nixporn;
   inherit (cfg) avatar wallpaper;
   target = "dank-material-shell";
-  colorscheme = cfg.colorscheme;
+  inherit (cfg) colorscheme;
   colorschemeCfg = cfg.colorschemes.${colorscheme};
   hasSpecific = builtins.pathExists (targetPath + "/${colorscheme}.nix");
   enable =

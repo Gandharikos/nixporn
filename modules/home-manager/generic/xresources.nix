@@ -8,7 +8,7 @@
 let
   cfg = config.nixporn;
   target = "xresources";
-  colorscheme = cfg.colorscheme;
+  inherit (cfg) colorscheme;
   hasSpecific = builtins.pathExists (targetPath + "/${colorscheme}.nix");
   enable = cfg.enable && cfg.${target}.enable && !hasSpecific && pkgs.stdenv.hostPlatform.isLinux;
   inherit (cfg.palette) ansi;

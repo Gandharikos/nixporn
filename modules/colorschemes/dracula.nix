@@ -20,10 +20,9 @@ in
   slugFor = _: _: name;
 
   ansiFor = _: palette: {
-    bg = palette.bg;
-    fg = palette.fg;
-
     inherit (palette)
+      bg
+      fg
       black
       bright_blue
       bright_cyan

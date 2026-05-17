@@ -8,7 +8,7 @@
 let
   cfg = config.nixporn;
   target = "spicetify";
-  colorscheme = cfg.colorscheme;
+  inherit (cfg) colorscheme;
   colorschemeCfg = cfg.colorschemes.${colorscheme};
   hasSpecific = builtins.pathExists (targetPath + "/${colorscheme}.nix");
   enable =

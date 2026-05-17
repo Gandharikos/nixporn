@@ -8,7 +8,7 @@
 let
   cfg = config.nixporn;
   target = "niri";
-  colorscheme = cfg.colorscheme;
+  inherit (cfg) colorscheme;
   hasSpecific = builtins.pathExists (targetPath + "/${colorscheme}.nix");
   enable =
     cfg.enable

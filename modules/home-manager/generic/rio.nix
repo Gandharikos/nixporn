@@ -3,7 +3,7 @@
 let
   cfg = config.nixporn;
   target = "rio";
-  colorscheme = cfg.colorscheme;
+  inherit (cfg) colorscheme;
   hasSpecific = builtins.pathExists (targetPath + "/${colorscheme}.nix");
   enable = cfg.enable && cfg.${target}.enable && !hasSpecific;
   inherit (cfg.palette) ansi;
@@ -13,14 +13,16 @@ in
     programs.rio.settings.colors = {
       background = ansi.bg;
       foreground = ansi.fg;
-      black = ansi.black;
-      red = ansi.red;
-      green = ansi.green;
-      yellow = ansi.yellow;
-      blue = ansi.blue;
-      magenta = ansi.magenta;
-      cyan = ansi.cyan;
-      white = ansi.white;
+      inherit (ansi)
+        black
+        red
+        green
+        yellow
+        blue
+        magenta
+        cyan
+        white
+        ;
       light-black = ansi.bright_black;
       light-red = ansi.bright_red;
       light-green = ansi.bright_green;

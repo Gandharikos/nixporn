@@ -89,10 +89,12 @@
         cyan = palette.neutral_aqua;
         white = palette.light1;
         bright_black = palette.gray_245;
-        bright_red = palette.bright_red;
-        bright_green = palette.bright_green;
-        bright_yellow = palette.bright_yellow;
-        bright_blue = palette.bright_blue;
+        inherit (palette)
+          bright_red
+          bright_green
+          bright_yellow
+          bright_blue
+          ;
         bright_magenta = palette.bright_purple;
         bright_cyan = palette.bright_aqua;
         bright_white = palette.light0;

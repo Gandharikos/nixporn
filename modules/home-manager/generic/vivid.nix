@@ -3,7 +3,7 @@
 let
   cfg = config.nixporn;
   target = "vivid";
-  colorscheme = cfg.colorscheme;
+  inherit (cfg) colorscheme;
   hasSpecific = builtins.pathExists (targetPath + "/${colorscheme}.nix");
   enable = cfg.enable && cfg.${target}.enable && !hasSpecific;
   inherit (cfg.palette) ansi;
@@ -15,24 +15,26 @@ in
       activeTheme = themeName;
       themes.${themeName} = {
         colors = {
-          bg = ansi.bg;
-          black = ansi.black;
-          red = ansi.red;
-          green = ansi.green;
-          yellow = ansi.yellow;
-          blue = ansi.blue;
-          magenta = ansi.magenta;
-          cyan = ansi.cyan;
-          white = ansi.white;
-          bright_black = ansi.bright_black;
-          bright_red = ansi.bright_red;
-          bright_green = ansi.bright_green;
-          bright_yellow = ansi.bright_yellow;
-          bright_blue = ansi.bright_blue;
-          bright_magenta = ansi.bright_magenta;
-          bright_cyan = ansi.bright_cyan;
-          bright_white = ansi.bright_white;
-          fg = ansi.fg;
+          inherit (ansi)
+            bg
+            black
+            red
+            green
+            yellow
+            blue
+            magenta
+            cyan
+            white
+            bright_black
+            bright_red
+            bright_green
+            bright_yellow
+            bright_blue
+            bright_magenta
+            bright_cyan
+            bright_white
+            fg
+            ;
         };
         core = {
           normal_text.foreground = "fg";
