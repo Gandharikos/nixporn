@@ -12,28 +12,33 @@ let
 in
 {
   config = lib.mkIf enable {
-    programs.fzf.defaultOptions = [
-      "--highlight-line"
-      "--info=inline-right"
-      "--ansi"
-      "--layout=reverse"
-      "--border=none"
-      "--color=bg+:${palette.bg_highlight}"
-      "--color=bg:${palette.bg}"
-      "--color=border:${palette.base02}"
-      "--color=fg:${palette.base0}"
-      "--color=gutter:${palette.bg}"
-      "--color=header:${palette.orange}"
-      "--color=hl+:${palette.orange}"
-      "--color=hl:${palette.orange}"
-      "--color=info:${palette.base00}"
-      "--color=marker:${palette.orange}"
-      "--color=pointer:${palette.orange}"
-      "--color=prompt:${palette.orange}"
-      "--color=query:${palette.base0}:regular"
-      "--color=scrollbar:${palette.base02}"
-      "--color=separator:${palette.base02}"
-      "--color=spinner:${palette.orange}"
-    ];
+    programs.fzf = {
+      defaultOptions = [
+        "--highlight-line"
+        "--info=inline-right"
+        "--ansi"
+        "--layout=reverse"
+        "--border=none"
+      ];
+
+      colors = {
+        "bg+" = palette.bg_highlight;
+        inherit (palette) bg;
+        border = palette.base02;
+        fg = palette.base0;
+        gutter = palette.bg;
+        header = palette.orange;
+        "hl+" = palette.orange;
+        hl = palette.orange;
+        info = palette.base00;
+        marker = palette.orange;
+        pointer = palette.orange;
+        prompt = palette.orange;
+        query = "${palette.base0}:regular";
+        scrollbar = palette.base02;
+        separator = palette.base02;
+        spinner = palette.orange;
+      };
+    };
   };
 }
