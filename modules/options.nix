@@ -8,19 +8,33 @@ let
     genAttrs
     mkEnableOption
     mkOption
+    optionalAttrs
     types
     ;
 
   resourcePathType = types.coercedTo types.package toString types.path;
+  targetsWithoutGlobalEnable = [
+    "qt5ct"
+  ];
 
-  targetOptions = genAttrs colorschemes.targetNames (name: {
-    enable = mkOption {
-      type = types.bool;
-      default = cfg.enable;
-      defaultText = "config.nixporn.enable";
-      description = "Whether to enable the ${name} colorscheme target.";
-    };
-  });
+  targetOptions = genAttrs colorschemes.targetNames (
+    name:
+    let
+      useGlobalEnable = !(builtins.elem name targetsWithoutGlobalEnable);
+    in
+    {
+      enable = mkOption (
+        {
+          type = types.bool;
+          default = if useGlobalEnable then cfg.enable else false;
+          description = "Whether to enable the ${name} colorscheme target.";
+        }
+        // optionalAttrs useGlobalEnable {
+          defaultText = "config.nixporn.enable";
+        }
+      );
+    }
+  );
 
   baseOptions = {
     enable = mkEnableOption "nixporn colorscheme integration";
