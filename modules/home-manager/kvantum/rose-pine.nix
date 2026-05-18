@@ -10,7 +10,7 @@ let
   inherit (rose-pine) slug;
   sources = pkgs.nixporn.rose-pine;
   target = "kvantum";
-  enable = cfg.enable && cfg.colorscheme == "rose-pine" && cfg.${target}.enable;
+  enable = cfg.enable && cfg.colorscheme == "rose-pine" && cfg.${target}.enable && config.qt.enable;
   themeName = "${slug}-rose";
   theme = pkgs.runCommandLocal "rose-pine-kvantum-${themeName}" { } ''
     mkdir -p $out

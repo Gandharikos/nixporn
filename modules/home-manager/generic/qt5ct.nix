@@ -10,7 +10,7 @@ let
   target = "qt5ct";
   inherit (cfg) colorscheme;
   hasSpecific = builtins.pathExists (targetPath + "/${colorscheme}.nix");
-  enable = cfg.enable && cfg.${target}.enable && !hasSpecific;
+  enable = cfg.enable && cfg.${target}.enable && !hasSpecific && config.qt.enable;
   colorschemeCfg = cfg.colorschemes.${colorscheme};
   inherit (cfg.palette) ansi;
 

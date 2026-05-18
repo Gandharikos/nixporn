@@ -30,7 +30,7 @@ in
     };
   };
 
-  config = lib.mkIf (cfg.enable && cfg.kvantum.enable) {
+  config = lib.mkIf (cfg.enable && cfg.kvantum.enable && config.qt.enable) {
     assertions = lib.mkIf cfg.kvantum.assertStyle [
       {
         assertion = lib.elem (config.qt.style.name or null) [

@@ -10,7 +10,7 @@ let
   target = "kvantum";
   inherit (cfg) colorscheme;
   hasSpecific = builtins.pathExists (targetPath + "/${colorscheme}.nix");
-  enable = cfg.enable && cfg.${target}.enable && !hasSpecific;
+  enable = cfg.enable && cfg.${target}.enable && !hasSpecific && config.qt.enable;
   inherit (cfg.palette) ansi;
   themeName = cfg.colorschemes.${colorscheme}.slug;
 

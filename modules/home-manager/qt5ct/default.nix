@@ -18,7 +18,7 @@ in
     '';
   };
 
-  config = lib.mkIf (cfg.enable && cfg.qt5ct.enable) {
+  config = lib.mkIf (cfg.enable && cfg.qt5ct.enable && config.qt.enable) {
     assertions = lib.mkIf cfg.qt5ct.assertPlatformTheme [
       {
         assertion = (config.qt.platformTheme.name or null) == "qtct";

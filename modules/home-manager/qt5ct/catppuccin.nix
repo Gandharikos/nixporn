@@ -10,7 +10,7 @@ let
   inherit (catppuccin) accent flavor;
   sources = pkgs.nixporn.catppuccin;
   target = "qt5ct";
-  enable = cfg.enable && cfg.colorscheme == "catppuccin" && cfg.${target}.enable;
+  enable = cfg.enable && cfg.colorscheme == "catppuccin" && cfg.${target}.enable && config.qt.enable;
 in
 {
   config = lib.mkIf enable {
