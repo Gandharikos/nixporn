@@ -1,6 +1,7 @@
 {
   config,
   lib,
+  options,
   pkgs,
   ...
 }:
@@ -9,6 +10,7 @@ let
   inherit (cfg) palette;
   inherit (cfg.colorschemes) catppuccin;
   target = "niri";
+  hasProgram = options.programs ? niri;
   enable =
     cfg.enable
     && cfg.colorscheme == "catppuccin"
@@ -18,19 +20,21 @@ let
   accent = palette.${catppuccin.accent};
 in
 {
-  config = lib.mkIf enable {
-    programs.niri.settings.layout = {
-      background-color = palette.base;
-      border = {
-        active.color = accent;
-        inactive.color = palette.surface0;
-        urgent.color = palette.red;
+  config = lib.optionalAttrs hasProgram (
+    lib.mkIf enable {
+      programs.niri.settings.layout = {
+        background-color = palette.base;
+        border = {
+          active.color = accent;
+          inactive.color = palette.surface0;
+          urgent.color = palette.red;
+        };
+        focus-ring = {
+          active.color = accent;
+          inactive.color = palette.surface0;
+          urgent.color = palette.red;
+        };
       };
-      focus-ring = {
-        active.color = accent;
-        inactive.color = palette.surface0;
-        urgent.color = palette.red;
-      };
-    };
-  };
+    }
+  );
 }
