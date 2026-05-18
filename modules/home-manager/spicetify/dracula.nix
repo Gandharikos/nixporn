@@ -9,11 +9,7 @@ let
   cfg = config.nixporn;
   target = "spicetify";
   hasProgram = options.programs ? spicetify;
-  enable =
-    cfg.enable
-    && cfg.colorscheme == "dracula"
-    && cfg.${target}.enable
-    && (config.programs.spicetify.enable or false);
+  enable = cfg.enable && cfg.colorscheme == "dracula" && cfg.${target}.enable;
 
   source = pkgs.fetchFromGitHub {
     owner = "dracula";

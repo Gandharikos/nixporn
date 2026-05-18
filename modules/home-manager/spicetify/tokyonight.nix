@@ -11,11 +11,7 @@ let
   inherit (tokyonight) style;
   target = "spicetify";
   hasProgram = options.programs ? spicetify;
-  enable =
-    cfg.enable
-    && cfg.colorscheme == "tokyonight"
-    && cfg.${target}.enable
-    && (config.programs.spicetify.enable or false);
+  enable = cfg.enable && cfg.colorscheme == "tokyonight" && cfg.${target}.enable;
 
   theme = pkgs.fetchFromGitHub {
     owner = "evening-hs";

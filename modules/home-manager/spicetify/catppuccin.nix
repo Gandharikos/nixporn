@@ -11,11 +11,7 @@ let
   inherit (catppuccin) flavor;
   target = "spicetify";
   hasProgram = options.programs ? spicetify;
-  enable =
-    cfg.enable
-    && cfg.colorscheme == "catppuccin"
-    && cfg.${target}.enable
-    && (config.programs.spicetify.enable or false);
+  enable = cfg.enable && cfg.colorscheme == "catppuccin" && cfg.${target}.enable;
 
   source = pkgs.fetchFromGitHub {
     owner = "catppuccin";
