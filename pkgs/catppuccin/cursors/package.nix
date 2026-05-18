@@ -1,4 +1,5 @@
 {
+  catppuccin-whiskers,
   hyprcursor,
   inkscape,
   just,
@@ -23,6 +24,7 @@ stdenvNoCC.mkDerivation {
     hyprcursor
     inkscape
     just
+    catppuccin-whiskers
     (python3.withPackages (pythonPkgs: [ pythonPkgs.pyside6 ]))
     xcur2png
     xcursorgen
@@ -35,7 +37,8 @@ stdenvNoCC.mkDerivation {
 
   buildPhase = ''
     runHook preBuild
-    just all
+    just clean
+    just build ${flavor} ${accent}
     runHook postBuild
   '';
 
