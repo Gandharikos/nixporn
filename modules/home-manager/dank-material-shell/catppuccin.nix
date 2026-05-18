@@ -1,6 +1,7 @@
 {
   config,
   lib,
+  options,
   pkgs,
   ...
 }:
@@ -13,6 +14,7 @@ let
     ;
   inherit (cfg.colorschemes.catppuccin) accent slug;
   target = "dank-material-shell";
+  hasProgram = options.programs ? dank-material-shell;
   enable =
     cfg.enable
     && cfg.colorscheme == "catppuccin"
@@ -40,25 +42,27 @@ let
   };
 in
 {
-  config = lib.mkIf enable {
-    programs.dank-material-shell.settings = {
-      currentThemeName = "custom";
-      customThemeFile = pkgs.writeText "dank-material-shell-${slug}-theme.json" (
-        builtins.toJSON {
-          dark = theme;
-          light = theme;
-        }
-      );
-    };
+  config = lib.optionalAttrs hasProgram (
+    lib.mkIf enable {
+      programs.dank-material-shell.settings = {
+        currentThemeName = "custom";
+        customThemeFile = pkgs.writeText "dank-material-shell-${slug}-theme.json" (
+          builtins.toJSON {
+            dark = theme;
+            light = theme;
+          }
+        );
+      };
 
-    programs.dank-material-shell.session = lib.optionalAttrs (wallpaper != null) {
-      wallpaperPath = toString wallpaper;
-      wallpaperPathLight = toString wallpaper;
-      wallpaperPathDark = toString wallpaper;
-    };
+      programs.dank-material-shell.session = lib.optionalAttrs (wallpaper != null) {
+        wallpaperPath = toString wallpaper;
+        wallpaperPathLight = toString wallpaper;
+        wallpaperPathDark = toString wallpaper;
+      };
 
-    home.file = lib.optionalAttrs (avatar != null) {
-      ".face".source = avatar;
-    };
-  };
+      home.file = lib.optionalAttrs (avatar != null) {
+        ".face".source = avatar;
+      };
+    }
+  );
 }

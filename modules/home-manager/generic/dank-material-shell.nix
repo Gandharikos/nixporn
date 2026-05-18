@@ -2,6 +2,7 @@
 {
   config,
   lib,
+  options,
   pkgs,
   ...
 }:
@@ -9,6 +10,7 @@ let
   cfg = config.nixporn;
   inherit (cfg) avatar wallpaper;
   target = "dank-material-shell";
+  hasProgram = options.programs ? dank-material-shell;
   inherit (cfg) colorscheme;
   colorschemeCfg = cfg.colorschemes.${colorscheme};
   hasSpecific = builtins.pathExists (targetPath + "/${colorscheme}.nix");
@@ -42,25 +44,27 @@ let
   };
 in
 {
-  config = lib.mkIf enable {
-    programs.dank-material-shell.settings = {
-      currentThemeName = "custom";
-      customThemeFile = pkgs.writeText "dank-material-shell-${themeName}-theme.json" (
-        builtins.toJSON {
-          dark = theme;
-          light = theme;
-        }
-      );
-    };
+  config = lib.optionalAttrs hasProgram (
+    lib.mkIf enable {
+      programs.dank-material-shell.settings = {
+        currentThemeName = "custom";
+        customThemeFile = pkgs.writeText "dank-material-shell-${themeName}-theme.json" (
+          builtins.toJSON {
+            dark = theme;
+            light = theme;
+          }
+        );
+      };
 
-    programs.dank-material-shell.session = lib.optionalAttrs (wallpaper != null) {
-      wallpaperPath = toString wallpaper;
-      wallpaperPathLight = toString wallpaper;
-      wallpaperPathDark = toString wallpaper;
-    };
+      programs.dank-material-shell.session = lib.optionalAttrs (wallpaper != null) {
+        wallpaperPath = toString wallpaper;
+        wallpaperPathLight = toString wallpaper;
+        wallpaperPathDark = toString wallpaper;
+      };
 
-    home.file = lib.optionalAttrs (avatar != null) {
-      ".face".source = avatar;
-    };
-  };
+      home.file = lib.optionalAttrs (avatar != null) {
+        ".face".source = avatar;
+      };
+    }
+  );
 }

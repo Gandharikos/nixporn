@@ -1,6 +1,7 @@
 {
   config,
   lib,
+  options,
   pkgs,
   ...
 }:
@@ -11,6 +12,7 @@ let
     ;
   inherit (cfg.colorschemes.tokyonight) slug;
   target = "dank-material-shell";
+  hasProgram = options.programs ? dank-material-shell;
   enable =
     cfg.enable
     && cfg.colorscheme == "tokyonight"
@@ -38,15 +40,17 @@ let
   };
 in
 {
-  config = lib.mkIf enable {
-    programs.dank-material-shell.settings = {
-      currentThemeName = "custom";
-      customThemeFile = pkgs.writeText "dank-material-shell-${slug}-theme.json" (
-        builtins.toJSON {
-          dark = theme;
-          light = theme;
-        }
-      );
-    };
-  };
+  config = lib.optionalAttrs hasProgram (
+    lib.mkIf enable {
+      programs.dank-material-shell.settings = {
+        currentThemeName = "custom";
+        customThemeFile = pkgs.writeText "dank-material-shell-${slug}-theme.json" (
+          builtins.toJSON {
+            dark = theme;
+            light = theme;
+          }
+        );
+      };
+    }
+  );
 }
