@@ -1,6 +1,7 @@
 {
   config,
   lib,
+  options,
   pkgs,
   ...
 }:
@@ -9,6 +10,7 @@ let
   inherit (cfg.colorschemes) catppuccin;
   inherit (catppuccin) flavor;
   target = "spicetify";
+  hasProgram = options.programs ? spicetify;
   enable =
     cfg.enable
     && cfg.colorscheme == "catppuccin"
@@ -23,14 +25,16 @@ let
   };
 in
 {
-  config = lib.mkIf enable {
-    programs.spicetify = {
-      theme = {
-        name = "catppuccin";
-        src = "${source}/catppuccin";
-        overwriteAssets = true;
+  config = lib.optionalAttrs hasProgram (
+    lib.mkIf enable {
+      programs.spicetify = {
+        theme = {
+          name = "catppuccin";
+          src = "${source}/catppuccin";
+          overwriteAssets = true;
+        };
+        colorScheme = flavor;
       };
-      colorScheme = flavor;
-    };
-  };
+    }
+  );
 }

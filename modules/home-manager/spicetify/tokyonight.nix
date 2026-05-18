@@ -1,6 +1,7 @@
 {
   config,
   lib,
+  options,
   pkgs,
   ...
 }:
@@ -9,7 +10,12 @@ let
   inherit (cfg.colorschemes) tokyonight;
   inherit (tokyonight) style;
   target = "spicetify";
-  enable = cfg.enable && cfg.colorscheme == "tokyonight" && cfg.${target}.enable;
+  hasProgram = options.programs ? spicetify;
+  enable =
+    cfg.enable
+    && cfg.colorscheme == "tokyonight"
+    && cfg.${target}.enable
+    && (config.programs.spicetify.enable or false);
 
   theme = pkgs.fetchFromGitHub {
     owner = "evening-hs";
@@ -29,14 +35,16 @@ let
       "Night";
 in
 {
-  config = lib.mkIf enable {
-    programs.spicetify = {
-      theme = {
-        name = "Tokyo";
-        src = theme;
-        overwriteAssets = true;
+  config = lib.optionalAttrs hasProgram (
+    lib.mkIf enable {
+      programs.spicetify = {
+        theme = {
+          name = "Tokyo";
+          src = theme;
+          overwriteAssets = true;
+        };
+        inherit colorScheme;
       };
-      inherit colorScheme;
-    };
-  };
+    }
+  );
 }

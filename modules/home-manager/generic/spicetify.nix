@@ -2,12 +2,14 @@
 {
   config,
   lib,
+  options,
   pkgs,
   ...
 }:
 let
   cfg = config.nixporn;
   target = "spicetify";
+  hasProgram = options.programs ? spicetify;
   inherit (cfg) colorscheme;
   colorschemeCfg = cfg.colorschemes.${colorscheme};
   hasSpecific = builtins.pathExists (targetPath + "/${colorscheme}.nix");
@@ -43,13 +45,15 @@ let
   };
 in
 {
-  config = lib.mkIf enable {
-    programs.spicetify = {
-      theme = {
-        name = themeName;
-        src = theme;
+  config = lib.optionalAttrs hasProgram (
+    lib.mkIf enable {
+      programs.spicetify = {
+        theme = {
+          name = themeName;
+          src = theme;
+        };
+        colorScheme = "nixporn";
       };
-      colorScheme = "nixporn";
-    };
-  };
+    }
+  );
 }
