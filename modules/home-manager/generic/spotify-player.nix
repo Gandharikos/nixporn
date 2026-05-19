@@ -17,7 +17,6 @@ in
         {
           name = themeName;
           palette = {
-            background = ansi.bg;
             foreground = ansi.fg;
             inherit (ansi)
               black
@@ -37,6 +36,9 @@ in
               bright_cyan
               bright_white
               ;
+          }
+          // lib.optionalAttrs (!cfg.transparent) {
+            background = ansi.bg;
           };
         }
       ];
