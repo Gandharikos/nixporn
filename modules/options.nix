@@ -2,6 +2,7 @@
   cfg,
   colorschemes,
   lib,
+  pkgs,
 }:
 let
   inherit (lib)
@@ -16,21 +17,30 @@ let
   targetsWithoutGlobalEnable = [
     "qt5ct"
   ];
+  targetsOnlyOnLinux = [
+    "cursors"
+  ];
 
   targetOptions = genAttrs colorschemes.targetNames (
     name:
     let
       useGlobalEnable = !(builtins.elem name targetsWithoutGlobalEnable);
+      onlyOnLinux = builtins.elem name targetsOnlyOnLinux;
     in
     {
       enable = mkOption (
         {
           type = types.bool;
-          default = if useGlobalEnable then cfg.enable else false;
+          default =
+            if useGlobalEnable then cfg.enable && (!onlyOnLinux || pkgs.stdenv.hostPlatform.isLinux) else false;
           description = "Whether to enable the ${name} colorscheme target.";
         }
         // optionalAttrs useGlobalEnable {
-          defaultText = "config.nixporn.enable";
+          defaultText =
+            if onlyOnLinux then
+              "config.nixporn.enable && pkgs.stdenv.hostPlatform.isLinux"
+            else
+              "config.nixporn.enable";
         }
       );
     }

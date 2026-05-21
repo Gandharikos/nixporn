@@ -5,6 +5,7 @@
 {
   config,
   lib,
+  pkgs,
   ...
 }:
 let
@@ -44,6 +45,7 @@ in
     inherit
       cfg
       colorschemes
+      pkgs
       ;
     lib = lib';
   };
