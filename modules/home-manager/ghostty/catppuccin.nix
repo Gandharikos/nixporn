@@ -15,7 +15,7 @@ let
 in
 {
   config = lib.mkIf enable {
-    xdg.configFile."ghostty/themes/${themeName}".source = "${sources.ghostty}/${themeName}.conf";
+    xdg.configFile."ghostty/themes/${themeName}".source = "${sources.ghostty}/themes/${themeName}.conf";
     programs.ghostty.settings.theme = "light:${themeName},dark:${themeName}";
   };
 }
