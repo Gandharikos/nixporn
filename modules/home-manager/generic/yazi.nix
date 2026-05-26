@@ -92,7 +92,7 @@ in
           bold = true;
         }
         {
-          mime = "*";
+          url = "*";
           fg = ansi.fg;
         }
       ];
