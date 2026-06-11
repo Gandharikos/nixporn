@@ -32,6 +32,36 @@ let
     mOnSurfaceVariant = ansi.white;
     mOutline = ansi.bright_black;
     mShadow = ansi.black;
+    terminal = {
+      normal = {
+        inherit (ansi)
+          black
+          red
+          green
+          yellow
+          blue
+          magenta
+          cyan
+          white
+          ;
+      };
+      bright = {
+        black = ansi.bright_black;
+        red = ansi.bright_red;
+        green = ansi.bright_green;
+        yellow = ansi.bright_yellow;
+        blue = ansi.bright_blue;
+        magenta = ansi.bright_magenta;
+        cyan = ansi.bright_cyan;
+        white = ansi.bright_white;
+      };
+      foreground = ansi.fg;
+      background = ansi.bg;
+      cursor = ansi.fg;
+      cursorText = ansi.bg;
+      selectionFg = ansi.fg;
+      selectionBg = ansi.bright_black;
+    };
   };
 in
 {
