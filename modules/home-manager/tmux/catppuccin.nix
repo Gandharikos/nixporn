@@ -11,12 +11,17 @@ let
   sources = pkgs.nixporn.catppuccin;
   target = "tmux";
   enable = cfg.enable && cfg.colorscheme == "catppuccin" && cfg.${target}.enable;
+  plugin = pkgs.tmuxPlugins.mkTmuxPlugin {
+    pluginName = "catppuccin";
+    version = "unstable";
+    src = sources.tmux;
+  };
 in
 {
   config = lib.mkIf enable {
     programs.tmux.plugins = [
       {
-        plugin = sources.tmux;
+        inherit plugin;
         extraConfig = ''
           set -g @catppuccin_flavor "${flavor}"
           ${cfg.${target}.extraConfig}

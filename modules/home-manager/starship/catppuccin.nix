@@ -11,11 +11,15 @@ let
   sources = pkgs.nixporn.catppuccin;
   target = "starship";
   enable = cfg.enable && cfg.colorscheme == "catppuccin" && cfg.${target}.enable;
+  themeFile =
+    if builtins.pathExists "${sources.starship}/themes/${flavor}.toml" then
+      "${sources.starship}/themes/${flavor}.toml"
+    else
+      "${sources.starship}/${flavor}.toml";
 in
 {
   config = lib.mkIf enable {
-    programs.starship.settings = (lib.importTOML "${sources.starship}/${flavor}.toml") // {
-      format = lib.mkDefault "$all";
+    programs.starship.settings = (lib.importTOML themeFile) // {
       palette = "catppuccin_${flavor}";
     };
   };
