@@ -7,12 +7,20 @@
 let
   cfg = config.nixporn;
   inherit (cfg.colorschemes) catppuccin;
-  inherit (catppuccin) accent flavor;
+  inherit (catppuccin) accent flavor palette;
   sources = pkgs.nixporn.catppuccin;
   target = "yazi";
   slug = "catppuccin-${flavor}-${accent}";
   flavorName = lib.nixporn.yaziFlavorName slug;
-  flavorToml = lib.nixporn.mkYaziFlavor pkgs slug "${sources.yazi}/themes/${flavor}/${slug}.toml";
+  flavorTomlBase = lib.nixporn.mkYaziFlavor pkgs slug "${sources.yazi}/themes/${flavor}/${slug}.toml";
+  flavorToml =
+    if cfg.transparent then
+      pkgs.runCommand "yazi-${flavorName}-transparent-flavor.toml" { } ''
+        substitute ${flavorTomlBase} $out \
+          --replace 'overall = { bg = "${palette.base}" }' 'overall = { bg = "reset" }'
+      ''
+    else
+      flavorTomlBase;
   enable = cfg.enable && cfg.colorscheme == "catppuccin" && cfg.${target}.enable;
 in
 {

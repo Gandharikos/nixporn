@@ -1,36 +1,40 @@
 {
   config,
   lib,
-  pkgs,
   ...
 }:
 let
   cfg = config.nixporn;
   inherit (cfg.colorschemes) catppuccin;
-  inherit (catppuccin) accent flavor;
-  sources = pkgs.nixporn.catppuccin;
+  inherit (catppuccin) accent palette;
+  accentColor = palette.${accent};
   target = "lazygit";
   enable = cfg.enable && cfg.colorscheme == "catppuccin" && cfg.${target}.enable;
-
-  enableXdgConfig = !pkgs.stdenv.hostPlatform.isDarwin || config.xdg.enable;
-  configDirectory =
-    if enableXdgConfig then
-      config.xdg.configHome
-    else
-      "${config.home.homeDirectory}/Library/Application Support";
-  configFile = "${configDirectory}/lazygit/config.yml";
 in
 {
   config = lib.mkIf enable {
-    home.sessionVariables =
-      let
-        configFiles = [
-          "${sources.lazygit}/themes/${flavor}/${accent}.yml"
-        ]
-        ++ lib.optional (config.programs.lazygit.settings != { }) configFile;
-      in
-      {
-        LG_CONFIG_FILE = lib.concatStringsSep "," configFiles;
+    programs.lazygit.settings.gui = {
+      authorColors."*" = accentColor;
+      theme = {
+        activeBorderColor = [
+          accentColor
+          "bold"
+        ];
+        inactiveBorderColor = [ palette.subtext0 ];
+        searchingActiveBorderColor = [
+          palette.yellow
+          "bold"
+        ];
+        optionsTextColor = [ palette.blue ];
+        selectedLineBgColor = [ palette.surface0 ];
+        inactiveViewSelectedLineBgColor = [ palette.overlay0 ];
+        cherryPickedCommitFgColor = [ accentColor ];
+        cherryPickedCommitBgColor = [ palette.surface1 ];
+        markedBaseCommitFgColor = [ palette.blue ];
+        markedBaseCommitBgColor = [ palette.yellow ];
+        unstagedChangesColor = [ palette.red ];
+        defaultFgColor = [ palette.text ];
       };
+    };
   };
 }
