@@ -16,7 +16,7 @@ in
 {
   config = lib.mkIf enable {
     xdg.configFile."fish/themes/${themeName}.theme".source =
-      "${sources.fish}/static/${themeName}.theme";
+      "${sources.fish}/themes/static/${themeName}.theme";
     programs.fish.shellInit = ''
       fish_config theme choose "${themeName}"
     '';
