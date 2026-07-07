@@ -15,7 +15,7 @@ let
 in
 {
   config = lib.mkIf enable {
-    xdg.configFile."broot/skins/${themeFile}".source = "${sources.broot}/${flavor}/${themeFile}";
+    xdg.configFile."broot/skins/${themeFile}".source = "${sources.broot}/themes/${flavor}/${themeFile}";
     programs.broot.settings = {
       imports = [
         {
