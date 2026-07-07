@@ -21,6 +21,6 @@ let
 in
 {
   config = lib.mkIf enable {
-    programs.gh-dash.settings.theme = importYAML "${sources.gh-dash}/themes/${flavor}/${accent}.yml";
+    programs.gh-dash.settings.theme = importYAML "${sources.gh-dash}/themes/${flavor}/catppuccin-${flavor}-${accent}.yml";
   };
 }

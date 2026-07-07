@@ -15,7 +15,7 @@ in
 {
   config = lib.mkIf enable {
     programs.hyprlock.settings.source = [
-      "${sources.hyprland}/${flavor}.conf"
+      "${sources.hyprland}/themes/${flavor}.conf"
       (pkgs.writeText "hyprlock-catppuccin-${accent}.conf" ''
         $accent = ''$${accent}
         $accentAlpha = ''$${accent}Alpha

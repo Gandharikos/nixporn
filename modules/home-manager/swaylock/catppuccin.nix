@@ -21,6 +21,6 @@ let
 in
 {
   config = lib.mkIf enable {
-    programs.swaylock.settings = importINI "${sources.swaylock}/${flavor}.conf";
+    programs.swaylock.settings = importINI "${sources.swaylock}/themes/${flavor}.conf";
   };
 }

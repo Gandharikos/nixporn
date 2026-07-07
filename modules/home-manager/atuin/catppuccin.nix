@@ -17,6 +17,6 @@ in
   config = lib.mkIf enable {
     programs.atuin.settings.theme.name = themeName;
     xdg.configFile."atuin/themes/${themeName}.toml".source =
-      "${sources.atuin}/${flavor}/${themeName}.toml";
+      "${sources.atuin}/themes/${flavor}/${themeName}.toml";
   };
 }

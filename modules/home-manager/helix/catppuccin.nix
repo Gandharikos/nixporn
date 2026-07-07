@@ -19,6 +19,6 @@ in
       editor.color-modes = lib.mkDefault true;
     };
     xdg.configFile."helix/themes/catppuccin-${flavor}.toml".source =
-      "${sources.helix}/default/catppuccin_${flavor}.toml";
+      "${sources.helix}/themes/default/catppuccin_${flavor}.toml";
   };
 }

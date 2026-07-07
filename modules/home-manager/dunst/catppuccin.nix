@@ -15,6 +15,6 @@ in
 {
   config = lib.mkIf enable {
     xdg.configFile."dunst/dunstrc.d/${cfg.${target}.prefix}-catppuccin.conf".source =
-      "${sources.dunst}/${flavor}.conf";
+      "${sources.dunst}/themes/${flavor}.conf";
   };
 }

@@ -16,7 +16,7 @@ let
 in
 {
   config = lib.mkIf enable {
-    xdg.configFile."cava/themes/catppuccin".source = "${sources.cava}/${themeFile}";
+    xdg.configFile."cava/themes/catppuccin".source = "${sources.cava}/themes/${themeFile}";
     programs.cava.settings.color.theme = "catppuccin";
   };
 }

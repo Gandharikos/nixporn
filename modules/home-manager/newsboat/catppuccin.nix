@@ -14,6 +14,6 @@ let
 in
 {
   config = lib.mkIf enable {
-    programs.newsboat.extraConfig = lib.fileContents "${sources.newsboat}/${theme}";
+    programs.newsboat.extraConfig = lib.fileContents "${sources.newsboat}/themes/${theme}";
   };
 }

@@ -14,6 +14,6 @@ let
 in
 {
   config = lib.mkIf enable {
-    services.polybar.extraConfig = lib.fileContents "${sources.polybar}/${flavor}.ini";
+    services.polybar.extraConfig = lib.fileContents "${sources.polybar}/themes/${flavor}.ini";
   };
 }

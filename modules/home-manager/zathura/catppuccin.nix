@@ -15,7 +15,7 @@ in
 {
   config = lib.mkIf enable {
     programs.zathura.extraConfig = ''
-      include ${sources.zathura}/catppuccin-${flavor}
+      include ${sources.zathura}/themes/catppuccin-${flavor}
     '';
   };
 }

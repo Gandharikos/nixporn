@@ -14,6 +14,6 @@ let
 in
 {
   config = lib.mkIf enable {
-    programs.foot.settings.main.include = "${sources.foot}/catppuccin-${flavor}.ini";
+    programs.foot.settings.main.include = "${sources.foot}/themes/static/catppuccin-${flavor}.ini";
   };
 }

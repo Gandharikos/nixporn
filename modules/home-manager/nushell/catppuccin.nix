@@ -15,7 +15,7 @@ in
 {
   config = lib.mkIf enable {
     programs.nushell.extraConfig = lib.mkBefore ''
-      source ${sources.nushell}/catppuccin_${flavor}.nu
+      source ${sources.nushell}/themes/catppuccin_${flavor}.nu
     '';
   };
 }

@@ -14,6 +14,6 @@ let
 in
 {
   config = lib.mkIf enable {
-    programs.tofi.settings = lib.importTOML "${sources.tofi}/catppuccin-${flavor}.toml";
+    programs.tofi.settings = lib.importTOML "${sources.tofi}/themes/catppuccin-${flavor}";
   };
 }

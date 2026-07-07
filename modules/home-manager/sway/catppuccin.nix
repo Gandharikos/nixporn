@@ -15,7 +15,7 @@ in
 {
   config = lib.mkIf enable {
     wayland.windowManager.sway.extraConfigEarly = ''
-      include ${sources.sway}/catppuccin-${flavor}
+      include ${sources.sway}/themes/catppuccin-${flavor}
     '';
   };
 }

@@ -14,6 +14,6 @@ let
 in
 {
   config = lib.mkIf enable {
-    programs.mpv.config.include = "${sources.mpv}/${flavor}/${accent}.conf";
+    programs.mpv.config.include = "${sources.mpv}/themes/${flavor}/${accent}.conf";
   };
 }

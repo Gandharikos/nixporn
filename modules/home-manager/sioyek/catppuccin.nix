@@ -14,6 +14,6 @@ let
 in
 {
   config = lib.mkIf enable {
-    programs.sioyek.config.source = "${sources.sioyek}/catppuccin-${flavor}.config";
+    programs.sioyek.config.source = "${sources.sioyek}/themes/catppuccin-${flavor}.config";
   };
 }

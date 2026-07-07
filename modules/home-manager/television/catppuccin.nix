@@ -17,6 +17,6 @@ in
   config = lib.mkIf enable {
     programs.television.settings.ui.theme = themeName;
     xdg.configFile."television/themes/${themeName}.toml".source =
-      "${sources.television}/${themeName}.toml";
+      "${sources.television}/themes/${themeName}.toml";
   };
 }

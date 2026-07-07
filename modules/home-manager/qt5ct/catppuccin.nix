@@ -17,7 +17,7 @@ in
     qt = lib.genAttrs [ "qt5ctSettings" "qt6ctSettings" ] (_: {
       Appearance = {
         custom_palette = true;
-        color_scheme_path = "${sources.qt5ct}/catppuccin-${flavor}-${accent}.conf";
+        color_scheme_path = "${sources.qt5ct}/themes/catppuccin-${flavor}-${accent}.conf";
       };
     });
   };

@@ -14,6 +14,7 @@ let
 in
 {
   config = lib.mkIf enable {
-    programs.fuzzel.settings.main.include = "${sources.fuzzel}/catppuccin-${flavor}/${accent}.ini";
+    programs.fuzzel.settings.main.include =
+      "${sources.fuzzel}/themes/catppuccin-${flavor}/${accent}.ini";
   };
 }

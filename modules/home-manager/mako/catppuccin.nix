@@ -14,6 +14,6 @@ let
 in
 {
   config = lib.mkIf enable {
-    services.mako.settings.include = "${sources.mako}/catppuccin-${flavor}/catppuccin-${flavor}-${accent}";
+    services.mako.settings.include = "${sources.mako}/themes/catppuccin-${flavor}/catppuccin-${flavor}-${accent}";
   };
 }

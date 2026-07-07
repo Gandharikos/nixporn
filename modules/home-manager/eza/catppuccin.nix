@@ -15,6 +15,6 @@ in
 {
   config = lib.mkIf enable {
     xdg.configFile."eza/theme.yml".source =
-      "${sources.eza}/${flavor}/catppuccin-${flavor}-${accent}.yml";
+      "${sources.eza}/themes/${flavor}/catppuccin-${flavor}-${accent}.yml";
   };
 }

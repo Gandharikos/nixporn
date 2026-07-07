@@ -19,7 +19,7 @@ in
         { nativeBuildInputs = [ pkgs.zip ]; }
         ''
           mkdir -p $out
-          cp ${sources.thunderbird}/${flavor}/${flavor}-${accent}.xpi $out/catppuccin-${flavor}-${accent}.xpi
+          cp ${sources.thunderbird}/themes/${flavor}/${flavor}-${accent}.xpi $out/catppuccin-${flavor}-${accent}.xpi
         ''
       )
     ];

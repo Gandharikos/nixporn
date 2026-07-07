@@ -15,7 +15,7 @@ in
 {
   config = lib.mkIf enable {
     programs.waybar.style = lib.mkBefore ''
-      @import "${sources.waybar}/${flavor}.css";
+      @import "${sources.waybar}/themes/${flavor}.css";
     '';
   };
 }

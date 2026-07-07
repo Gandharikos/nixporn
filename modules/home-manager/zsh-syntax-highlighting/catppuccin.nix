@@ -15,7 +15,7 @@ in
 {
   config = lib.mkIf enable {
     programs.zsh.initContent = lib.mkOrder 950 ''
-      source '${sources.zsh-syntax-highlighting}/catppuccin_${flavor}-zsh-syntax-highlighting.zsh'
+      source '${sources.zsh-syntax-highlighting}/themes/catppuccin_${flavor}-zsh-syntax-highlighting.zsh'
     '';
   };
 }

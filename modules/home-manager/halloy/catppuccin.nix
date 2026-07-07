@@ -16,6 +16,6 @@ in
   config = lib.mkIf enable {
     programs.halloy.settings.theme = "catppuccin-${flavor}";
     xdg.configFile."halloy/themes/catppuccin-${flavor}.toml".source =
-      "${sources.halloy}/catppuccin-${flavor}.toml";
+      "${sources.halloy}/themes/catppuccin-${flavor}.toml";
   };
 }

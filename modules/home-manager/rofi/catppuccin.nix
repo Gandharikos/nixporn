@@ -15,10 +15,8 @@ in
 {
   config = lib.mkIf enable {
     xdg.dataFile = {
-      "rofi/themes/catppuccin-${flavor}.rasi".source =
-        "${sources.rofi}/basic/.local/share/rofi/themes/catppuccin-${flavor}.rasi";
-      "rofi/themes/catppuccin-default.rasi".source =
-        "${sources.rofi}/basic/.local/share/rofi/themes/catppuccin-default.rasi";
+      "rofi/themes/catppuccin-${flavor}.rasi".source = "${sources.rofi}/themes/catppuccin-${flavor}.rasi";
+      "rofi/themes/catppuccin-default.rasi".source = "${sources.rofi}/catppuccin-default.rasi";
     };
     programs.rofi.theme = {
       "@theme" = "catppuccin-default";

@@ -14,6 +14,6 @@ let
 in
 {
   config = lib.mkIf enable {
-    home.sessionVariables.GLAMOUR_STYLE = "${sources.glamour}/catppuccin-${flavor}.json";
+    home.sessionVariables.GLAMOUR_STYLE = "${sources.glamour}/themes/catppuccin-${flavor}.json";
   };
 }

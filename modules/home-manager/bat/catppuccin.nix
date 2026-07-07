@@ -18,7 +18,7 @@ in
     programs.bat = {
       config.theme = themeName;
       themes.${themeName} = {
-        src = sources.bat;
+        src = "${sources.bat}/themes";
         file = "${themeName}.tmTheme";
       };
     };

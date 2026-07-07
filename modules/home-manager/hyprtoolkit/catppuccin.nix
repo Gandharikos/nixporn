@@ -15,6 +15,6 @@ in
 {
   config = lib.mkIf enable {
     xdg.configFile."hypr/hyprtoolkit.conf".source =
-      "${sources.hyprtoolkit}/${flavor}/catppuccin-${flavor}-${accent}.conf";
+      "${sources.hyprtoolkit}/themes/${flavor}/catppuccin-${flavor}-${accent}.conf";
   };
 }

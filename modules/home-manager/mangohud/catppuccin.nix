@@ -14,6 +14,7 @@ let
 in
 {
   config = lib.mkIf enable {
-    xdg.configFile."MangoHud/MangoHud.conf".source = "${sources.mangohud}/${flavor}/MangoHud.conf";
+    xdg.configFile."MangoHud/MangoHud.conf".source =
+      "${sources.mangohud}/themes/${flavor}/MangoHud.conf";
   };
 }

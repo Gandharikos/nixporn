@@ -22,7 +22,7 @@ in
     };
 
     wayland.windowManager.hyprland.settings.source = [
-      "${sources.hyprland}/${flavor}.conf"
+      "${sources.hyprland}/themes/${flavor}.conf"
       (pkgs.writeText "hyprland-catppuccin-${accent}.conf" ''
         $accent = ''$${accent}
         $accentAlpha = ''$${accent}Alpha

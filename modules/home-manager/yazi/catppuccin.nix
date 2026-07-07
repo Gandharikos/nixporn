@@ -30,7 +30,7 @@ in
     xdg.configFile = {
       "yazi/flavors/${flavorName}.yazi/flavor.toml".source = flavorToml;
       "yazi/Catppuccin-${flavor}.tmTheme".source =
-        "${sources.bat}/Catppuccin ${lib.toSentenceCase flavor}.tmTheme";
+        "${sources.bat}/themes/Catppuccin ${lib.toSentenceCase flavor}.tmTheme";
     };
   };
 }

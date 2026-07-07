@@ -14,7 +14,7 @@ let
 in
 {
   config = lib.mkIf enable {
-    xdg.configFile."lsd/colors.yaml".source = "${sources.lsd}/catppuccin-${flavor}/colors.yaml";
+    xdg.configFile."lsd/colors.yaml".source = "${sources.lsd}/themes/catppuccin-${flavor}/colors.yaml";
     programs.lsd.settings.color.theme = "custom";
   };
 }

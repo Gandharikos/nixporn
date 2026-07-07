@@ -14,6 +14,6 @@ let
 in
 {
   config = lib.mkIf enable {
-    programs.bottom.settings = lib.importTOML "${sources.bottom}/${flavor}.toml";
+    programs.bottom.settings = lib.importTOML "${sources.bottom}/themes/${flavor}.toml";
   };
 }

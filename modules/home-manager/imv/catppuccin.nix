@@ -21,6 +21,6 @@ let
 in
 {
   config = lib.mkIf enable {
-    programs.imv.settings = importINI "${sources.imv}/${flavor}.config";
+    programs.imv.settings = importINI "${sources.imv}/themes/${flavor}.config";
   };
 }
