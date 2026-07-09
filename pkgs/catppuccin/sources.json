@@ -49,6 +49,11 @@
     "lastModified": "2025-10-14",
     "rev": "74b47a345638a2f19b3e5bdb9d7e4984066f9ac7"
   },
+  "discord": {
+    "hash": "sha256-HNQkVH8nOKBuP9cQ6Z9ZmwXDkvi2r0mre9ParFmLXf0=",
+    "lastModified": "2026-02-07",
+    "rev": "0d8c7aaea33c655bb9e4c93d352a28f3baa69a75"
+  },
   "dunst": {
     "hash": "sha256-rBp9wU6QHpmNAjeaKnI6u8rOUlv8MC70SLUzeKHN/eY=",
     "lastModified": "2024-12-24",

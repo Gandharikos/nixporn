@@ -22,10 +22,17 @@ SOURCES_FILE = ROOT / "sources.json"
 
 fetch_port_sem = asyncio.Semaphore(cpu_count())
 
+PORT_REFS = {
+    # Discord publishes the complete dist CSS on gh-pages. The default branch
+    # only contains wrappers that import from catppuccin.github.io.
+    "discord": "gh-pages",
+}
+
 
 async def fetch_port(port: str) -> dict:
     async with fetch_port_sem:
-        repository = f"github:catppuccin/{port}"
+        ref = PORT_REFS.get(port)
+        repository = f"github:catppuccin/{port}" + (f"/{ref}" if ref else "")
         print(f"Fetching {repository}")
 
         command = FETCH_ARGS + [repository]

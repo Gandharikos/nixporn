@@ -27,6 +27,7 @@ let
     "atuin"
     "broot"
     "cursors"
+    "discord"
     "eza"
     "fcitx5"
     "firefox"
