@@ -82,6 +82,8 @@ let
     source = catppuccinSources.fcitx5;
   };
 
+  catppuccinGtk = pkgs.callPackage ./pkgs/catppuccin/gtk/package.nix { };
+
   rosePineFcitx5 = pkgs.callPackage ./pkgs/rose-pine/fcitx5/package.nix {
     source = rosePineSources.fcitx5;
   };
@@ -119,6 +121,7 @@ let
     catppuccin = catppuccinSources // {
       cursors = catppuccinCursors;
       fcitx5 = catppuccinFcitx5;
+      gtkPackage = catppuccinGtk;
 
       gitea = pkgs.fetchzip {
         url = "https://github.com/catppuccin/gitea/releases/download/v1.0.2/catppuccin-gitea.tar.gz";
