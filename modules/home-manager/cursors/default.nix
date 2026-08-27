@@ -15,6 +15,10 @@ in
 {
   imports = lib.nixporn.scanPaths ./.;
 
+  config = lib.mkIf (config.nixporn.enable && config.nixporn.cursors.enable) {
+    home.pointerCursor.enable = true;
+  };
+
   options.nixporn.cursors = {
     accent = lib.mkOption {
       type = lib.types.enum [
