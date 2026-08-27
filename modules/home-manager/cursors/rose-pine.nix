@@ -16,17 +16,46 @@ let
       "dawn"
     else
       "main";
-  cursorName =
-    if cursorVariant == "dawn" then "BreezeX-RosePineDawn-Linux" else "BreezeX-RosePine-Linux";
+  defaultBaseColor =
+    if cfg.${target}.accent == "light" then
+      "#faf4ed"
+    else if cfg.${target}.accent == "dark" then
+      "#191724"
+    else
+      colorscheme.palette.base;
+  defaultOutlineColor =
+    if cfg.${target}.accent == "light" then
+      "#464261"
+    else if cfg.${target}.accent == "dark" then
+      "#e0def4"
+    else
+      colorscheme.palette.text;
+  cursorPackage = pkgs.nixporn.rose-pine.cursors.override {
+    variant = cursorVariant;
+    inherit (cfg.${target}.rose-pine) baseColor outlineColor;
+  };
 in
 {
-  config = lib.mkIf enable {
-    home.pointerCursor = {
-      name = cursorName;
-      package = pkgs.rose-pine-cursor;
+  options.nixporn.cursors.rose-pine = {
+    baseColor = lib.mkOption {
+      type = lib.types.str;
+      default = defaultBaseColor;
+      description = "Base color for generated Rosé Pine cursors.";
     };
 
-    home.packages = [ pkgs.rose-pine-hyprcursor ];
-    home.sessionVariables.HYPRCURSOR_THEME = "rose-pine-hyprcursor";
+    outlineColor = lib.mkOption {
+      type = lib.types.str;
+      default = defaultOutlineColor;
+      description = "Outline color for generated Rosé Pine cursors.";
+    };
+  };
+
+  config = lib.mkIf enable {
+    home.pointerCursor = {
+      name = cursorPackage.cursorThemeName;
+      package = cursorPackage;
+    };
+
+    home.sessionVariables.HYPRCURSOR_THEME = cursorPackage.cursorThemeName;
   };
 }

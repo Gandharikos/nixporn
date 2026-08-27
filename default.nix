@@ -81,6 +81,10 @@ let
 
   catppuccinGtk = pkgs.callPackage ./pkgs/catppuccin/gtk/package.nix { };
 
+  rosePineCursors = pkgs.callPackage ./pkgs/rose-pine/cursors/package.nix {
+    source = rosePineSources.cursors;
+  };
+
   rosePineFcitx5 = pkgs.callPackage ./pkgs/rose-pine/fcitx5/package.nix {
     source = rosePineSources.fcitx5;
   };
@@ -138,6 +142,7 @@ let
     kanagawa = kanagawaSource;
     nordic = nordicSource;
     rose-pine = rosePineSources // {
+      cursors = rosePineCursors;
       fcitx5 = rosePineFcitx5;
       gtk = rosePineGtk;
     };

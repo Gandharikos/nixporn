@@ -33,6 +33,8 @@ python3 scripts/update-sources.py
 - `nixporn.colorschemes.<colorscheme>.targets.<target>`
 - `nixporn.colorschemes.<colorscheme>.slug`
 - `nixporn.colorschemes.<colorscheme>.palette`
+- `nixporn.cursors.rose-pine.baseColor`
+- `nixporn.cursors.rose-pine.outlineColor`
 
 `nixporn.colorscheme` is an enum generated from `sources/*.json` and defaults to
 `catppuccin`. When `nixporn.enable = true`, known target entries default to

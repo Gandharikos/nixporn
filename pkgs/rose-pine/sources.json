@@ -17,6 +17,12 @@
     "rev": "3cc2cf0c841df4056697389980a0890a01913f7d",
     "url": "github:rose-pine/cava"
   },
+  "cursors": {
+    "lastModified": "2026-06-24",
+    "narHash": "sha256-vzrquqbHuWp2ObeAcZbeyNNmWV3epQ3hns4zx7yCa7k=",
+    "rev": "7c923d1a2eb90550112c81bb0db1e2a9ef1c0419",
+    "url": "github:rose-pine/cursors"
+  },
   "fcitx5": {
     "lastModified": "2025-11-05",
     "narHash": "sha256-pNFDzsURMsNUJRz1jjyOb9uLjCtMbNuo3ARvv0rsvLg=",
