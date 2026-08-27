@@ -5,28 +5,52 @@
   ...
 }:
 let
+  inherit (lib.modules) mkAfter mkIf;
   cfg = config.nixporn;
   inherit (cfg.colorschemes) catppuccin;
-  inherit (catppuccin) flavor;
-  sources = pkgs.nixporn.catppuccin;
-  target = "tmux";
-  enable = cfg.enable && cfg.colorscheme == "catppuccin" && cfg.${target}.enable;
   plugin = pkgs.tmuxPlugins.mkTmuxPlugin {
     pluginName = "catppuccin";
     version = "unstable";
-    src = sources.tmux;
+    src = pkgs.nixporn.catppuccin.tmux;
   };
+  enable = cfg.enable && cfg.colorscheme == "catppuccin" && cfg.tmux.enable;
 in
 {
-  config = lib.mkIf enable {
+  config = mkIf enable {
     programs.tmux.plugins = [
       {
         inherit plugin;
         extraConfig = ''
-          set -g @catppuccin_flavor "${flavor}"
-          ${cfg.${target}.extraConfig}
+          set -gu @catppuccin_status_background
+          set -gu @catppuccin_status_connect_separator
+          set -gu @catppuccin_status_module_bg_color
+          set -gu @catppuccin_status_right_separator
+          set -gu @catppuccin_status_fill
+          set -gu @catppuccin_window_flags
+          set -gu @catppuccin_window_left_separator
+          set -gu @catppuccin_window_middle_separator
+          set -gu @catppuccin_window_right_separator
+          set -gu @catppuccin_window_current_left_separator
+          set -gu @catppuccin_window_current_middle_separator
+          set -gu @catppuccin_window_current_right_separator
+          set -g @catppuccin_flavor "${catppuccin.flavor}"
+          set -g @catppuccin_window_status_style "rounded"
+          set -g @catppuccin_pane_status_enabled "yes"
         '';
       }
     ];
+
+    programs.tmux.extraConfig = mkAfter ''
+      set -g status-right-length 100
+      set -g status-left-length 100
+      set -g status-left ""
+      set -g status-right "#{E:@catppuccin_status_application}"
+      set -ag status-right "#{E:@catppuccin_status_session}"
+      set -ag status-right "#{E:@catppuccin_status_date_time}"
+      set -g status-style default
+      setw -gF window-status-format "#[fg=#{E:@catppuccin_window_number_color},bg=default]#[fg=#{@thm_crust},bg=#{E:@catppuccin_window_number_color}]#{@catppuccin_window_number} #[fg=#{@thm_fg},bg=#{E:@catppuccin_window_text_color}]#{@catppuccin_window_text}#[fg=#{E:@catppuccin_window_text_color},bg=default]"
+      setw -gF window-status-current-format "#[fg=#{E:@catppuccin_window_current_number_color},bg=default]#[fg=#{@thm_crust},bg=#{E:@catppuccin_window_current_number_color}]#{@catppuccin_window_current_number} #[fg=#{@thm_fg},bg=#{E:@catppuccin_window_current_text_color}]#{@catppuccin_window_current_text}#[fg=#{E:@catppuccin_window_current_text_color},bg=default]"
+      ${cfg.tmux.extraConfig}
+    '';
   };
 }
