@@ -13,12 +13,7 @@ let
   hasProgram = options.programs ? spicetify;
   enable = cfg.enable && cfg.colorscheme == "tokyonight" && cfg.${target}.enable;
 
-  theme = pkgs.fetchFromGitHub {
-    owner = "evening-hs";
-    repo = "Spotify-Tokyo-Night-Theme";
-    rev = "d88ca06eaeeb424d19e0d6f7f8e614e4bce962be";
-    hash = "sha256-cLj9v8qtHsdV9FfzV2Qf4pWO8AOBXu51U/lUMvdEXAk=";
-  };
+  theme = pkgs.nixporn.spicetify.tokyonight;
 
   colorScheme =
     if style == "night" then

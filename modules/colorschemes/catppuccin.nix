@@ -5,6 +5,7 @@
 }:
 let
   inherit (lib) mkOption types;
+  extraSources = builtins.fromJSON (builtins.readFile ../../pkgs/extra-sources.json);
 
   accents = [
     "blue"
@@ -69,9 +70,7 @@ in
     ) (builtins.fromJSON (builtins.readFile ../../pkgs/catppuccin/sources.json))
     // {
       spicetify = {
-        url = "github:catppuccin/spicetify";
-        rev = "1ec645c4cf7f42f9792b9eeb1bb7930f94593277";
-        hash = "sha256-VK9JpXYFuLMkIuMftFkkMy6Y5+ttuxDUYoIiAPlx6YY=";
+        inherit (extraSources.catppuccin-spicetify) narHash rev url;
       };
     };
 

@@ -48,9 +48,9 @@
     "url": "github:rose-pine/fzf"
   },
   "ghostty": {
-    "lastModified": "2025-11-19",
-    "narHash": "sha256-kNHbd3BhLp49nDk0Cr+9LNKJVwhguQ4uiheXDLGn3s8=",
-    "rev": "cd5c30210c8d90fa276e2632bbbf49b8abb18455",
+    "lastModified": "2026-07-21",
+    "narHash": "sha256-kSxKjQUaHm/EAVogJsAFn0bqt4f0QZZz8x75HaY9ex0=",
+    "rev": "d8b4ec06e0cde80fb2bfbf59021ff0a332c77388",
     "url": "github:rose-pine/ghostty"
   },
   "gtk": {
@@ -66,9 +66,9 @@
     "url": "github:rose-pine/helix"
   },
   "hyprland": {
-    "lastModified": "2025-11-05",
-    "narHash": "sha256-3egB8oXxHFL6Mjj2wCVB7qU8jfcNPBGbKEwtBcMS/gA=",
-    "rev": "2787c67d62f128fa0b1ead4c9ffdab2fe79e410f",
+    "lastModified": "2026-06-20",
+    "narHash": "sha256-nA/re4gWvOtH0OPqxJzp7lm8YS/qLHUhhS/6Og22TlU=",
+    "rev": "9d08f2561266783ac96d31d518c896d5059e1878",
     "url": "github:rose-pine/hyprland"
   },
   "kitty": {
@@ -127,8 +127,8 @@
     "url": "github:rose-pine/swaync"
   },
   "tmux": {
-    "narHash": "sha256-HDmCCRhTCPfu7gL9VPHVGCiG5IcnkpQ4EaXN4IsQ0YE=",
-    "rev": "b6138c51573425ccdc33c91464597323baec3b7e",
+    "narHash": "sha256-niFXeZRyJ26ukNxEgQjzGbNPPQPtpoe5/7cF/9VGOTk=",
+    "rev": "43d03507427ac3ad92cadfdf0d1307b8b0ff5128",
     "url": "github:rose-pine/tmux"
   },
   "tty": {
@@ -137,8 +137,8 @@
     "url": "github:rose-pine/linux-tty"
   },
   "vscode": {
-    "narHash": "sha256-SO2WfrguCgflqFEhPLi4LdnOM/4oyEXeEFzjAPSXDsI=",
-    "rev": "6b51224aa5936d3fc18e270ab35cde0a71fecf29",
+    "narHash": "sha256-joBuzyRqS7KiNzWhcGtXbiBQLH73Xhm4qqnaBM1mlBg=",
+    "rev": "d8f5ebe8e096fa833e997c07eb7685ee1677a4ba",
     "url": "github:rose-pine/vscode"
   },
   "waybar": {
@@ -152,8 +152,8 @@
     "url": "github:rose-pine/yazi"
   },
   "zed-editor": {
-    "narHash": "sha256-NK4XWp3dHMqPTb7itTje0Joh3ZCmrafrTOvBv6oOJSQ=",
-    "rev": "577707af80007feaa606f3f63287d6aab4ae72fe",
+    "narHash": "sha256-7VcZWTqaRJOHCXP/vA89ywzVOAIqxmJoZtnpVl+gGVQ=",
+    "rev": "2c7b4ee61c78334f8f1e9960d1d9e44d447ee9ef",
     "url": "github:rose-pine/zed"
   },
   "zellij": {

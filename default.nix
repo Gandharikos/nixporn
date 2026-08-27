@@ -13,11 +13,7 @@ let
   decaySourceMetadata = builtins.fromJSON (builtins.readFile ./pkgs/decay/sources.json);
   draculaSourceMetadata = builtins.fromJSON (builtins.readFile ./pkgs/dracula/sources.json);
   gruvboxSourceMetadata = (builtins.fromJSON (builtins.readFile ./sources/gruvbox.json)).source;
-  gruvboxContribSourceMetadata = {
-    url = "github:morhetz/gruvbox-contrib";
-    rev = "150e9ca30fcd679400dc388c24930e5ec8c98a9f";
-    narHash = "sha256-hhoDMMoIbf2QXtgCirJeRos7jiFjG0YbxnFoJUvPMaA=";
-  };
+  extraSourceMetadata = builtins.fromJSON (builtins.readFile ./pkgs/extra-sources.json);
   kanagawaSourceMetadata = (builtins.fromJSON (builtins.readFile ./sources/kanagawa.json)).source;
   nordicSourceMetadata = (builtins.fromJSON (builtins.readFile ./sources/nordic.json)).source;
   rosePineSourceMetadata = builtins.fromJSON (builtins.readFile ./pkgs/rose-pine/sources.json);
@@ -63,7 +59,8 @@ let
   decaySources = lib.mapAttrs (_: fetchGithubSource) decaySourceMetadata;
   draculaSources = lib.mapAttrs (_: fetchGithubSource) draculaSourceMetadata;
   gruvboxSource = fetchGithubSource gruvboxSourceMetadata;
-  gruvboxContribSource = fetchGithubSource gruvboxContribSourceMetadata;
+  extraSources = lib.mapAttrs (_: fetchGithubSource) extraSourceMetadata;
+  gruvboxContribSource = extraSources.gruvbox-contrib;
   kanagawaSource = fetchGithubSource kanagawaSourceMetadata;
   nordicSource = fetchGithubSource nordicSourceMetadata;
   rosePineSources = lib.mapAttrs (_: fetchGithubSource) rosePineSourceMetadata;
@@ -143,6 +140,11 @@ let
     rose-pine = rosePineSources // {
       fcitx5 = rosePineFcitx5;
       gtk = rosePineGtk;
+    };
+    spicetify = {
+      catppuccin = extraSources.catppuccin-spicetify;
+      dracula = extraSources.dracula-spicetify;
+      tokyonight = extraSources.tokyonight-spicetify;
     };
     solarized-osaka = solarizedOsakaSource;
     tokyonight = tokyonightSource;

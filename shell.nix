@@ -11,7 +11,7 @@ pkgs.mkShellNoCC {
   packages =
     with pkgs;
     [
-      nixVersions.nix_2_28
+      nixVersions.nix_2_31
       deadnix
       keep-sorted
       nixfmt

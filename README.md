@@ -12,8 +12,15 @@ A minimal Nix colorscheme module.
 ## Packages
 
 Upstream target sources are exposed through `overlays.default` as
-`pkgs.nixporn.<colorscheme>.<target>`. Catppuccin sources are pinned in
-`pkgs/catppuccin/sources.json`.
+`pkgs.nixporn.<colorscheme>.<target>`. Target sources are pinned in
+`pkgs/<colorscheme>/sources.json`.
+
+Update all palette and target pins, then regenerate normalized palettes with:
+
+```console
+python3 scripts/update-pins.py
+python3 scripts/update-sources.py
+```
 
 ## Options
 

@@ -30,9 +30,9 @@
     "url": "github:dracula/fish"
   },
   "foot": {
-    "lastModified": "2026-04-26",
-    "narHash": "sha256-O/IxSlQ1x2n8A5LhsAgd+Ivw8ToYAPNZ8JHDtT4XBlU=",
-    "rev": "570a4888e3316d00fc74596d924d6fbe5c327e36",
+    "lastModified": "2026-06-16",
+    "narHash": "sha256-6fi17N/F/FADnufJVkQnlLsDpNbR3UHSrL2k7ywm6SI=",
+    "rev": "3a9b7d6d1ec35e738caed094dd67003ecdcbf14d",
     "url": "github:dracula/foot"
   },
   "freetube": {
@@ -144,15 +144,15 @@
     "url": "github:dracula/thunderbird"
   },
   "tmux": {
-    "lastModified": "2026-04-24",
-    "narHash": "sha256-GyGKbc73BeXpAUyUwa6aQRuxHoBAvJYaeAKJJBBkpPY=",
-    "rev": "a0830546479f4cc2e865099749a67914ae74a0f1",
+    "lastModified": "2026-08-22",
+    "narHash": "sha256-HwcalCIeXZrS9uY2DvQvO6+wcfyTaPZveJEsUtt8r8E=",
+    "rev": "04405e63842b2824490dfd471ab5c1542c3844ee",
     "url": "github:dracula/tmux"
   },
   "vscode": {
-    "lastModified": "2026-03-01",
-    "narHash": "sha256-zyRl7mZa5lkd/EWHEnAvbCX/24/JE5bjXMuexhrQKbE=",
-    "rev": "f1c685e6d46dd5eef1b7d4ec8356976f29123814",
+    "lastModified": "2026-08-12",
+    "narHash": "sha256-DEZM4LFMFqb7ASbOSHQQp8BHFN45X+h74tSWa5FuKpI=",
+    "rev": "1b9ecf4d7e0c8cc2e2e890a7a41ad1db5fff1e6c",
     "url": "github:dracula/visual-studio-code"
   },
   "waybar": {

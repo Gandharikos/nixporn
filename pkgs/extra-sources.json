@@ -1,0 +1,22 @@
+{
+  "catppuccin-spicetify": {
+    "narHash": "sha256-VK9JpXYFuLMkIuMftFkkMy6Y5+ttuxDUYoIiAPlx6YY=",
+    "rev": "1ec645c4cf7f42f9792b9eeb1bb7930f94593277",
+    "url": "github:catppuccin/spicetify"
+  },
+  "dracula-spicetify": {
+    "narHash": "sha256-/5ikaxHIAxODEOJkPKFbA80fxYtPQzN0gXGg7S4RYQA=",
+    "rev": "63b2e835d8079d840277defa53651f65deee7d0c",
+    "url": "github:dracula/spicetify"
+  },
+  "gruvbox-contrib": {
+    "narHash": "sha256-hhoDMMoIbf2QXtgCirJeRos7jiFjG0YbxnFoJUvPMaA=",
+    "rev": "150e9ca30fcd679400dc388c24930e5ec8c98a9f",
+    "url": "github:morhetz/gruvbox-contrib"
+  },
+  "tokyonight-spicetify": {
+    "narHash": "sha256-cLj9v8qtHsdV9FfzV2Qf4pWO8AOBXu51U/lUMvdEXAk=",
+    "rev": "d88ca06eaeeb424d19e0d6f7f8e614e4bce962be",
+    "url": "github:evening-hs/Spotify-Tokyo-Night-Theme"
+  }
+}

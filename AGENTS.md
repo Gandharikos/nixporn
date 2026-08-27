@@ -16,5 +16,7 @@ This repository is a minimal Nix colorscheme flake.
 - `nix flake check`
 - `nix flake show`
 - `nixfmt flake.nix module.nix`
+- `python3 scripts/update-pins.py`
+- `python3 scripts/update-sources.py`
 
 Use simple Nix, two-space indentation, and keep the module surface small.
