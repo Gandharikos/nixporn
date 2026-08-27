@@ -20,7 +20,7 @@ in
         $accent = ''$${accent}
         $accentAlpha = ''$${accent}Alpha
       '')
-      sources.hyprlock
+      "${sources.hyprlock}/hyprlock.conf"
     ];
   };
 }

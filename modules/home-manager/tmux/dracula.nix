@@ -9,12 +9,17 @@ let
   sources = pkgs.nixporn.dracula;
   target = "tmux";
   enable = cfg.enable && cfg.colorscheme == "dracula" && cfg.${target}.enable;
+  plugin = pkgs.tmuxPlugins.mkTmuxPlugin {
+    pluginName = "dracula";
+    version = "unstable";
+    src = sources.tmux;
+  };
 in
 {
   config = lib.mkIf enable {
     programs.tmux.plugins = [
       {
-        plugin = sources.tmux;
+        inherit plugin;
         extraConfig = cfg.${target}.extraConfig;
       }
     ];

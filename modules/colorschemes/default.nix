@@ -107,6 +107,7 @@ let
         "black"
         "ansi_black"
         "crust"
+        "border"
       ];
       red = pick palette [
         "red"
