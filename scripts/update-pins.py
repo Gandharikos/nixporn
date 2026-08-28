@@ -19,6 +19,7 @@ ROOT = Path(__file__).resolve().parents[1]
 SOURCES = ROOT / "sources"
 TARGET_SOURCE_FILES = {
     "extra": ROOT / "pkgs/extra-sources.json",
+    "cursors": ROOT / "pkgs/cursor-sources.json",
     "catppuccin": ROOT / "pkgs/catppuccin/sources.json",
     "decay": ROOT / "pkgs/decay/sources.json",
     "dracula": ROOT / "pkgs/dracula/sources.json",

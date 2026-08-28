@@ -54,6 +54,17 @@ metadata when that colorscheme provides it.
 `nixporn.avatar` and `nixporn.wallpaper` are top-level resources. They are not
 colorscheme-specific options.
 
+Cursor integrations use dedicated upstream themes where available:
+
+- Cyberdream and Solarized Osaka use palette-colored XCursor-Pro.
+- Decay uses Phinger Cursors.
+- Gruvbox uses palette-colored GoogleDot cursors.
+- Kanagawa uses Vimix Cursors.
+
+The generated XCursor-Pro and GoogleDot packages include matching XCursor and
+Hyprcursor themes. Their colors can also be changed with package overrides for
+`baseColor`, `outlineColor`, and, for XCursor-Pro, `watchBackgroundColor`.
+
 ## Example
 
 ```nix

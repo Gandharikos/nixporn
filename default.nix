@@ -9,6 +9,7 @@
 }:
 let
   catppuccinSourceMetadata = builtins.fromJSON (builtins.readFile ./pkgs/catppuccin/sources.json);
+  cursorSourceMetadata = builtins.fromJSON (builtins.readFile ./pkgs/cursor-sources.json);
   cyberdreamSourceMetadata = (builtins.fromJSON (builtins.readFile ./sources/cyberdream.json)).source;
   decaySourceMetadata = builtins.fromJSON (builtins.readFile ./pkgs/decay/sources.json);
   draculaSourceMetadata = builtins.fromJSON (builtins.readFile ./pkgs/dracula/sources.json);
@@ -55,6 +56,7 @@ let
     };
 
   catppuccinSources = lib.mapAttrs fetchCatppuccinSource catppuccinSourceMetadata;
+  cursorSources = lib.mapAttrs (_: fetchGithubSource) cursorSourceMetadata;
   cyberdreamSource = fetchGithubSource cyberdreamSourceMetadata;
   decaySources = lib.mapAttrs (_: fetchGithubSource) decaySourceMetadata;
   draculaSources = lib.mapAttrs (_: fetchGithubSource) draculaSourceMetadata;
@@ -83,6 +85,14 @@ let
 
   rosePineCursors = pkgs.callPackage ./pkgs/rose-pine/cursors/package.nix {
     source = rosePineSources.cursors;
+  };
+
+  googleCursor = pkgs.callPackage ./pkgs/google-cursor/package.nix {
+    source = cursorSources.google-cursor;
+  };
+
+  xcursorPro = pkgs.callPackage ./pkgs/xcursor-pro/package.nix {
+    source = cursorSources.xcursor-pro;
   };
 
   rosePineFcitx5 = pkgs.callPackage ./pkgs/rose-pine/fcitx5/package.nix {
@@ -133,13 +143,20 @@ let
     };
 
     dracula = draculaSources;
-    cyberdream = cyberdreamSource;
-    decay = decaySources;
+    cyberdream = cyberdreamSource // {
+      cursors = xcursorPro;
+    };
+    decay = decaySources // {
+      cursors = pkgs.phinger-cursors;
+    };
     gruvbox = {
       nvim = gruvboxSource;
       contrib = gruvboxContribSource;
+      cursors = googleCursor;
     };
-    kanagawa = kanagawaSource;
+    kanagawa = kanagawaSource // {
+      cursors = pkgs.vimix-cursors;
+    };
     nordic = nordicSource;
     rose-pine = rosePineSources // {
       cursors = rosePineCursors;
@@ -151,7 +168,9 @@ let
       dracula = extraSources.dracula-spicetify;
       tokyonight = extraSources.tokyonight-spicetify;
     };
-    solarized-osaka = solarizedOsakaSource;
+    solarized-osaka = solarizedOsakaSource // {
+      cursors = xcursorPro;
+    };
     tokyonight = tokyonightSource;
   };
 in

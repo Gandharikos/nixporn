@@ -1,0 +1,12 @@
+{
+  "google-cursor": {
+    "narHash": "sha256-vzNtm3gwkGjHlC2G7dTsieQLOu67GnB3BIUSD6pZ6AA=",
+    "rev": "ed1ef928e327117b294af66a1a8c68da28e0a8e3",
+    "url": "github:ful1e5/Google_Cursor"
+  },
+  "xcursor-pro": {
+    "narHash": "sha256-vKNvTyJ50vHXoRsalmkityP7Dnf1KkD2uq13kgWniQY=",
+    "rev": "a2bb52cb795aff1d612a7eb4aa739ded79ae2b15",
+    "url": "github:ful1e5/XCursor-pro"
+  }
+}
