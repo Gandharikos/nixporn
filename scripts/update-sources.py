@@ -19,6 +19,7 @@ SOURCE_ORIGINS = {
     "cyberdream": "package source",
     "decay": "package source",
     "dracula": "package source",
+    "everforest": "package source",
     "gruvbox": "package source",
     "kanagawa": "package source",
     "nordic": "package source",
@@ -32,6 +33,7 @@ SOURCE_URLS = {
     "cyberdream": "github:scottmckendry/cyberdream.nvim",
     "decay": "github:decaycs/decay.nvim",
     "dracula": "github:Mofiqul/dracula.nvim",
+    "everforest": "github:sainnhe/everforest",
     "gruvbox": "github:morhetz/gruvbox",
     "kanagawa": "github:rebelot/kanagawa.nvim",
     "nordic": "github:andersevenrud/nordic.nvim",
@@ -275,6 +277,38 @@ def parse_gruvbox(root: Path) -> tuple[dict[str, dict[str, str]], list[str]]:
     return {"dark": raw, "light": raw}, [rel]
 
 
+def parse_everforest(root: Path) -> tuple[dict[str, dict[str, str]], list[str]]:
+    rel = "autoload/everforest.vim"
+    text = (root / rel).read_text()
+    palette1_blocks = re.findall(r"let palette1 = \{(.*?)\\ \}", text, re.S)
+    palette2_blocks = re.findall(r"let palette2 = \{(.*?)\\ \}", text, re.S)
+
+    if len(palette1_blocks) != 6 or len(palette2_blocks) != 2:
+        raise ValueError("unexpected Everforest palette structure")
+
+    def parse_vim_palette(block: str) -> dict[str, str]:
+        return dict(
+            re.findall(
+                rf"\\ '([A-Za-z0-9_]+)':\s*\['({HEX_VALUE})'",
+                block,
+            )
+        )
+
+    foreground = {
+        "dark": parse_vim_palette(palette2_blocks[0]),
+        "light": parse_vim_palette(palette2_blocks[1]),
+    }
+    palettes = {}
+    for index, contrast in enumerate(["hard", "medium", "soft"]):
+        for offset, polarity in enumerate(["dark", "light"]):
+            palettes[f"{polarity}-{contrast}"] = (
+                parse_vim_palette(palette1_blocks[index * 2 + offset])
+                | foreground[polarity]
+            )
+
+    return palettes, [rel]
+
+
 def parse_kanagawa(root: Path) -> tuple[dict[str, dict[str, str]], list[str]]:
     rel = "lua/kanagawa/colors.lua"
     raw = read_lua_table(root / rel, r"local palette\s*=\s*{")
@@ -337,6 +371,7 @@ PARSERS = {
     "cyberdream": parse_cyberdream,
     "decay": parse_decay,
     "dracula": parse_dracula,
+    "everforest": parse_everforest,
     "gruvbox": parse_gruvbox,
     "kanagawa": parse_kanagawa,
     "nordic": parse_nordic,

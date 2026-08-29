@@ -13,6 +13,8 @@ let
   cyberdreamSourceMetadata = (builtins.fromJSON (builtins.readFile ./sources/cyberdream.json)).source;
   decaySourceMetadata = builtins.fromJSON (builtins.readFile ./pkgs/decay/sources.json);
   draculaSourceMetadata = builtins.fromJSON (builtins.readFile ./pkgs/dracula/sources.json);
+  everforestSourceMetadata = (builtins.fromJSON (builtins.readFile ./sources/everforest.json)).source;
+  everforestTargetMetadata = builtins.fromJSON (builtins.readFile ./pkgs/everforest/sources.json);
   gruvboxSourceMetadata = (builtins.fromJSON (builtins.readFile ./sources/gruvbox.json)).source;
   extraSourceMetadata = builtins.fromJSON (builtins.readFile ./pkgs/extra-sources.json);
   kanagawaSourceMetadata = (builtins.fromJSON (builtins.readFile ./sources/kanagawa.json)).source;
@@ -60,6 +62,8 @@ let
   cyberdreamSource = fetchGithubSource cyberdreamSourceMetadata;
   decaySources = lib.mapAttrs (_: fetchGithubSource) decaySourceMetadata;
   draculaSources = lib.mapAttrs (_: fetchGithubSource) draculaSourceMetadata;
+  everforestSource = fetchGithubSource everforestSourceMetadata;
+  everforestTargets = lib.mapAttrs (_: fetchGithubSource) everforestTargetMetadata;
   gruvboxSource = fetchGithubSource gruvboxSourceMetadata;
   extraSources = lib.mapAttrs (_: fetchGithubSource) extraSourceMetadata;
   gruvboxContribSource = extraSources.gruvbox-contrib;
@@ -94,6 +98,8 @@ let
   xcursorPro = pkgs.callPackage ./pkgs/xcursor-pro/package.nix {
     source = cursorSources.xcursor-pro;
   };
+
+  everforestVscode = pkgs.callPackage ./pkgs/everforest/vscode/package.nix { };
 
   rosePineFcitx5 = pkgs.callPackage ./pkgs/rose-pine/fcitx5/package.nix {
     source = rosePineSources.fcitx5;
@@ -149,6 +155,15 @@ let
     decay = decaySources // {
       cursors = pkgs.phinger-cursors;
     };
+    everforest =
+      everforestSource
+      // everforestTargets
+      // {
+        cursors = pkgs.everforest-cursors;
+        gtk = pkgs.everforest-gtk-theme;
+        nvim = everforestSource;
+        vscodeExtension = everforestVscode;
+      };
     gruvbox = {
       nvim = gruvboxSource;
       contrib = gruvboxContribSource;

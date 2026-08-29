@@ -51,6 +51,9 @@ Catppuccin has `flavor` and `accent`, Tokyo Night has `style`, and most other
 colorschemes have `variant`. `targets` is generated from upstream target
 metadata when that colorscheme provides it.
 
+Everforest provides `mode` (`dark` or `light`) and `contrast` (`hard`, `medium`,
+or `soft`) options. Its default is dark mode with medium contrast.
+
 `nixporn.avatar` and `nixporn.wallpaper` are top-level resources. They are not
 colorscheme-specific options.
 

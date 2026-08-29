@@ -23,6 +23,7 @@ TARGET_SOURCE_FILES = {
     "catppuccin": ROOT / "pkgs/catppuccin/sources.json",
     "decay": ROOT / "pkgs/decay/sources.json",
     "dracula": ROOT / "pkgs/dracula/sources.json",
+    "everforest": ROOT / "pkgs/everforest/sources.json",
     "rose-pine": ROOT / "pkgs/rose-pine/sources.json",
 }
 TARGET_REFS = {

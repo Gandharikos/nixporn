@@ -1,0 +1,12 @@
+{
+  "ghostty": {
+    "narHash": "sha256-Eu/lFqad1jIYdow0kRaEJoijI4TMaXc9gL4/FlDnopM=",
+    "rev": "df8a781e3d9a573d909acc63ef6935d4744fd91e",
+    "url": "github:metalelf0/everforest.ghostty"
+  },
+  "vscode": {
+    "narHash": "sha256-tLbVd+Kh/PHE2wu7je4LE9zX47m75++ZJFtX1MEpD4M=",
+    "rev": "b17f8affe9096f18d209caf2fc26322490e55857",
+    "url": "github:sainnhe/everforest-vscode"
+  }
+}
