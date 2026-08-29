@@ -52,7 +52,10 @@ colorschemes have `variant`. `targets` is generated from upstream target
 metadata when that colorscheme provides it.
 
 Everforest provides `mode` (`dark` or `light`) and `contrast` (`hard`, `medium`,
-or `soft`) options. Its default is dark mode with medium contrast.
+or `soft`) options. Its default is dark mode with medium contrast. Dedicated
+Everforest ports are used for Bat, browser themes, cursors, Ghostty, GTK, Micro,
+VS Code, and Yazi where available; palette-generated integrations cover the
+remaining targets and unsupported upstream variants.
 
 `nixporn.avatar` and `nixporn.wallpaper` are top-level resources. They are not
 colorscheme-specific options.

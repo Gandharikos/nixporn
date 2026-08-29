@@ -1,12 +1,27 @@
 {
+  "bat": {
+    "narHash": "sha256-x6NhryI+1CvzQqXGDQKm9AldW/z+jrlgkDMucwMScAo=",
+    "rev": "1bed96f33bc74283d37d07c361e863306f7b5dc8",
+    "url": "github:VasylRomanets/everforest-bat"
+  },
   "ghostty": {
     "narHash": "sha256-Eu/lFqad1jIYdow0kRaEJoijI4TMaXc9gL4/FlDnopM=",
     "rev": "df8a781e3d9a573d909acc63ef6935d4744fd91e",
     "url": "github:metalelf0/everforest.ghostty"
   },
+  "micro": {
+    "narHash": "sha256-WRjORWRo2/mHhLppn8QDEdLp98g2jbG8cnGB4WNNL1c=",
+    "rev": "3a1844eb88e58c582ac902e27d7cc1b33f43199b",
+    "url": "github:atomashevic/everforest-micro"
+  },
   "vscode": {
     "narHash": "sha256-tLbVd+Kh/PHE2wu7je4LE9zX47m75++ZJFtX1MEpD4M=",
     "rev": "b17f8affe9096f18d209caf2fc26322490e55857",
     "url": "github:sainnhe/everforest-vscode"
+  },
+  "yazi": {
+    "narHash": "sha256-2Fx7+xnSsc+aVHBZUtLtVUDEzb1y8BcPBASciKk8x7o=",
+    "rev": "e1ead7b5a3bfc8eb572fd269a369775842752705",
+    "url": "github:Chromium-3-Oxide/everforest-medium.yazi"
   }
 }

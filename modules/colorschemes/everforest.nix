@@ -11,6 +11,10 @@
   ];
 
   targets = {
+    bat = {
+      url = "github:VasylRomanets/everforest-bat";
+    };
+
     cursors = {
       url = "github:talwat/everforest-cursors";
     };
@@ -23,12 +27,20 @@
       url = "github:Fausto-Korpsvart/Everforest-GTK-Theme";
     };
 
+    micro = {
+      url = "github:atomashevic/everforest-micro";
+    };
+
     nvim = {
       url = "github:sainnhe/everforest";
     };
 
     vscode = {
       url = "github:sainnhe/everforest-vscode";
+    };
+
+    yazi = {
+      url = "github:Chromium-3-Oxide/everforest-medium.yazi";
     };
   };
 
