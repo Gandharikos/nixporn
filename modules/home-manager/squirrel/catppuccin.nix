@@ -1,4 +1,3 @@
-{ targetPath }:
 {
   config,
   lib,
@@ -6,41 +5,41 @@
 }:
 let
   cfg = config.nixporn;
+  inherit (cfg.colorschemes) catppuccin;
+  inherit (catppuccin) accent flavor palette;
   target = "squirrel";
-  inherit (cfg) colorscheme;
-  colorschemeCfg = cfg.colorschemes.${colorscheme};
   targetCfg = cfg.${target};
-  hasSpecific = builtins.pathExists (targetPath + "/${colorscheme}.nix");
-  enable = cfg.enable && targetCfg.enable && !hasSpecific;
-  inherit (cfg.palette) ansi;
+  enable = cfg.enable && cfg.colorscheme == "catppuccin" && targetCfg.enable;
 
+  slug = "catppuccin-${flavor}-${accent}";
   toRimeColor =
     hex: "0x${builtins.substring 5 2 hex}${builtins.substring 3 2 hex}${builtins.substring 1 2 hex}";
+  accentColor = palette.${accent};
 
   style = {
-    text_color = toRimeColor ansi.fg;
-    back_color = toRimeColor ansi.bg;
-    border_color = toRimeColor ansi.black;
-    label_color = toRimeColor ansi.bright_black;
-    candidate_text_color = toRimeColor ansi.fg;
-    comment_text_color = toRimeColor ansi.bright_black;
-    hilited_text_color = toRimeColor ansi.bg;
-    hilited_back_color = toRimeColor ansi.blue;
-    hilited_candidate_text_color = toRimeColor ansi.bg;
-    hilited_candidate_back_color = toRimeColor ansi.blue;
-    hilited_comment_text_color = toRimeColor ansi.black;
+    text_color = toRimeColor palette.text;
+    back_color = toRimeColor palette.base;
+    border_color = toRimeColor palette.mantle;
+    label_color = toRimeColor palette.overlay1;
+    candidate_text_color = toRimeColor palette.text;
+    comment_text_color = toRimeColor palette.overlay1;
+    hilited_text_color = toRimeColor palette.base;
+    hilited_back_color = toRimeColor accentColor;
+    hilited_candidate_text_color = toRimeColor palette.base;
+    hilited_candidate_back_color = toRimeColor accentColor;
+    hilited_comment_text_color = toRimeColor palette.surface2;
   };
 in
 {
   config = lib.mkIf enable {
     home.file."${targetCfg.dir}/squirrel.custom.yaml".text = ''
       patch:
-        style/color_scheme: ${colorschemeCfg.slug}
-        style/color_scheme_dark: ${colorschemeCfg.slug}
+        style/color_scheme: ${slug}
+        style/color_scheme_dark: ${slug}
         style/font_point: ${toString targetCfg.fontPoint}
-        preset_color_schemes/${colorschemeCfg.slug}:
-          name: "${colorschemeCfg.slug}"
-          author: "nixporn"
+        preset_color_schemes/${slug}:
+          name: "Catppuccin ${flavor} ${accent}"
+          author: "catppuccin"
           text_color: ${style.text_color}
           back_color: ${style.back_color}
           border_color: ${style.border_color}
