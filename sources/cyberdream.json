@@ -6,11 +6,11 @@
   },
   "schema": 1,
   "source": {
-    "narHash": "sha256-wsTa+IovGjVdzgZmbQ2+6YKaQPM9Naw9Tc+3tQkP8Mo=",
+    "narHash": "sha256-sgmU6h28jNsl0ukfI5igF6CHUKUSO2yLZ8GkfqlajUU=",
     "paletteFiles": [
       "lua/cyberdream/colors.lua"
     ],
-    "rev": "39e1fda12c0704e01029b286a4c7e77e33a0c5cd",
+    "rev": "b3f4ef5e9b8ee370c913a48b63e130b730ee8782",
     "source": "package source",
     "url": "github:scottmckendry/cyberdream.nvim"
   },
