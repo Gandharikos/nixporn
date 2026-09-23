@@ -1,8 +1,8 @@
 {
   vimix-cursors,
   cursorThemeName ? "Vimix-Kanagawa-cursors",
-  baseColor ? "#1F1F28",
-  outlineColor ? "#DCD7BA",
+  baseColor ? "#957FB8",
+  outlineColor ? "#1F1F28",
   redColor ? "#C34043",
   greenColor ? "#76946A",
   yellowColor ? "#C0A36E",

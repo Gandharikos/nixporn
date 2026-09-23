@@ -7,11 +7,19 @@
 let
   cfg = config.nixporn;
   inherit (cfg.colorschemes.kanagawa) variant;
-  inherit (cfg.palette) ansi;
+  inherit (cfg) palette;
+  inherit (palette) ansi;
+  accentColor =
+    {
+      wave = palette.oniViolet;
+      dragon = palette.dragonViolet;
+      lotus = palette.lotusViolet4;
+    }
+    .${variant};
   cursorPackage = pkgs.nixporn.kanagawa.cursors.override {
     cursorThemeName = "Vimix-Kanagawa-${variant}-cursors";
-    baseColor = ansi.bg;
-    outlineColor = ansi.fg;
+    baseColor = accentColor;
+    outlineColor = ansi.bg;
     redColor = ansi.red;
     greenColor = ansi.green;
     yellowColor = ansi.yellow;
