@@ -125,12 +125,13 @@ in
       line_break.disabled = false;
 
       character = {
-        success_symbol = "[❯](bold color_green) ";
-        error_symbol = "[❯](bold color_red) ";
-        vimcmd_symbol = "[❮](bold color_purple) ";
-        vimcmd_replace_one_symbol = "[❮](bold color_yellow) ";
-        vimcmd_replace_symbol = "[❮](bold color_yellow) ";
-        vimcmd_visual_symbol = "[❮](bold color_blue) ";
+        format = "$symbol";
+        success_symbol = "[❯](bold color_green)";
+        error_symbol = "[❯](bold color_red)";
+        vimcmd_symbol = "[❮](bold color_purple)";
+        vimcmd_replace_one_symbol = "[❮](bold color_yellow)";
+        vimcmd_replace_symbol = "[❮](bold color_yellow)";
+        vimcmd_visual_symbol = "[❮](bold color_blue)";
       };
 
       os = {
