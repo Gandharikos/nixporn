@@ -65,10 +65,10 @@ Cursor integrations use dedicated upstream themes where available:
 - Cyberdream and Solarized Osaka use palette-colored XCursor-Pro.
 - Decay uses Phinger Cursors.
 - Gruvbox uses palette-colored GoogleDot cursors.
-- Kanagawa uses Vimix Cursors.
+- Kanagawa uses palette-colored Vimix cursors that follow the active variant.
 
-The generated XCursor-Pro and GoogleDot packages include matching XCursor and
-Hyprcursor themes. Their colors can also be changed with package overrides for
+The Kanagawa Vimix cursor body, outline, and status colors are generated from the active palette.
+The generated XCursor-Pro and GoogleDot packages include matching XCursor and Hyprcursor themes. Their colors can also be changed with package overrides for
 `baseColor`, `outlineColor`, and, for XCursor-Pro, `watchBackgroundColor`.
 
 ## Example

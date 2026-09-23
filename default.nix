@@ -91,6 +91,8 @@ let
     source = rosePineSources.cursors;
   };
 
+  kanagawaCursors = pkgs.callPackage ./pkgs/kanagawa/cursors/package.nix { };
+
   googleCursor = pkgs.callPackage ./pkgs/google-cursor/package.nix {
     source = cursorSources.google-cursor;
   };
@@ -170,7 +172,7 @@ let
       cursors = googleCursor;
     };
     kanagawa = kanagawaSource // {
-      cursors = pkgs.vimix-cursors;
+      cursors = kanagawaCursors;
     };
     nordic = nordicSource;
     rose-pine = rosePineSources // {
