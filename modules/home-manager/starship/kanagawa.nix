@@ -125,7 +125,7 @@ in
       line_break.disabled = false;
 
       character = {
-        format = "$symbol";
+        format = "$symbol ";
         success_symbol = "[❯](bold color_green)";
         error_symbol = "[❯](bold color_red)";
         vimcmd_symbol = "[❮](bold color_purple)";
