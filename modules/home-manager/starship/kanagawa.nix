@@ -107,14 +107,6 @@ in
         "[](bg:color_blue fg:color_purple)"
         "$directory"
         "[](bg:color_wave_blue fg:color_blue)"
-        "[ ](color_wave_blue)"
-        "$line_break"
-        "$character"
-      ];
-
-      right_format = lib.concatStrings [
-        "[](bg:color_wave_blue fg:color_bg1)"
-        "[█](color_wave_blue)"
         "$cmd_duration"
         "$git_branch"
         "$git_status"
@@ -123,8 +115,12 @@ in
         "$php"
         "$rust"
         "$time"
-        "[▓▒░](color_wave_blue)"
+        "[ ](color_wave_blue)"
+        "$line_break"
+        "$character"
       ];
+
+      right_format = "";
 
       line_break.disabled = false;
 
@@ -150,6 +146,7 @@ in
           Macos = "󰀵";
           Manjaro = "";
           Linux = "󰌽";
+          NixOS = "";
           Gentoo = "󰣨";
           Fedora = "󰣛";
           Alpine = "";
@@ -189,42 +186,42 @@ in
 
       cmd_duration = {
         format = "[  $duration ]($style)";
-        style = "bg:color_bg3 fg:color_fg0";
+        style = "bg:color_wave_blue fg:color_fg0";
       };
 
       git_branch = {
         format = "[ $symbol$branch(:$remote_branch)]($style)";
-        style = "bg:color_yellow fg:color_bg0";
+        style = "bg:color_wave_blue fg:color_yellow";
         symbol = "󰘬 ";
         truncation_length = 12;
       };
 
       git_status = {
         format = "[ $all_status$ahead_behind ]($style)";
-        style = "bg:color_yellow fg:color_bg0";
+        style = "bg:color_wave_blue fg:color_yellow";
       };
 
       nodejs = {
         format = "[ $symbol($version) ]($style)";
-        style = "bg:color_green fg:color_fg0";
-        not_capable_style = "bg:color_red fg:color_fg0";
+        style = "bg:color_wave_blue fg:color_green";
+        not_capable_style = "bg:color_wave_blue fg:color_red";
       };
 
       php = {
         format = "[ $symbol ($version) ]($style)";
-        style = "bg:color_purple fg:color_fg0";
+        style = "bg:color_wave_blue fg:color_purple";
         symbol = "";
       };
 
       rust = {
         format = "[ $symbol ($version) ]($style)";
-        style = "bg:color_orange fg:color_bg0";
+        style = "bg:color_wave_blue fg:color_orange";
         symbol = "󱘗";
       };
 
       docker_context = {
         format = "[ $symbol $context ]($style)";
-        style = "bg:color_cyan fg:color_fg0";
+        style = "bg:color_wave_blue fg:color_cyan";
         symbol = "󰡨";
       };
     };

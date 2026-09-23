@@ -17,51 +17,47 @@ let
         selection = palette.sumiInk6;
         info = palette.waveAqua1;
         accent = palette.springViolet1;
-        notice = palette.autumnYellow;
-        error = palette.waveRed;
         muted = palette.sakuraPink;
         alert = palette.roninYellow;
       };
       dragon = {
-        text = palette.dragonWhite;
+        text = palette.oldWhite;
         bgBar = palette.dragonBlack4;
-        bgPane = palette.dragonBlack3;
+        bgPane = palette.dragonBlack2;
         highlight = palette.dragonOrange;
         selection = palette.dragonBlack5;
         info = palette.dragonTeal;
         accent = palette.dragonAsh;
-        notice = palette.dragonYellow;
-        error = palette.dragonRed;
         muted = palette.dragonOrange;
         alert = palette.dragonYellow;
       };
       lotus = {
         text = palette.lotusInk1;
-        bgBar = palette.lotusWhite2;
+        bgBar = palette.lotusYellow2;
         bgPane = palette.lotusWhite3;
         highlight = palette.lotusRed4;
         selection = palette.lotusRed4;
-        info = palette.lotusTeal1;
+        info = palette.lotusCyan;
         accent = palette.lotusRed2;
-        notice = palette.lotusAqua2;
-        error = palette.lotusRed;
         muted = palette.lotusPink;
         alert = palette.lotusTeal3;
       };
     }
     .${variant};
   statusBackground = if cfg.transparent then "default" else colors.bgBar;
-  leftPad = color: "#[fg=${color},bg=${statusBackground}]";
-  rightPad = color: "#[fg=${color},bg=${statusBackground}]";
+  currentWindowLeft =
+    if cfg.transparent then
+      "#[fg=${colors.selection},bg=default]"
+    else
+      "#[fg=${colors.bgBar},bg=${colors.selection}]";
   statusComponent =
-    color: icon: content:
+    previousColor: color: icon: content:
     lib.concatStrings [
-      (leftPad color)
-      "#[fg=${colors.bgPane},bg=${color},bold] ${icon} "
-      "#[fg=${colors.text},bg=${colors.highlight},nobold] ${content} "
-      (rightPad colors.highlight)
+      "#[fg=${color},bg=${previousColor},nobold,nounderscore,noitalics]"
+      "#[fg=${colors.bgPane},bg=${color}] ${icon} ${content} "
     ];
-  windowFlags = "#{?window_zoomed_flag,#[fg=${colors.accent}] 󰁌,}#{?window_activity_flag,#[fg=${colors.notice}] ,}#{?window_bell_flag,#[fg=${colors.error}] 󰂞,}";
+  inactiveWindowFlags = "#{?window_flags,#[fg=${colors.selection}]#{window_flags},}";
+  currentWindowFlags = "#{?window_flags,#[fg=${colors.highlight}]#{window_flags},}";
   enable = cfg.enable && cfg.colorscheme == "kanagawa" && cfg.tmux.enable;
 in
 {
@@ -71,27 +67,29 @@ in
       set -g status-position ${cfg.tmux.statusPosition}
       set -g status-interval 5
       set -g status-justify left
-      set -g status-left-length 50
-      set -g status-right-length 150
+      set -g status-left-length 100
+      set -g status-right-length 100
       set -g status-style "fg=${colors.text},bg=${statusBackground}"
-      setw -g window-status-separator " "
-      setw -g window-status-activity-style none
-      setw -g window-status-bell-style none
+      setw -g window-status-separator ""
+      setw -g window-status-activity-style bold
+      setw -g window-status-bell-style bold
 
       set -g message-style "fg=${colors.text},bg=${colors.bgBar}"
       set -g message-command-style "fg=${colors.text},bg=${colors.bgBar}"
       set -g mode-style "fg=${colors.text},bg=${colors.selection},bold"
       set -g pane-border-style "fg=${colors.bgBar}"
-      set -g pane-active-border-style "fg=${colors.accent}"
+      set -g pane-active-border-style "fg=${colors.selection}"
+      ${lib.optionalString (!cfg.transparent) ''
+        setw -g window-style "fg=${colors.text},bg=${colors.bgPane}"
+      ''}
 
-      set -g status-left "${leftPad colors.accent}#[fg=${colors.bgPane},bg=${colors.accent},bold] #{?client_prefix,#[fg=${colors.alert}]WAIT,#{?pane_in_mode,#[fg=${colors.info}]COPY,#{?pane_synchronized,#[fg=${colors.muted}]SYNC,#[fg=${colors.bgPane}]#S}}} ${rightPad colors.accent} "
+      set -g status-left "#{?client_prefix,#[fg=${colors.bgPane}]#[bg=${colors.alert}],#[fg=${colors.bgPane}]#[bg=${colors.accent}]} #{?client_prefix, WAIT,#{?pane_in_mode, COPY,#{?pane_synchronized, SYNC, #S}}} #{?client_prefix,#[fg=${colors.alert}],#[fg=${colors.accent}]}#[bg=${statusBackground}]"
 
-      setw -g window-status-format "${leftPad colors.muted}#[fg=${colors.bgPane},bg=${colors.muted},bold] #I #[fg=${colors.text},bg=${colors.highlight},nobold] #W${windowFlags} ${rightPad colors.highlight}"
-      setw -g window-status-current-format "${leftPad colors.accent}#[fg=${colors.bgPane},bg=${colors.accent},bold] #I #[fg=${colors.text},bg=${colors.selection},nobold] #W${windowFlags} ${rightPad colors.selection}"
+      setw -g window-status-format "#[fg=${colors.text},bg=${statusBackground}] #I #W${inactiveWindowFlags}"
+      setw -g window-status-current-format "${currentWindowLeft}#[fg=${colors.text},bg=${colors.selection}] #I #W${currentWindowFlags} #[fg=${colors.selection},bg=${statusBackground}]"
 
-      set -g status-right "${statusComponent colors.notice "" "#{pane_current_command}"}"
-      set -ag status-right " ${statusComponent colors.accent "" "#S"}"
-      set -ag status-right " ${statusComponent colors.info "󰃭" "%Y-%m-%d 󰅐 %H:%M"}"
+      set -g status-right "${statusComponent statusBackground colors.muted "" "#{pane_current_command}"}"
+      set -ag status-right "${statusComponent colors.muted colors.info "󰃰" "%Y-%m-%d %H:%M"}"
 
       ${cfg.tmux.extraConfig}
     '';
