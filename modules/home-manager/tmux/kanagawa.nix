@@ -76,7 +76,11 @@ in
 
       set -g message-style "fg=${colors.text},bg=${colors.bgBar}"
       set -g message-command-style "fg=${colors.text},bg=${colors.bgBar}"
-      set -g mode-style "fg=${colors.text},bg=${colors.selection},bold"
+      set -g mode-style "fg=${colors.bgPane},bg=${colors.accent},bold"
+      setw -g copy-mode-selection-style "fg=${colors.bgPane},bg=${colors.accent},bold"
+      setw -g copy-mode-match-style "fg=${colors.bgPane},bg=${colors.info}"
+      setw -g copy-mode-current-match-style "fg=${colors.bgPane},bg=${colors.muted},bold"
+      setw -g copy-mode-mark-style "fg=${colors.bgPane},bg=${colors.alert},bold"
       set -g pane-border-style "fg=${colors.bgBar}"
       set -g pane-active-border-style "fg=${colors.selection}"
       ${lib.optionalString (!cfg.transparent) ''
