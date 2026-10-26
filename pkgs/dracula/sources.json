@@ -144,15 +144,15 @@
     "url": "github:dracula/thunderbird"
   },
   "tmux": {
-    "lastModified": "2026-08-22",
-    "narHash": "sha256-HwcalCIeXZrS9uY2DvQvO6+wcfyTaPZveJEsUtt8r8E=",
-    "rev": "04405e63842b2824490dfd471ab5c1542c3844ee",
+    "lastModified": "2026-10-14",
+    "narHash": "sha256-UfA9Gn6MTH2kcsE+FsG2/8XNEPFUrbVo7MCxyW+fypw=",
+    "rev": "50b5fdfcbece52124c1ecfd5687469d163e05bf3",
     "url": "github:dracula/tmux"
   },
   "vscode": {
-    "lastModified": "2026-08-12",
-    "narHash": "sha256-DEZM4LFMFqb7ASbOSHQQp8BHFN45X+h74tSWa5FuKpI=",
-    "rev": "1b9ecf4d7e0c8cc2e2e890a7a41ad1db5fff1e6c",
+    "lastModified": "2026-10-19",
+    "narHash": "sha256-m3WXFhsQB+6X48uR2AMWh1Krg4eJO45YEhgRbG1lVNU=",
+    "rev": "b50e62e320906d5f57a8bf05fd6ddf23b890d6dd",
     "url": "github:dracula/visual-studio-code"
   },
   "waybar": {

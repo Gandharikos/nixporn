@@ -36,9 +36,9 @@
     "url": "github:rose-pine/firefox"
   },
   "fish": {
-    "lastModified": "2026-03-09",
-    "narHash": "sha256-3heI6nhItw5WfKGQT1FRQKfv+lONyn+DzwYjYqJjzLE=",
-    "rev": "127a990e5ad4688118c950123787fb0686afa4c8",
+    "lastModified": "2026-10-07",
+    "narHash": "sha256-nTMaJ2sKa/EyvH5iOndS6Q0mdjFOqIiSh/gnLmdb5t8=",
+    "rev": "b4ccaddaafc91d3c991d542830fdf2fb61128ba0",
     "url": "github:rose-pine/fish"
   },
   "foot": {
@@ -133,8 +133,8 @@
     "url": "github:rose-pine/swaync"
   },
   "tmux": {
-    "narHash": "sha256-niFXeZRyJ26ukNxEgQjzGbNPPQPtpoe5/7cF/9VGOTk=",
-    "rev": "43d03507427ac3ad92cadfdf0d1307b8b0ff5128",
+    "narHash": "sha256-AiU3+RSw7Hj3SQ6q0ETV/7yaNl+ba2ykp3OomDL+4kw=",
+    "rev": "6222fc73a9ce0bf36ffd3a8ca7d2f3e516f5c9ef",
     "url": "github:rose-pine/tmux"
   },
   "tty": {
@@ -158,8 +158,8 @@
     "url": "github:rose-pine/yazi"
   },
   "zed-editor": {
-    "narHash": "sha256-7VcZWTqaRJOHCXP/vA89ywzVOAIqxmJoZtnpVl+gGVQ=",
-    "rev": "2c7b4ee61c78334f8f1e9960d1d9e44d447ee9ef",
+    "narHash": "sha256-VBF3W+/XC/XKDlhptJCmHxLJqKqHwUQnoM2iLFUpdYQ=",
+    "rev": "1446d31a2eec6bee627883d523ec63ef5c78ec9b",
     "url": "github:rose-pine/zed"
   },
   "zellij": {
