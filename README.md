@@ -60,6 +60,12 @@ remaining targets and unsupported upstream variants.
 `nixporn.avatar` and `nixporn.wallpaper` are top-level resources. They are not
 colorscheme-specific options.
 
+Solarized Osaka's Starship prompt uses a two-line Powerline layout with the same
+blue accents and background colors as its tmux status bar. Both dark and light
+variants include user, directory, Git, development environment, and time segments.
+Use a Nerd Font for the icons and separators. Set `nixporn.starship.enable = false`
+to keep your own Starship layout.
+
 Cursor integrations use dedicated upstream themes where available:
 
 - Cyberdream and Solarized Osaka use palette-colored XCursor-Pro.
