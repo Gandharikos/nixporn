@@ -1,12 +1,12 @@
 {
   "google-cursor": {
-    "narHash": "sha256-vzNtm3gwkGjHlC2G7dTsieQLOu67GnB3BIUSD6pZ6AA=",
-    "rev": "ed1ef928e327117b294af66a1a8c68da28e0a8e3",
+    "narHash": "sha256-ON4dwn24sc+8gSErelBsCQo4PLb7Vy6/x7JfXyuvg+4=",
+    "rev": "7e416f8ae074a9346bf860961a0c4d47a58f4f00",
     "url": "github:ful1e5/Google_Cursor"
   },
   "xcursor-pro": {
-    "narHash": "sha256-vKNvTyJ50vHXoRsalmkityP7Dnf1KkD2uq13kgWniQY=",
-    "rev": "a2bb52cb795aff1d612a7eb4aa739ded79ae2b15",
+    "narHash": "sha256-fUdcT64/2wQDPHNrSdt73gra0OyUGMwUiGSgNddlEFU=",
+    "rev": "cf54774f2fe3a088ecbef8a69c52f7358db6bbf6",
     "url": "github:ful1e5/XCursor-pro"
   }
 }
