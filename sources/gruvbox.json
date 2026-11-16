@@ -6,11 +6,11 @@
   },
   "schema": 1,
   "source": {
-    "narHash": "sha256-cVUOwm7TudiLNQxnmOfjDMth61f5ndDqxYSl15fQzSE=",
+    "narHash": "sha256-zvc7lJBhM0fbXP+dOPRKqfz2UsucHujCHMElzeV8Ljs=",
     "paletteFiles": [
       "colors/gruvbox.vim"
     ],
-    "rev": "5d15b2765f59754d7ac263c88a0f6e3e58124951",
+    "rev": "ef8864bb42bf244f0295d1c5a403b27e3d139695",
     "source": "package source",
     "url": "github:morhetz/gruvbox"
   },
